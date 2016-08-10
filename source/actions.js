@@ -57,12 +57,9 @@ export const attemptLogin = () => {
   }
 }
 
-export const savePost = (uid, title, content, mode) => {
+export const savePost = (payload) => {
   return {
     type: SAVE_POST,
-    uid: uid,
-    title: title,
-    content: content,
-    mode: mode
+    payload: payload
   }
 }

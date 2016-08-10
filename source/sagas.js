@@ -14,7 +14,11 @@ function* stateSave(getState) {
   // console.log('--- persisting state ---')
   const haveStorage = yield storageAvailable('localStorage')
   if (haveStorage === true) {
-    yield persistState(getState())
+    const persisted = {
+      uid: getState().uid,
+      language: getState().language
+    }
+    yield persistState(persisted)
   }
 }
 
@@ -60,7 +64,8 @@ function* loginSaga() {
 }
 
 function* persistContent(action) {
-  console.log(action);
+  console.log(action.payload);
+  
 }
 
 

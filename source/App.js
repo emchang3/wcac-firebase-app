@@ -9,11 +9,12 @@ import NavbarMobile from './navbar/NavbarMobile'
 const App = ({ language, browserWidth, authorized, changeAuthState }) => {
   return (
     <div style={{ width: '100%', height: '100%' }}>
-      { browserWidth > 1145 ? <Navbar /> : <NavbarMobile /> }
+      <NavbarMobile />
     </div>
   )
 }
 
+  // { browserWidth > 1145 ? <Navbar /> : <NavbarMobile /> }
 
 const mapStateToProps = (state) => {
   return {

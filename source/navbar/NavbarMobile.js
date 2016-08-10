@@ -58,7 +58,7 @@ class Navbar extends Component {
       <div id='navbar'>
         <MenuMobile />
         <div id='logo' style={{ opacity: window.innerWidth < 418 ? this.state.style.opacity : 1 }}>
-          <i className="material-icons" style={{ position: 'relative', top: '7px' }}>local_hospital</i>
+          <img src='images/alliance.jpeg' />
         </div>
         <div id='site-title' style={{ width: this.state.style.width, opacity: this.state.style.opacity }}>
           <strong>

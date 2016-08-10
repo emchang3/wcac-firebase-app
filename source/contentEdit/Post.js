@@ -5,7 +5,7 @@ import Draft from 'draft-js'
 
 import { savePost } from '../actions'
 
-// import { login } from '../database'
+import { CongregationSelect } from './CongregationSelect'
 
 const {
   Editor,
@@ -19,10 +19,13 @@ const {Map} = Immutable
 class RichEditorExample extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props);
+    // console.log(props);
     this.state = {
       editorState: EditorState.createEmpty(),
-      saveMode: 'draft'
+      saveMode: 'draft',
+      congregation: '',
+      category: '',
+      title: ''
     }
 
     this.focus = () => {
@@ -40,10 +43,18 @@ class RichEditorExample extends React.Component {
 
   componentWillUpdate = (nextProps, nextState) => {
     const rawContentState = Draft.convertToRaw(nextState.editorState.getCurrentContent())
-    const title = nextState.title
+    const title = nextState.title || this.state.title
     const uid = this.props.uid
-    const saveMode = nextState.saveMode
-    this.props.savePost(uid, title, rawContentState, saveMode)
+    const saveMode = nextState.saveMode || this.state.saveMode
+    const congregation = nextState.congregation
+    const payload = {
+      uid: uid,
+      title: title,
+      content: rawContentState,
+      congregation: congregation,
+      mode: saveMode
+    }
+    this.props.savePost(payload)
   }
 
   _handleKeyCommand(command) {
@@ -84,6 +95,10 @@ class RichEditorExample extends React.Component {
 
   updateTitle = (event) => {
     this.setState({ title: event.target.value })
+  }
+
+  congregationChange = (event) => {
+    this.setState({ congregation: event.target.value })
   }
 
   render() {
@@ -134,8 +149,55 @@ class RichEditorExample extends React.Component {
                 />
               </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <div style={{ paddingTop: '5px', paddingRight: '40px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', border: '1px solid black' }}>
+              <div style={{ paddingLeft: '8px', paddingTop: '8px', paddingBottom: '8px' }}>
+                <label
+                  className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                  htmlFor="flash1"
+                  style={{ display: 'block' }}
+                >
+                  <input
+                    className="mdl-radio__button"
+                    id="flash1"
+                    name="flash"
+                    type="radio"
+                    value="on"
+                  />
+                  <span className="mdl-radio__label">Always on</span>
+                </label>
+                <label
+                  className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                  htmlFor="flash2"
+                  style={{ display: 'block' }}
+                >
+                  <input
+                    className="mdl-radio__button"
+                    id="flash2"
+                    name="flash"
+                    type="radio"
+                    value="off"
+                  />
+                  <span className="mdl-radio__label">Always off</span>
+                </label>
+                <label
+                  className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                  htmlFor="flash3"
+                  style={{ display: 'block' }}
+                >
+                  <input
+                    className="mdl-radio__button"
+                    id="flash3"
+                    name="flash"
+                    type="radio"
+                    value="auto"
+                  />
+                  <span className="mdl-radio__label">Automatic</span>
+                </label>
+              </div>
+
+              <CongregationSelect onClick={this.congregationChange} />
+
+              <div style={{ paddingTop: '8px', paddingRight: '32px' }}>
                 <label
                   htmlFor="saveSwitch"
                   className="mdl-switch mdl-js-switch mdl-js-ripple-effect"

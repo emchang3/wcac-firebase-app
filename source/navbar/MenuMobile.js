@@ -69,19 +69,6 @@ class MenuMobile extends React.Component {
           <button className="mdl-button mdl-js-button mdl-js-ripple-effect" style={{ width: '100%', textAlign: 'left' }}>
             {
               this.props.language === 'EN' ? (
-                'Contact'
-              ) : (
-                this.props.language === '检体' ? (
-                  '联系我们'
-                ) : (
-                  '聯繫我們'
-                )
-              )
-            }
-          </button>
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect" style={{ width: '100%', textAlign: 'left' }}>
-            {
-              this.props.language === 'EN' ? (
                 'Events'
               ) : (
                 this.props.language === '检体' ? (
@@ -119,6 +106,19 @@ class MenuMobile extends React.Component {
             }
           </button>
           <AboutMobile language={this.props.language} />
+          <button className="mdl-button mdl-js-button mdl-js-ripple-effect" style={{ width: '100%', textAlign: 'left' }}>
+            {
+              this.props.language === 'EN' ? (
+                'Contact'
+              ) : (
+                this.props.language === '检体' ? (
+                  '联系我们'
+                ) : (
+                  '聯繫我們'
+                )
+              )
+            }
+          </button>
         </div>
       </div>
     )
