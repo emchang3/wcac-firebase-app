@@ -6,6 +6,11 @@ import Draft from 'draft-js'
 import { savePost } from '../actions'
 
 import { CongregationSelect } from './CongregationSelect'
+import { CategorySelect } from './CategorySelect'
+import { SaveMode } from './SaveMode'
+import { Title } from './Title'
+import { DateSelect } from './DateSelect'
+
 
 const {
   Editor,
@@ -25,7 +30,11 @@ class RichEditorExample extends React.Component {
       saveMode: 'draft',
       congregation: '',
       category: '',
-      title: ''
+      title: '',
+      startDate: '',
+      startTime: '',
+      endDate: '',
+      endTime: ''
     }
 
     this.focus = () => {
@@ -44,15 +53,17 @@ class RichEditorExample extends React.Component {
   componentWillUpdate = (nextProps, nextState) => {
     const rawContentState = Draft.convertToRaw(nextState.editorState.getCurrentContent())
     const title = nextState.title || this.state.title
-    const uid = this.props.uid
+    const uid = nextProps.uid
     const saveMode = nextState.saveMode || this.state.saveMode
     const congregation = nextState.congregation
+    const category = nextState.category
     const payload = {
       uid: uid,
       title: title,
       content: rawContentState,
       congregation: congregation,
-      mode: saveMode
+      mode: saveMode,
+      category: category
     }
     this.props.savePost(payload)
   }
@@ -101,6 +112,26 @@ class RichEditorExample extends React.Component {
     this.setState({ congregation: event.target.value })
   }
 
+  categoryChange = (event) => {
+    this.setState({ category: event.target.value })
+  }
+
+  updateStartDate = (event) => {
+    console.log(event.target.value);
+  }
+
+  updateStartTime = (event) => {
+    console.log(event.target.value);
+  }
+
+  updateEndDate = (event) => {
+    console.log(event.target.value);
+  }
+
+  updateEndTime = (event) => {
+    console.log(event.target.value);
+  }
+
   render() {
     const {editorState} = this.state
 
@@ -117,98 +148,59 @@ class RichEditorExample extends React.Component {
     if (this.props.uid !== undefined && this.props.uid !== null) {
       if (this.props.readOnly === false) {
         return (
-          <div>
-            <div className="mdl-textfield mdl-js-textfield">
-              <input
-                className="mdl-textfield__input"
-                type="text"
-                id="post-title"
-                onChange={this.updateTitle}
-              />
-              <label className="mdl-textfield__label" htmlFor="post-title">Title...</label>
-            </div>
-            <div className="RichEditor-root">
-              <BlockStyleControls
-                editorState={editorState}
-                onToggle={this.toggleBlockType}
-              />
-              <InlineStyleControls
-                editorState={editorState}
-                onToggle={this.toggleInlineStyle}
-              />
-              <div className={className} onClick={this.focus}>
-                <Editor
-                  blockStyleFn={getBlockStyle}
-                  customStyleMap={styleMap}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center'
+          }}>
+            <div style={{ width: this.props.browserWidth < 1145 ? '80%' : '60%', paddingTop: '100px' }}>
+              <h2>Create New Content</h2>
+              
+              <Title onChange={this.updateTitle} />
+
+              <div className="RichEditor-root">
+                <BlockStyleControls
                   editorState={editorState}
-                  handleKeyCommand={this.handleKeyCommand}
-                  onChange={this.onChange}
-                  ref="editor"
-                  spellCheck={true}
-                  readOnly={this.props.readOnly}
+                  onToggle={this.toggleBlockType}
                 />
-              </div>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', border: '1px solid black' }}>
-              <div style={{ paddingLeft: '8px', paddingTop: '8px', paddingBottom: '8px' }}>
-                <label
-                  className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
-                  htmlFor="flash1"
-                  style={{ display: 'block' }}
-                >
-                  <input
-                    className="mdl-radio__button"
-                    id="flash1"
-                    name="flash"
-                    type="radio"
-                    value="on"
+                <InlineStyleControls
+                  editorState={editorState}
+                  onToggle={this.toggleInlineStyle}
+                />
+                <div className={className} onClick={this.focus}>
+                  <Editor
+                    blockStyleFn={getBlockStyle}
+                    customStyleMap={styleMap}
+                    editorState={editorState}
+                    handleKeyCommand={this.handleKeyCommand}
+                    onChange={this.onChange}
+                    ref="editor"
+                    spellCheck={true}
+                    readOnly={this.props.readOnly}
                   />
-                  <span className="mdl-radio__label">Always on</span>
-                </label>
-                <label
-                  className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
-                  htmlFor="flash2"
-                  style={{ display: 'block' }}
-                >
-                  <input
-                    className="mdl-radio__button"
-                    id="flash2"
-                    name="flash"
-                    type="radio"
-                    value="off"
-                  />
-                  <span className="mdl-radio__label">Always off</span>
-                </label>
-                <label
-                  className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
-                  htmlFor="flash3"
-                  style={{ display: 'block' }}
-                >
-                  <input
-                    className="mdl-radio__button"
-                    id="flash3"
-                    name="flash"
-                    type="radio"
-                    value="auto"
-                  />
-                  <span className="mdl-radio__label">Automatic</span>
-                </label>
+                </div>
               </div>
 
-              <CongregationSelect onClick={this.congregationChange} />
-
-              <div style={{ paddingTop: '8px', paddingRight: '32px' }}>
-                <label
-                  htmlFor="saveSwitch"
-                  className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
-                >
-                  <input type="checkbox"
-                    id="saveSwitch"
-                    className="mdl-switch__input"
-                    onChange={this.saveModeToggle}
+              {
+                this.state.category === 'events' ? (
+                  <DateSelect
+                    updateStartDate={this.updateStartDate}
+                    updateEndDate={this.updateEndDate}
+                    updateStartTime={this.updateStartTime}
+                    updateEndTime={this.updateEndTime}
                   />
-                  <span className="mdl-switch__label">Draft/Publish</span>
-                </label>
+                ) : ''
+              }
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', border: '1px solid black' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                  <CategorySelect onClick={this.categoryChange} />
+                  <CongregationSelect onClick={this.congregationChange} />
+                </div>
+                <SaveMode
+                  onChange={this.saveModeToggle}
+                  browserWidth={this.props.browserWidth}
+                  saveMode={this.state.saveMode}
+                />
               </div>
             </div>
           </div>
@@ -325,7 +317,8 @@ const InlineStyleControls = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    uid: state.uid
+    uid: state.uid,
+    browserWidth: state.browserWidth
   }
 }
 

@@ -5,31 +5,34 @@ import { attemptLogin } from './actions'
 
 const Login = ({ language, browserWidth, attemptLogin, uid }) => {
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h1>Administrator Log-in</h1>
-      <p>
-        <button className="mdl-button mdl-js-button mdl-button--icon" onClick={attemptLogin}>
-          <i className="material-icons">account_circle</i>
-        </button>
-      </p>
-      {
-        uid !== null ? (
-          <p>
-            <a href='/new_post'>
-              <button className="mdl-button mdl-js-button">
-                Create Content
-              </button>
-            </a>
-          </p>
-        ) : (
-          <p>
-            Log in with Google.
-          </p>
-        )
-      }
+    <div style={{ display: 'flex', paddingTop: '100px', justifyContent: 'center', textAlign: 'center' }}>
+      <div>
+        <h1>Administrator Log-in</h1>
+        <p>
+          <button className="mdl-button mdl-js-button mdl-button--icon" onClick={attemptLogin}>
+            <i className="material-icons">account_circle</i>
+          </button>
+        </p>
+        {
+          uid !== null ? (
+            <p>
+              <a href='/new_post'>
+                <button className="mdl-button mdl-js-button">
+                  Create Content
+                </button>
+              </a>
+            </p>
+          ) : (
+            <p>
+              Log in with Google.
+            </p>
+          )
+        }
+      </div>
     </div>
   )
 }
+
 
 const mapStateToProps = (state) => {
   return {

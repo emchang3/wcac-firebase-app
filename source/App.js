@@ -2,23 +2,19 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 
-import Navbar from './navbar/Navbar'
-import NavbarMobile from './navbar/NavbarMobile'
+// import Navbar from './navbar/Navbar'
+import Router from './Router'
 
 
-const App = ({ language, browserWidth, authorized, changeAuthState }) => {
+const App = ({ language, browserWidth }) => {
   return (
-    <div style={{ width: '100%', height: '100%' }}>
-      <NavbarMobile />
-    </div>
+    <Router />
   )
 }
 
-  // { browserWidth > 1145 ? <Navbar /> : <NavbarMobile /> }
 
 const mapStateToProps = (state) => {
   return {
-    authorized: state.authorized,
     language: state.language,
     browserWidth: state.browserWidth
   }

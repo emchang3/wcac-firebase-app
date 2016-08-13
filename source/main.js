@@ -9,8 +9,6 @@ import createSagaMiddleware from 'redux-saga'
 import { startApp } from './database'
 
 import App from './App'
-import Post from './contentEdit/Post'
-import Login from './Login'
 
 import { browserResize, storeLocal, retrieveState } from './actions'
 import reductor from './reducers'
@@ -24,7 +22,8 @@ const initialState = {
   language: 'EN',
   browserWidth: window.innerWidth,
   browserHeight: window.innerHeight,
-  uid: null
+  uid: null,
+  path: window.location.pathname
 }
 
 export const store = createStore(reductor, initialState, compose(
@@ -42,22 +41,6 @@ window.addEventListener('resize', renderNav, false)
 
 
 function render() {
-  if (document.getElementById('login-container')) {
-    ReactDOM.render(
-      <Provider store={store}>
-        <Login />
-      </Provider>,
-      document.getElementById('login-container')
-    )
-  }
-  if (document.getElementById('editor-container')) {
-    ReactDOM.render(
-      <Provider store={store}>
-        <Post readOnly={false} />
-      </Provider>,
-      document.getElementById('editor-container')
-    )
-  }
   ReactDOM.render(
     <Provider store={store}>
       <App />

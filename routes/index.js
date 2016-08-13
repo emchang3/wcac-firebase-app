@@ -15,11 +15,11 @@ router.get('/', (req, res, next) => {
 // })
 
 router.get('/login', (req, res, next) => {
-  res.render('login')
+  res.render('default', { title: 'Log In' })
 })
 
 router.get('/new_post', (req, res, next) => {
-  res.render('newPost')
+  res.render('default', { title: 'Create Content' })
 })
 
 module.exports = router
