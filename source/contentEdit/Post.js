@@ -148,14 +148,22 @@ class RichEditorExample extends React.Component {
     if (this.props.uid !== undefined && this.props.uid !== null) {
       if (this.props.readOnly === false) {
         return (
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center'
-          }}>
-            <div style={{ width: this.props.browserWidth < 1145 ? '80%' : '60%', paddingTop: '100px' }}>
-              <h2>Create New Content</h2>
-              
-              <Title onChange={this.updateTitle} />
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div
+              style={{
+                width: this.props.browserWidth < 1145 ? '80%' : '60%',
+                paddingTop: '100px'
+              }}
+            >
+              <h2>
+                {
+                  this.props.language === 'EN' ? 'Create New Content' : (
+                    this.props.language === '检体' ? '创建新内容' : '創建新內容'
+                  )
+                }
+              </h2>
+
+              <Title onChange={this.updateTitle} language={this.props.language} />
 
               <div className="RichEditor-root">
                 <BlockStyleControls
@@ -191,7 +199,13 @@ class RichEditorExample extends React.Component {
                 ) : ''
               }
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', border: '1px solid black' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  border: '1px solid black'
+                }}
+              >
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                   <CategorySelect onClick={this.categoryChange} />
                   <CongregationSelect onClick={this.congregationChange} />
@@ -318,7 +332,8 @@ const InlineStyleControls = (props) => {
 const mapStateToProps = (state) => {
   return {
     uid: state.uid,
-    browserWidth: state.browserWidth
+    browserWidth: state.browserWidth,
+    language: state.language
   }
 }
 

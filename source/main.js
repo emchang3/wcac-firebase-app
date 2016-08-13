@@ -14,10 +14,11 @@ import { browserResize, storeLocal, retrieveState } from './actions'
 import reductor from './reducers'
 import rootSaga from './sagas'
 
+
 startApp()
 
-const sagaMiddleware = createSagaMiddleware()
 
+const sagaMiddleware = createSagaMiddleware()
 const initialState = {
   language: 'EN',
   browserWidth: window.innerWidth,
@@ -25,15 +26,14 @@ const initialState = {
   uid: null,
   path: window.location.pathname
 }
-
 export const store = createStore(reductor, initialState, compose(
   applyMiddleware(sagaMiddleware),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 ))
 sagaMiddleware.run(rootSaga, store.getState)
 
-store.dispatch(retrieveState())
 
+store.dispatch(retrieveState())
 const renderNav = () => {
   store.dispatch(browserResize())
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { vExpand } from './Animation'
 
+
 class About extends React.Component {
   constructor(props) {
     super(props)
@@ -46,40 +47,59 @@ class About extends React.Component {
               )
           }
         </button>
-        <div style={{ height: this.state.style.height, width: this.props.language === 'EN' ? '182px' : '88px', overflow: 'hidden', borderRight: '1px solid black', borderBottom: '1px solid black' }}>
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect" style={{ width: '100%',  textAlign: 'left' }}>
+        <div
+          style={{
+            height: this.state.style.height,
+            width: this.props.language === 'EN' ? '182px' : '88px',
+            overflow: 'hidden',
+            borderRight: '1px solid black',
+            borderBottom: '1px solid black'
+          }}
+        >
+          <button
+            className="mdl-button mdl-js-button mdl-js-ripple-effect"
+            style={{
+              width: '100%',
+              textAlign: 'left'
+            }}
+          >
             {
-              this.props.language === 'EN' ? 'Statement of Faith'
-                : (
-                  this.props.language === '检体' ? '信仰' : '信仰'
-                )
+              this.props.language === 'EN' ? 'Statement of Faith' : (
+                this.props.language === '检体' ? '信仰' : '信仰'
+              )
             }
           </button>
           <br />
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect" style={{ width: '100%',  textAlign: 'left' }}>
+          <button
+            className="mdl-button mdl-js-button mdl-js-ripple-effect"
+            style={{ width: '100%',  textAlign: 'left' }}
+          >
             {
-              this.props.language === 'EN' ? 'Mission'
-                : (
-                  this.props.language === '检体' ? '任务' : '任務'
-                )
+              this.props.language === 'EN' ? 'Mission' : (
+                this.props.language === '检体' ? '任务' : '任務'
+              )
             }
           </button>
           <br />
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect" style={{ width: '100%', textAlign: 'left' }}>
+          <button
+            className="mdl-button mdl-js-button mdl-js-ripple-effect"
+            style={{ width: '100%', textAlign: 'left' }}
+          >
             {
-              this.props.language === 'EN' ? 'Staff'
-                : (
-                  this.props.language === '检体' ? '同工' : '同工'
-                )
+              this.props.language === 'EN' ? 'Staff' : (
+                this.props.language === '检体' ? '同工' : '同工'
+              )
             }
           </button>
           <br />
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect" style={{ width: '100%', textAlign: 'left' }}>
+          <button
+            className="mdl-button mdl-js-button mdl-js-ripple-effect"
+            style={{ width: '100%', textAlign: 'left' }}
+          >
             {
-              this.props.language === 'EN' ? 'Jobs'
-                : (
-                  this.props.language === '检体' ? '工作' : '工作'
-                )
+              this.props.language === 'EN' ? 'Jobs' : (
+                this.props.language === '检体' ? '工作' : '工作'
+              )
             }
           </button>
         </div>
@@ -88,8 +108,8 @@ class About extends React.Component {
   }
 }
 
+
 const mapStateToProps = (state) => {
-  // console.log('App mapStateToProps state', state);
   return {
     language: state.language,
     browserWidth: state.browserWidth

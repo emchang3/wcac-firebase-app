@@ -46,20 +46,40 @@ class Language extends React.Component {
 
   render() {
     return (
-      <div id='site-language' style={{ width: '66px', right: this.props.browserWidth < 1145 ? '0px' : '50px' }}>
-        <button className="mdl-button mdl-js-button mdl-js-ripple-effect" style={{ paddingLeft: '1px', paddingRight: '0px', textAlign: 'center' }} onClick={this.openMenu}>
+      <div
+        id='site-language'
+        style={{ width: '66px', right: this.props.browserWidth < 1145 ? '0px' : '50px' }}
+      >
+        <button
+          className="mdl-button mdl-js-button mdl-js-ripple-effect"
+          style={{ paddingLeft: '1px', paddingRight: '0px', textAlign: 'center' }} onClick={this.openMenu}
+        >
           <span style={{ padding: '1px', borderRadius: '3px' }}>&nbsp;{this.props.language} </span>{ this.state.expanded === 'contracted' ? <i className="material-icons">arrow_drop_down</i> : <i className="material-icons">arrow_drop_up</i> }
         </button>
-        <div style={{ height: this.state.style.height, width: '66px', overflow: 'hidden', borderRight: '1px solid black', borderBottom: '1px solid black' }}>
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect" onClick={this.changeLang.bind(null, this.props.language !== '粵語' ? '粵語' : 'EN')}>
+        <div
+          style={{
+            height: this.state.style.height,
+            width: '66px',
+            overflow: 'hidden',
+            borderRight: '1px solid black',
+            borderBottom: '1px solid black'
+          }}
+        >
+          <button
+            className="mdl-button mdl-js-button mdl-js-ripple-effect" onClick={this.changeLang.bind(null, this.props.language !== '粵語' ? '粵語' : 'EN')}
+          >
             { this.props.language !== '粵語' ? '粵語' : 'EN' }
           </button>
           <br />
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect" onClick={this.changeLang.bind(null, this.props.language !== '繁體' ? '繁體' : 'EN')}>
+          <button
+            className="mdl-button mdl-js-button mdl-js-ripple-effect" onClick={this.changeLang.bind(null, this.props.language !== '繁體' ? '繁體' : 'EN')}
+          >
             { this.props.language !== '繁體' ? '繁體' : 'EN' }
           </button>
           <br />
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect" onClick={this.changeLang.bind(null, this.props.language !== '检体' ? '检体' : 'EN')}>
+          <button
+            className="mdl-button mdl-js-button mdl-js-ripple-effect" onClick={this.changeLang.bind(null, this.props.language !== '检体' ? '检体' : 'EN')}
+          >
             { this.props.language !== '检体' ? '检体' : 'EN' }
           </button>
         </div>

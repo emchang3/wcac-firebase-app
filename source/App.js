@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 
-// import Navbar from './navbar/Navbar'
 import Router from './Router'
 
 

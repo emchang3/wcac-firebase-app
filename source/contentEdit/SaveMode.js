@@ -3,7 +3,14 @@ import React from 'react'
 
 export const SaveMode = ({ onChange, browserWidth, saveMode }) => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '12px', paddingRight: '8px' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'flex-end',
+        paddingTop: '12px',
+        paddingRight: '8px'
+      }}
+    >
       <span style={{ paddingTop: '2px' }}>
         { saveMode === 'draft' ? `${saveMode.toLowerCase()}` : `${saveMode.toUpperCase()}` }
       </span>

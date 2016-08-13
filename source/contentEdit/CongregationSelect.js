@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 export class CongregationSelect extends React.Component {
   constructor(props) {
     super(props)
@@ -16,7 +17,14 @@ export class CongregationSelect extends React.Component {
 
   render() {
     return (
-      <div style={{ paddingLeft: '8px', paddingTop: '8px', paddingBottom: '8px', paddingRight: '16px' }}>
+      <div
+        style={{
+          paddingLeft: '8px',
+          paddingTop: '8px',
+          paddingBottom: '8px',
+          paddingRight: '16px'
+        }}
+      >
         <button
           className="mdl-button mdl-js-button mdl-js-ripple-effect"
           onClick={this.openOptions}

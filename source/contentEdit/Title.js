@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Title = ({ onChange }) => {
+export const Title = ({ onChange, language }) => {
   return (
     <div className="mdl-textfield mdl-js-textfield">
       <input
@@ -9,7 +9,13 @@ export const Title = ({ onChange }) => {
         id="post-title"
         onChange={onChange}
       />
-      <label className="mdl-textfield__label" htmlFor="post-title">Title...</label>
+      <label className="mdl-textfield__label" htmlFor="post-title">
+        {
+          language === 'EN' ? 'Title...' : (
+            language === '检体' ? '标题...' : '標題...'
+          )
+        }
+      </label>
     </div>
   )
 }

@@ -7,6 +7,7 @@ import Language from './Language'
 
 import { hShiftR, hExpand } from './Animation'
 
+
 class Navbar extends Component {
   constructor(props) {
     super(props)
@@ -44,10 +45,9 @@ class Navbar extends Component {
         <div id='site-title' style={{ width: this.state.style.width }}>
           <strong>
             {
-              this.props.language === 'EN' ? 'WCAC'
-                : (
-                  this.props.language === '检体' ? '惠顿华人宣道会' : '惠頓華人宣道會'
-                )
+              this.props.language === 'EN' ? 'WCAC' : (
+                this.props.language === '检体' ? '惠顿华人宣道会' : '惠頓華人宣道會'
+              )
             }
           </strong>
         </div>
@@ -55,34 +55,8 @@ class Navbar extends Component {
           <div className='navItem' style={{ height: '50px', lineHeight: '50px' }}>
             <button className="mdl-button mdl-js-button mdl-js-ripple-effect">
               {
-                this.props.language === 'EN' ? 'Contact'
-                  : (
-                    this.props.language === '检体' ? '联系我们' : '聯繫我們'
-                  )
-              }
-            </button>
-          </div>
-          <div className='navItem' style={{ height: '50px', lineHeight: '50px' }}>
-            <button className="mdl-button mdl-js-button mdl-js-ripple-effect">
-              {
-                this.props.language === 'EN' ? 'Ministries'
-                  : (
-                    this.props.language === '检体' ? '事工' : '事工'
-                  )
-              }
-            </button>
-          </div>
-          <div className='navItem' style={{ height: '50px', lineHeight: '50px' }}>
-            <button className="mdl-button mdl-js-button mdl-js-ripple-effect">
-              {
-                this.props.language === 'EN' ? (
-                  'Sermons'
-                ) : (
-                  this.props.language === '检体' ? (
-                    '讲道'
-                  ) : (
-                    '講道'
-                  )
+                this.props.language === 'EN' ? 'Contact' : (
+                  this.props.language === '检体' ? '联系我们' : '聯繫我們'
                 )
               }
             </button>
@@ -90,14 +64,8 @@ class Navbar extends Component {
           <div className='navItem' style={{ height: '50px', lineHeight: '50px' }}>
             <button className="mdl-button mdl-js-button mdl-js-ripple-effect">
               {
-                this.props.language === 'EN' ? (
-                  'Announcements'
-                ) : (
-                  this.props.language === '检体' ? (
-                    '公告'
-                  ) : (
-                    '公告'
-                  )
+                this.props.language === 'EN' ? 'Ministries' : (
+                  this.props.language === '检体' ? '事工' : '事工'
                 )
               }
             </button>
@@ -105,14 +73,26 @@ class Navbar extends Component {
           <div className='navItem' style={{ height: '50px', lineHeight: '50px' }}>
             <button className="mdl-button mdl-js-button mdl-js-ripple-effect">
               {
-                this.props.language === 'EN' ? (
-                  'Events'
-                ) : (
-                  this.props.language === '检体' ? (
-                    '活动'
-                  ) : (
-                    '活動'
-                  )
+                this.props.language === 'EN' ? 'Sermons' : (
+                  this.props.language === '检体' ? '讲道' : '講道'
+                )
+              }
+            </button>
+          </div>
+          <div className='navItem' style={{ height: '50px', lineHeight: '50px' }}>
+            <button className="mdl-button mdl-js-button mdl-js-ripple-effect">
+              {
+                this.props.language === 'EN' ? 'Announcements' : (
+                  this.props.language === '检体' ? '公告' : '公告'
+                )
+              }
+            </button>
+          </div>
+          <div className='navItem' style={{ height: '50px', lineHeight: '50px' }}>
+            <button className="mdl-button mdl-js-button mdl-js-ripple-effect">
+              {
+                this.props.language === 'EN' ? 'Events' : (
+                  this.props.language === '检体' ? '活动' : '活動'
                 )
               }
             </button>
@@ -126,6 +106,7 @@ class Navbar extends Component {
   }
 }
 
+
 const mapStateToProps = (state) => {
   // console.log('App mapStateToProps state', state);
   return {
@@ -133,11 +114,5 @@ const mapStateToProps = (state) => {
     browserWidth: state.browserWidth
   }
 }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//
-//   }
-// }
 
 export default connect(mapStateToProps)(Navbar)

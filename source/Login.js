@@ -3,9 +3,17 @@ import { connect } from 'react-redux'
 
 import { attemptLogin } from './actions'
 
+
 const Login = ({ language, browserWidth, attemptLogin, uid }) => {
   return (
-    <div style={{ display: 'flex', paddingTop: '100px', justifyContent: 'center', textAlign: 'center' }}>
+    <div
+      style={{
+        display: 'flex',
+        paddingTop: '100px',
+        justifyContent: 'center',
+        textAlign: 'center'
+      }}
+    >
       <div>
         <h1>Administrator Log-in</h1>
         <p>

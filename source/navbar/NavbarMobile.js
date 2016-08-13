@@ -8,6 +8,7 @@ import MenuMobile from './MenuMobile'
 
 import { hShiftR, hExpand, fade } from './Animation'
 
+
 class Navbar extends Component {
   constructor(props) {
     super(props)
@@ -82,8 +83,8 @@ class Navbar extends Component {
   }
 }
 
+
 const mapStateToProps = (state) => {
-  // console.log('App mapStateToProps state', state);
   return {
     language: state.language,
     browserWidth: state.browserWidth
