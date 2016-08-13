@@ -29,7 +29,7 @@ const Router = ({ language, path }) => {
         </div>
       )
     default:
-      return <div></div>
+      return <div>Not found.</div>
   }
 }
 

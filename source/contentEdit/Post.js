@@ -38,6 +38,7 @@ class RichEditorExample extends React.Component {
     }
 
     this.focus = () => {
+      console.log('focus');
       this.refs.editor.focus()
     }
     this.onChange = (editorState) => {
@@ -47,7 +48,6 @@ class RichEditorExample extends React.Component {
     this.handleKeyCommand = (command) => this._handleKeyCommand(command)
     this.toggleBlockType = (type) => this._toggleBlockType(type)
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style)
-    // this.readOnlyToggle = () => this._readOnlyToggle()
   }
 
   componentWillUpdate = (nextProps, nextState) => {
@@ -57,6 +57,7 @@ class RichEditorExample extends React.Component {
     const saveMode = nextState.saveMode || this.state.saveMode
     const congregation = nextState.congregation
     const category = nextState.category
+
     const payload = {
       uid: uid,
       title: title,
@@ -65,6 +66,14 @@ class RichEditorExample extends React.Component {
       mode: saveMode,
       category: category
     }
+
+    if (nextState.startDate.length > 0 && nextState.startTime.length > 0 && nextState.endDate.length > 0 && nextState.endTime.length > 0) {
+      const startDateTime = new Date(`${nextState.startDate}T${nextState.startTime}`).getTime()
+      const endDateTime = new Date(`${nextState.endDate}T${nextState.endTime}`).getTime()
+      payload.startDateTime = startDateTime
+      payload.endDateTime = endDateTime
+    }
+
     this.props.savePost(payload)
   }
 
@@ -97,11 +106,9 @@ class RichEditorExample extends React.Component {
   }
 
   saveModeToggle = (event) => {
-    event.target.checked === true ? (
-      this.setState({ saveMode: 'publish' })
-    ) : (
-      this.setState({ saveMode: 'draft' })
-    )
+    event.target.checked === true
+      ? this.setState({ saveMode: 'publish' })
+      : this.setState({ saveMode: 'draft' })
   }
 
   updateTitle = (event) => {
@@ -117,19 +124,19 @@ class RichEditorExample extends React.Component {
   }
 
   updateStartDate = (event) => {
-    console.log(event.target.value);
+    this.setState({ startDate: event.target.value })
   }
 
   updateStartTime = (event) => {
-    console.log(event.target.value);
+    this.setState({ startTime: event.target.value + ':00' })
   }
 
   updateEndDate = (event) => {
-    console.log(event.target.value);
+    this.setState({ endDate: event.target.value })
   }
 
   updateEndTime = (event) => {
-    console.log(event.target.value);
+    this.setState({ endTime: event.target.value + ':00' })
   }
 
   render() {
@@ -148,12 +155,16 @@ class RichEditorExample extends React.Component {
     if (this.props.uid !== undefined && this.props.uid !== null) {
       if (this.props.readOnly === false) {
         return (
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div
+            style={{ display: 'flex', justifyContent: 'center' }}
+            onClick={ () => console.log('first level') }
+          >
             <div
               style={{
                 width: this.props.browserWidth < 1145 ? '80%' : '60%',
                 paddingTop: '100px'
               }}
+              onClick={ () => console.log('second level') }
             >
               <h2>
                 {
@@ -165,7 +176,7 @@ class RichEditorExample extends React.Component {
 
               <Title onChange={this.updateTitle} language={this.props.language} />
 
-              <div className="RichEditor-root">
+              <div className="RichEditor-root" onClick={ () => console.log('third level') }>
                 <BlockStyleControls
                   editorState={editorState}
                   onToggle={this.toggleBlockType}
@@ -174,7 +185,7 @@ class RichEditorExample extends React.Component {
                   editorState={editorState}
                   onToggle={this.toggleInlineStyle}
                 />
-                <div className={className} onClick={this.focus}>
+                <div className={className} onClick={ () => console.log('fourth level') }>
                   <Editor
                     blockStyleFn={getBlockStyle}
                     customStyleMap={styleMap}

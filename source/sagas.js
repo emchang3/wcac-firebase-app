@@ -3,7 +3,7 @@ import { put } from 'redux-saga/effects'
 
 import { rehydrateState, setUser } from './actions'
 
-import { storageAvailable, persistState, getLocalState, addUser, isAdmin } from './database'
+import { storageAvailable, persistState, getLocalState, addUser, isAdmin, postContent } from './database'
 
 
 function* helloSaga() {
@@ -64,8 +64,12 @@ function* loginSaga() {
 }
 
 function* persistContent(action) {
-  console.log(action.payload);
-  
+  const payload = action.payload
+  const content = { ...payload, timestamp: new Date().getTime() }
+  const adminStatus = yield* isAdmin(action.payload.uid)
+  adminStatus === true
+    ? yield* postContent(content)
+    : console.log('not admin');
 }
 
 
