@@ -10,6 +10,7 @@ import { CategorySelect } from './CategorySelect'
 import { SaveMode } from './SaveMode'
 import { Title } from './Title'
 import { DateSelect } from './DateSelect'
+import { SermonLink } from './SermonLink'
 
 
 const {
@@ -29,18 +30,19 @@ class RichEditorExample extends React.Component {
       editorState: EditorState.createEmpty(),
       saveMode: 'draft',
       congregation: '',
-      category: '',
+      category: 'uncategorized',
       title: '',
       startDate: '',
       startTime: '',
       endDate: '',
-      endTime: ''
+      endTime: '',
+      sermonLink: ''
     }
 
-    this.focus = () => {
-      console.log('focus');
-      this.refs.editor.focus()
-    }
+    // this.focus = () => {
+    //   console.log('focus');
+    //   this.refs.editor.focus()
+    // }
     this.onChange = (editorState) => {
       this.setState({editorState})
     }
@@ -75,6 +77,10 @@ class RichEditorExample extends React.Component {
     }
 
     this.props.savePost(payload)
+  }
+
+  componentDidUpdate = () => {
+    componentHandler.upgradeAllRegistered()
   }
 
   _handleKeyCommand(command) {
@@ -137,6 +143,10 @@ class RichEditorExample extends React.Component {
 
   updateEndTime = (event) => {
     this.setState({ endTime: event.target.value + ':00' })
+  }
+
+  setSermonLink = (event) => {
+    this.setState({ sermonLink: event.target.value })
   }
 
   render() {
@@ -203,7 +213,6 @@ class RichEditorExample extends React.Component {
                     onChange={this.onChange}
                     ref="editor"
                     spellCheck={true}
-                    readOnly={this.props.readOnly}
                   />
                 </div>
               </div>
@@ -216,6 +225,12 @@ class RichEditorExample extends React.Component {
                     updateStartTime={this.updateStartTime}
                     updateEndTime={this.updateEndTime}
                   />
+                ) : ''
+              }
+
+              {
+                this.state.category === 'sermons' ? (
+                  <SermonLink setSermonLink={this.setSermonLink} />
                 ) : ''
               }
 

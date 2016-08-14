@@ -80,6 +80,21 @@ export class CategorySelect extends React.Component {
           </label>
           <label
             className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
+            htmlFor="sermons"
+            style={{ display: 'block', paddingBottom: '2px' }}
+          >
+            <input
+              className="mdl-radio__button"
+              id="sermons"
+              name="category"
+              type="radio"
+              value="sermons"
+              onClick={this.props.onClick}
+            />
+            <span className="mdl-radio__label">Sermons</span>
+          </label>
+          <label
+            className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
             htmlFor="statement"
             style={{ display: 'block', paddingBottom: '2px' }}
           >
