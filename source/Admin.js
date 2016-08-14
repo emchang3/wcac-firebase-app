@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { attemptLogin } from './actions'
 
 
-const Login = ({ language, browserWidth, attemptLogin, uid }) => {
+const Admin = ({ language, browserWidth, attemptLogin, uid }) => {
   return (
     <div
       style={{
@@ -23,13 +23,22 @@ const Login = ({ language, browserWidth, attemptLogin, uid }) => {
         </p>
         {
           uid !== null ? (
-            <p>
-              <a href='/new_post'>
-                <button className="mdl-button mdl-js-button">
-                  Create Content
-                </button>
-              </a>
-            </p>
+            <div>
+              <p>
+                <a href='/create_new'>
+                  <button className="mdl-button mdl-js-button mdl-js-ripple-effect">
+                    Create New
+                  </button>
+                </a>
+              </p>
+              <p>
+                <a href='/create_new'>
+                  <button className="mdl-button mdl-js-button mdl-js-ripple-effect">
+                    View All
+                  </button>
+                </a>
+              </p>
+            </div>
           ) : (
             <p>
               Log in with Google.
@@ -58,4 +67,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect (mapStateToProps, mapDispatchToProps)(Login)
+export default connect (mapStateToProps, mapDispatchToProps)(Admin)

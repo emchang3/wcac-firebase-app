@@ -157,15 +157,24 @@ class RichEditorExample extends React.Component {
         return (
           <div
             style={{ display: 'flex', justifyContent: 'center' }}
-            onClick={ () => console.log('first level') }
           >
             <div
               style={{
                 width: this.props.browserWidth < 1145 ? '80%' : '60%',
-                paddingTop: '100px'
+                paddingTop: '80px'
               }}
-              onClick={ () => console.log('second level') }
             >
+              <div>
+                <p>
+                  <a href='/admin' style={{ color: 'black' }}>
+                    <button className="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">
+                      <i className="material-icons">arrow_back</i>
+                    </button>
+                  </a>
+                  <span style={{ paddingLeft: '8px' }}>ADMIN</span>
+                </p>
+              </div>
+
               <h2>
                 {
                   this.props.language === 'EN' ? 'Create New Content' : (
@@ -176,7 +185,7 @@ class RichEditorExample extends React.Component {
 
               <Title onChange={this.updateTitle} language={this.props.language} />
 
-              <div className="RichEditor-root" onClick={ () => console.log('third level') }>
+              <div className="RichEditor-root">
                 <BlockStyleControls
                   editorState={editorState}
                   onToggle={this.toggleBlockType}
@@ -185,7 +194,7 @@ class RichEditorExample extends React.Component {
                   editorState={editorState}
                   onToggle={this.toggleInlineStyle}
                 />
-                <div className={className} onClick={ () => console.log('fourth level') }>
+                <div className={className}>
                   <Editor
                     blockStyleFn={getBlockStyle}
                     customStyleMap={styleMap}
@@ -255,6 +264,7 @@ function getBlockStyle(block) {
     case 'blockquote': return 'RichEditor-blockquote'
     default: return null
   }
+  // return null
 }
 
 class StyleButton extends React.Component {

@@ -172,6 +172,25 @@ p {
   font-style: italic;
   margin: 16px 0;
   padding: 10px 20px;
+  quotes: none;
+}
+
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+blockquote:after {
+  color: #ccc;
+  content: open-quote;
+  font-size: 0em;
+  line-height: 0em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
 }
 
 .RichEditor-editor .public-DraftStyleDefault-pre {

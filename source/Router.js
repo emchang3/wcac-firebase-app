@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import NavbarMobile from './navbar/NavbarMobile'
 import Post from './contentEdit/Post'
-import Login from './Login'
+import Admin from './Admin'
 
 
 const Router = ({ language, path }) => {
@@ -14,17 +14,16 @@ const Router = ({ language, path }) => {
           <NavbarMobile />
         </div>
       )
-    case '/login':
+    case '/admin':
       return (
         <div style={{ width: '100%', height: '100%' }}>
           <NavbarMobile />
-          <Login />
+          <Admin />
         </div>
       )
-    case '/new_post':
+    case '/create_new':
       return (
         <div style={{ width: '100%', height: '100%' }}>
-          <NavbarMobile />
           <Post readOnly={false} />
         </div>
       )

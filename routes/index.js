@@ -14,11 +14,11 @@ router.get('/', (req, res, next) => {
 //   })
 // })
 
-router.get('/login', (req, res, next) => {
+router.get('/admin', (req, res, next) => {
   res.render('default', { title: 'Log In' })
 })
 
-router.get('/new_post', (req, res, next) => {
+router.get('/create_new', (req, res, next) => {
   res.render('default', { title: 'Create Content' })
 })
 
