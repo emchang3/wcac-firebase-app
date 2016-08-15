@@ -36,7 +36,8 @@ class RichEditorExample extends React.Component {
       startTime: '',
       endDate: '',
       endTime: '',
-      sermonLink: ''
+      sermonLink: '',
+      initialTimestamp: ''
     }
 
     // this.focus = () => {
@@ -53,30 +54,45 @@ class RichEditorExample extends React.Component {
   }
 
   componentWillUpdate = (nextProps, nextState) => {
-    const rawContentState = Draft.convertToRaw(nextState.editorState.getCurrentContent())
     const title = nextState.title || this.state.title
-    const uid = nextProps.uid
-    const saveMode = nextState.saveMode || this.state.saveMode
-    const congregation = nextState.congregation
-    const category = nextState.category
+    const initialTimestamp = nextState.initialTimestamp
 
-    const payload = {
-      uid: uid,
-      title: title,
-      content: rawContentState,
-      congregation: congregation,
-      mode: saveMode,
-      category: category
+    if (initialTimestamp.toString().length > 0) {
+      const rawContentState = Draft.convertToRaw(nextState.editorState.getCurrentContent())
+      const uid = nextProps.uid
+      const saveMode = nextState.saveMode || this.state.saveMode
+      const congregation = nextState.congregation
+      const category = nextState.category
+      const sermonLink = nextState.sermonLink
+
+      const payload = {
+        uid: uid,
+        title: title,
+        content: rawContentState,
+        congregation: congregation,
+        mode: saveMode,
+        category: category,
+        initialTimestamp: initialTimestamp
+      }
+
+      if (category === 'events'
+        && nextState.startDate.length > 0
+        && nextState.startTime.length > 0
+        && nextState.endDate.length > 0
+        && nextState.endTime.length > 0
+      ) {
+        const startDateTime = new Date(`${nextState.startDate}T${nextState.startTime}`).getTime()
+        const endDateTime = new Date(`${nextState.endDate}T${nextState.endTime}`).getTime()
+        payload.startDateTime = startDateTime
+        payload.endDateTime = endDateTime
+      }
+
+      if (category === 'sermons') {
+        payload.sermonLink = sermonLink
+      }
+
+      this.props.savePost(payload)
     }
-
-    if (nextState.startDate.length > 0 && nextState.startTime.length > 0 && nextState.endDate.length > 0 && nextState.endTime.length > 0) {
-      const startDateTime = new Date(`${nextState.startDate}T${nextState.startTime}`).getTime()
-      const endDateTime = new Date(`${nextState.endDate}T${nextState.endTime}`).getTime()
-      payload.startDateTime = startDateTime
-      payload.endDateTime = endDateTime
-    }
-
-    this.props.savePost(payload)
   }
 
   componentDidUpdate = () => {
@@ -118,7 +134,14 @@ class RichEditorExample extends React.Component {
   }
 
   updateTitle = (event) => {
-    this.setState({ title: event.target.value })
+    event.target.value.length > 0 && this.state.initialTimestamp.length === 0 ? (
+      this.setState({
+        title: event.target.value,
+        initialTimestamp: new Date().getTime()
+      })
+    ) : (
+      this.setState({ title: event.target.value })
+    )
   }
 
   congregationChange = (event) => {
@@ -279,7 +302,6 @@ function getBlockStyle(block) {
     case 'blockquote': return 'RichEditor-blockquote'
     default: return null
   }
-  // return null
 }
 
 class StyleButton extends React.Component {

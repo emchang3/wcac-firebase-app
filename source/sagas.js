@@ -3,7 +3,13 @@ import { put } from 'redux-saga/effects'
 
 import { rehydrateState, setUser } from './actions'
 
-import { storageAvailable, persistState, getLocalState, addUser, isAdmin, postContent } from './database'
+import {
+  storageAvailable,
+  persistState,
+  getLocalState,
+  addUser, isAdmin,
+  postContent
+} from './database'
 
 
 function* helloSaga() {
