@@ -10,7 +10,7 @@ import { startApp } from './database'
 
 import App from './App'
 
-import { browserResize, storeLocal, retrieveState } from './actions'
+import { browserResize, storeLocal, retrieveState, watchContent } from './actions'
 import reductor from './reducers'
 import rootSaga from './sagas'
 
@@ -34,10 +34,13 @@ sagaMiddleware.run(rootSaga, store.getState)
 
 
 store.dispatch(retrieveState())
+
 const renderNav = () => {
   store.dispatch(browserResize())
 }
 window.addEventListener('resize', renderNav, false)
+
+store.dispatch(watchContent(store.dispatch))
 
 
 function render() {

@@ -22,4 +22,8 @@ router.get('/create_new', (req, res, next) => {
   res.render('default', { title: 'Create Content' })
 })
 
+router.get('/edit/:its', (req, res, next) => {
+  res.render('secondary', { title: 'Edit Content'})
+})
+
 module.exports = router

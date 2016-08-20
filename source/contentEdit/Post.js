@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Immutable from 'immutable'
 import Draft from 'draft-js'
+import { isEmpty } from 'lodash'
 
 import { savePost } from '../actions'
 
@@ -16,8 +17,11 @@ import { SermonLink } from './SermonLink'
 const {
   Editor,
   EditorState,
+  ContentState,
   RichUtils,
   DefaultDraftBlockRenderMap,
+  convertToRaw,
+  convertFromRaw
 } = Draft
 
 const {Map} = Immutable
@@ -53,12 +57,34 @@ class RichEditorExample extends React.Component {
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style)
   }
 
+  componentWillReceiveProps = (nextProps) => {
+    // console.log('nextProps', nextProps);
+    if (nextProps.content && nextProps.initialTimestamp !== null) {
+
+      const rawContentState = nextProps.content[nextProps.initialTimestamp].content
+
+      if (isEmpty(rawContentState.entityMap)) {
+        rawContentState.entityMap = {};
+      }
+
+      const blockArray = convertFromRaw(rawContentState)
+      const myES = EditorState.createWithContent(blockArray)
+
+      console.log('v---------------');
+      console.log(myES);
+      console.log('^---------------');
+
+      this.setState({ editorState: myES })
+    }
+  }
+
   componentWillUpdate = (nextProps, nextState) => {
     const title = nextState.title || this.state.title
     const initialTimestamp = nextState.initialTimestamp
 
-    if (initialTimestamp.toString().length > 0) {
-      const rawContentState = Draft.convertToRaw(nextState.editorState.getCurrentContent())
+    if (initialTimestamp.toString().length > 0 && nextState !== this.state) {
+      const rawContentState = convertToRaw(nextState.editorState.getCurrentContent())
+      console.log(EditorState.createWithContent(convertFromRaw(rawContentState)));
       const uid = nextProps.uid
       const saveMode = nextState.saveMode || this.state.saveMode
       const congregation = nextState.congregation
@@ -103,10 +129,8 @@ class RichEditorExample extends React.Component {
     const {editorState} = this.state
     const newState = RichUtils.handleKeyCommand(editorState, command)
     if (newState) {
-      this.onChange(newState)
-      return true
+      this.setState({ editorState: newState })
     }
-    return false
   }
 
   _toggleBlockType(blockType) {
@@ -186,98 +210,96 @@ class RichEditorExample extends React.Component {
     }
 
     if (this.props.uid !== undefined && this.props.uid !== null) {
-      if (this.props.readOnly === false) {
-        return (
+      return (
+        <div
+          style={{ display: 'flex', justifyContent: 'center' }}
+        >
           <div
-            style={{ display: 'flex', justifyContent: 'center' }}
+            style={{
+              width: this.props.browserWidth < 1145 ? '80%' : '60%',
+              paddingTop: '80px'
+            }}
           >
-            <div
-              style={{
-                width: this.props.browserWidth < 1145 ? '80%' : '60%',
-                paddingTop: '80px'
-              }}
-            >
-              <div>
-                <p>
-                  <a href='/admin' style={{ color: 'black' }}>
-                    <button className="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">
-                      <i className="material-icons">arrow_back</i>
-                    </button>
-                  </a>
-                  <span style={{ paddingLeft: '8px' }}>ADMIN</span>
-                </p>
-              </div>
+            <div>
+              <p>
+                <a href='/admin' style={{ color: 'black' }}>
+                  <button className="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">
+                    <i className="material-icons">arrow_back</i>
+                  </button>
+                </a>
+                <span style={{ paddingLeft: '8px' }}>ADMIN</span>
+              </p>
+            </div>
 
-              <h2>
-                {
-                  this.props.language === 'EN' ? 'Create New Content' : (
-                    this.props.language === '检体' ? '创建新内容' : '創建新內容'
-                  )
-                }
-              </h2>
-
-              <Title onChange={this.updateTitle} language={this.props.language} />
-
-              <div className="RichEditor-root">
-                <BlockStyleControls
-                  editorState={editorState}
-                  onToggle={this.toggleBlockType}
-                />
-                <InlineStyleControls
-                  editorState={editorState}
-                  onToggle={this.toggleInlineStyle}
-                />
-                <div className={className}>
-                  <Editor
-                    blockStyleFn={getBlockStyle}
-                    customStyleMap={styleMap}
-                    editorState={editorState}
-                    handleKeyCommand={this.handleKeyCommand}
-                    onChange={this.onChange}
-                    ref="editor"
-                    spellCheck={true}
-                  />
-                </div>
-              </div>
-
+            <h2>
               {
-                this.state.category === 'events' ? (
-                  <DateSelect
-                    updateStartDate={this.updateStartDate}
-                    updateEndDate={this.updateEndDate}
-                    updateStartTime={this.updateStartTime}
-                    updateEndTime={this.updateEndTime}
-                  />
-                ) : ''
+                this.props.language === 'EN' ? 'Create New Content' : (
+                  this.props.language === '检体' ? '创建新内容' : '創建新內容'
+                )
               }
+            </h2>
 
-              {
-                this.state.category === 'sermons' ? (
-                  <SermonLink setSermonLink={this.setSermonLink} />
-                ) : ''
-              }
+            <Title onChange={this.updateTitle} language={this.props.language} />
 
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  border: '1px solid black'
-                }}
-              >
-                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                  <CategorySelect onClick={this.categoryChange} />
-                  <CongregationSelect onClick={this.congregationChange} />
-                </div>
-                <SaveMode
-                  onChange={this.saveModeToggle}
-                  browserWidth={this.props.browserWidth}
-                  saveMode={this.state.saveMode}
+            <div className="RichEditor-root">
+              <BlockStyleControls
+                editorState={editorState}
+                onToggle={this.toggleBlockType}
+              />
+              <InlineStyleControls
+                editorState={editorState}
+                onToggle={this.toggleInlineStyle}
+              />
+              <div className={className}>
+                <Editor
+                  blockStyleFn={getBlockStyle}
+                  customStyleMap={styleMap}
+                  editorState={editorState}
+                  handleKeyCommand={this.handleKeyCommand}
+                  onChange={this.onChange}
+                  ref="editor"
+                  spellCheck={true}
                 />
               </div>
             </div>
+
+            {
+              this.state.category === 'events' ? (
+                <DateSelect
+                  updateStartDate={this.updateStartDate}
+                  updateEndDate={this.updateEndDate}
+                  updateStartTime={this.updateStartTime}
+                  updateEndTime={this.updateEndTime}
+                />
+              ) : ''
+            }
+
+            {
+              this.state.category === 'sermons' ? (
+                <SermonLink setSermonLink={this.setSermonLink} />
+              ) : ''
+            }
+
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                border: '1px solid black'
+              }}
+            >
+              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                <CategorySelect onClick={this.categoryChange} />
+                <CongregationSelect onClick={this.congregationChange} />
+              </div>
+              <SaveMode
+                onChange={this.saveModeToggle}
+                browserWidth={this.props.browserWidth}
+                saveMode={this.state.saveMode}
+              />
+            </div>
           </div>
-        )
-      }
+        </div>
+      )
     }
     return (
       <div style={{ textAlign: 'center' }}>
@@ -391,7 +413,8 @@ const mapStateToProps = (state) => {
   return {
     uid: state.uid,
     browserWidth: state.browserWidth,
-    language: state.language
+    language: state.language,
+    content: state.content
   }
 }
 

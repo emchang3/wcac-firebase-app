@@ -6,6 +6,8 @@ const RESTORE_LOCAL = 'RESTORE_LOCAL'
 const ATTEMPT_LOGIN = 'ATTEMPT_LOGIN'
 const SET_USER = 'SET_USER'
 const SAVE_POST = 'SAVE_POST'
+const WATCH_CONTENT = 'WATCH_CONTENT'
+const UPDATE_CONTENT = 'UPDATE_CONTENT'
 
 
 export const browserResize = () => {
@@ -61,5 +63,19 @@ export const savePost = (payload) => {
   return {
     type: SAVE_POST,
     payload: payload
+  }
+}
+
+export const watchContent = (dispatch) => {
+  return {
+    type: WATCH_CONTENT,
+    dispatch: dispatch
+  }
+}
+
+export const updateContent = (posts) => {
+  return {
+    type: UPDATE_CONTENT,
+    content: posts
   }
 }

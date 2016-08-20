@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { startsWith } from 'lodash'
 
 import Search from './Search'
 import About from './AboutMobile'
@@ -24,11 +25,9 @@ class Navbar extends Component {
   left = () => {
     hShiftR(this, 150, 'px', 2, 300)
     if (window.innerWidth < 480 && this.props.language === 'EN') {
-      console.log('1st stage small');
       window.innerWidth < 445 ? (
         fade(this, -1, 2, 300)
       ) : (
-        console.log('shrink'),
         hExpand(this, -75, 'px', 2, 300)
       )
     }
@@ -59,7 +58,13 @@ class Navbar extends Component {
       <div id='navbar'>
         <MenuMobile />
         <div id='logo' style={{ opacity: window.innerWidth < 418 ? this.state.style.opacity : 1 }}>
-          <img src='images/alliance.jpeg' />
+          <img
+            src={
+              startsWith(this.props.path, '/edit')
+                ? '../images/alliance.jpeg'
+                : 'images/alliance.jpeg'
+            }
+          />
         </div>
         <div id='site-title' style={{ width: this.state.style.width, opacity: this.state.style.opacity }}>
           <strong>
@@ -87,7 +92,8 @@ class Navbar extends Component {
 const mapStateToProps = (state) => {
   return {
     language: state.language,
-    browserWidth: state.browserWidth
+    browserWidth: state.browserWidth,
+    path: state.path
   }
 }
 

@@ -8,7 +8,8 @@ import {
   persistState,
   getLocalState,
   addUser, isAdmin,
-  postContent
+  postContent,
+  initiateContentWatch
 } from './database'
 
 
@@ -70,12 +71,22 @@ function* loginSaga() {
 }
 
 function* persistContent(action) {
-  const payload = action.payload
-  const content = { ...payload, timestamp: new Date().getTime() }
-  const adminStatus = yield* isAdmin(action.payload.uid)
-  adminStatus === true
-    ? yield* postContent(content)
-    : console.log('not admin');
+  try {
+    const payload = action.payload
+    const content = { ...payload, timestamp: new Date().getTime() }
+    const adminStatus = yield* isAdmin(action.payload.uid)
+    adminStatus === true
+      ? yield* postContent(content)
+      : console.log('not admin')
+  } catch (e) {
+    console.log(`persistContent FAILURE: ${e}`);
+  } finally {
+
+  }
+}
+
+function* watchAndReturnContent(action) {
+  initiateContentWatch(action.dispatch)
 }
 
 
@@ -95,6 +106,10 @@ function* watchContentSave() {
   yield* takeLatest('SAVE_POST', persistContent)
 }
 
+function* watchContentWatch() {
+  yield* takeLatest('WATCH_CONTENT', watchAndReturnContent)
+}
+
 
 export default function* rootSaga(getState) {
   yield [
@@ -102,6 +117,7 @@ export default function* rootSaga(getState) {
     watchCriticalStateChange(getState),
     watchStateRetrievalRequest(),
     watchLoginAttempt(),
-    watchContentSave()
+    watchContentSave(),
+    watchContentWatch()
   ]
 }
