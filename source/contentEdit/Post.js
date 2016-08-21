@@ -60,6 +60,7 @@ class RichEditorExample extends React.Component {
   componentWillReceiveProps = (nextProps) => {
     // console.log('nextProps', nextProps);
     if (nextProps.content && nextProps.initialTimestamp !== null) {
+      console.log(nextProps.content[nextProps.initialTimestamp]);
 
       const rawContentState = nextProps.content[nextProps.initialTimestamp].content
 
@@ -70,11 +71,35 @@ class RichEditorExample extends React.Component {
       const blockArray = convertFromRaw(rawContentState)
       const myES = EditorState.createWithContent(blockArray)
 
-      console.log('v---------------');
-      console.log(myES);
-      console.log('^---------------');
+      const title = nextProps.content[nextProps.initialTimestamp].title
+      const congregation = nextProps.content[nextProps.initialTimestamp].congregation
+      const category = nextProps.content[nextProps.initialTimestamp].category
+      const initialTimestamp = nextProps.content[nextProps.initialTimestamp].initialTimestamp
+      const uid = nextProps.content[nextProps.initialTimestamp].uid
+      const saveMode = nextProps.content[nextProps.initialTimestamp].mode
 
-      this.setState({ editorState: myES })
+      const payload = {
+        uid: uid,
+        title: title,
+        editorState: myES,
+        congregation: congregation,
+        category: category,
+        initialTimestamp: initialTimestamp,
+        saveMode: saveMode
+      }
+
+      if (title !== this.state.title) {
+        if (saveMode === 'publish') {
+           document.getElementById('saveSwitch').click()
+        }
+        if (congregation !== '') {
+          document.getElementById(congregation).click()
+        }
+        if (category !== 'uncategorized') {
+          document.getElementById(category).click()
+        }
+        this.setState(payload)
+      }
     }
   }
 
@@ -84,12 +109,10 @@ class RichEditorExample extends React.Component {
 
     if (initialTimestamp.toString().length > 0 && nextState !== this.state) {
       const rawContentState = convertToRaw(nextState.editorState.getCurrentContent())
-      console.log(EditorState.createWithContent(convertFromRaw(rawContentState)));
       const uid = nextProps.uid
       const saveMode = nextState.saveMode || this.state.saveMode
       const congregation = nextState.congregation
       const category = nextState.category
-      const sermonLink = nextState.sermonLink
 
       const payload = {
         uid: uid,
@@ -114,6 +137,7 @@ class RichEditorExample extends React.Component {
       }
 
       if (category === 'sermons') {
+        const sermonLink = nextState.sermonLink
         payload.sermonLink = sermonLink
       }
 
@@ -239,7 +263,11 @@ class RichEditorExample extends React.Component {
               }
             </h2>
 
-            <Title onChange={this.updateTitle} language={this.props.language} />
+            <Title
+              onChange={this.updateTitle}
+              language={this.props.language}
+              title={this.state.title}
+            />
 
             <div className="RichEditor-root">
               <BlockStyleControls
@@ -288,8 +316,11 @@ class RichEditorExample extends React.Component {
               }}
             >
               <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                <CategorySelect onClick={this.categoryChange} />
-                <CongregationSelect onClick={this.congregationChange} />
+                <CategorySelect onClick={this.categoryChange} category={this.state.category} />
+                <CongregationSelect
+                  onClick={this.congregationChange}
+                  congregation={this.state.congregation}
+                />
               </div>
               <SaveMode
                 onChange={this.saveModeToggle}
@@ -350,9 +381,9 @@ class StyleButton extends React.Component {
 }
 
 const BLOCK_TYPES = [
-  {label: 'H1', style: 'header-one'},
-  {label: 'H2', style: 'header-two'},
-  {label: 'H3', style: 'header-three'},
+  // {label: 'H1', style: 'header-one'},
+  // {label: 'H2', style: 'header-two'},
+  // {label: 'H3', style: 'header-three'},
   {label: 'H4', style: 'header-four'},
   {label: 'H5', style: 'header-five'},
   {label: 'H6', style: 'header-six'},
@@ -386,25 +417,45 @@ const BlockStyleControls = (props) => {
 }
 
 var INLINE_STYLES = [
-  {label: 'Bold', style: 'BOLD'},
-  {label: 'Italic', style: 'ITALIC'},
-  {label: 'Underline', style: 'UNDERLINE'},
-  {label: 'Monospace', style: 'CODE'},
+  {label: 'b', style: 'BOLD'},
+  {label: 'i', style: 'ITALIC'},
+  {label: 'u', style: 'UNDERLINE'},
+  {label: 'Monospace', style: 'CODE'}
 ]
 
 const InlineStyleControls = (props) => {
   var currentStyle = props.editorState.getCurrentInlineStyle()
   return (
     <div className="RichEditor-controls">
-      {INLINE_STYLES.map(type =>
-        <StyleButton
-          key={type.label}
-          active={currentStyle.has(type.style)}
-          label={type.label}
-          onToggle={props.onToggle}
-          style={type.style}
-        />
-      )}
+      {
+        INLINE_STYLES.map((type) => {
+          console.log(type);
+          let styledLabel
+          switch (type.label) {
+            case 'b':
+              styledLabel = <strong>b</strong>
+              break
+            case 'i':
+              styledLabel = <em>i</em>
+              break
+            case 'u':
+              styledLabel = <u>u</u>
+              break
+            default:
+              styledLabel = type.label
+          }
+          console.log(type.label, styledLabel);
+          return (
+            <StyleButton
+              key={type.label}
+              active={currentStyle.has(type.style)}
+              label={styledLabel}
+              onToggle={props.onToggle}
+              style={type.style}
+            />
+          )
+        })
+      }
     </div>
   )
 }
