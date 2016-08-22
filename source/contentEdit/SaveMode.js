@@ -1,13 +1,14 @@
 import React from 'react'
 
 
-export const SaveMode = ({ onChange, browserWidth, saveMode }) => {
+export const SaveMode = ({ onChange, saveMode, inList, itemId }) => {
+
   return (
     <div
       style={{
         display: 'flex',
         justifyContent: 'flex-end',
-        paddingTop: '12px',
+        paddingTop: inList && inList === true ? '0px' : '12px',
         paddingRight: '8px'
       }}
     >
@@ -16,11 +17,11 @@ export const SaveMode = ({ onChange, browserWidth, saveMode }) => {
       </span>
       <div style={{ paddingLeft: '16px', paddingRight: '8px' }}>
         <label
-          htmlFor="saveSwitch"
+          htmlFor={ inList && inList === true ? `saveSwitch${itemId}` : 'saveSwitch' }
           className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
         >
           <input type="checkbox"
-            id="saveSwitch"
+            id={ inList && inList === true ? `saveSwitch${itemId}` : 'saveSwitch' }
             className="mdl-switch__input"
             onChange={onChange}
           />

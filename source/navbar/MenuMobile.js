@@ -23,6 +23,7 @@ class MenuMobile extends React.Component {
         menuOut: 'animating'
       })
       hShift(this, 200, 'px', 2, 300, () => {
+        window.addEventListener('click', this.handleNavBlur)
         this.setState({
           menuOut: 'shown'
         })
@@ -39,6 +40,12 @@ class MenuMobile extends React.Component {
           menuOut: 'hidden'
         })
       })
+    }
+  }
+  handleNavBlur = (event) => {
+    if (event.target !== document.getElementById('mobile-menu')) {
+      this.menuIn()
+      window.removeEventListener('click', this.handleNavBlur)
     }
   }
 

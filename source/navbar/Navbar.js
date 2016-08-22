@@ -40,7 +40,14 @@ class Navbar extends Component {
     return (
       <div id='navbar'>
         <div id='logo'>
-          <i className="material-icons" style={{ position: 'relative', top: '7px' }}>local_hospital</i>
+          <a href='/'>
+            <i
+              className="material-icons"
+              style={{ position: 'relative', top: '7px' }}
+            >
+              local_hospital
+            </i>
+          </a>
         </div>
         <div id='site-title' style={{ width: this.state.style.width }}>
           <strong>

@@ -58,13 +58,15 @@ class Navbar extends Component {
       <div id='navbar'>
         <MenuMobile />
         <div id='logo' style={{ opacity: window.innerWidth < 418 ? this.state.style.opacity : 1 }}>
-          <img
-            src={
-              startsWith(this.props.path, '/edit')
-                ? '../images/alliance.jpeg'
-                : 'images/alliance.jpeg'
-            }
-          />
+          <a href='/'>
+            <img
+              src={
+                startsWith(this.props.path, '/edit')
+                  ? '../images/alliance.jpeg'
+                  : 'images/alliance.jpeg'
+              }
+            />
+          </a>
         </div>
         <div id='site-title' style={{ width: this.state.style.width, opacity: this.state.style.opacity }}>
           <strong>

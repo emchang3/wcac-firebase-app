@@ -8,6 +8,7 @@ const SET_USER = 'SET_USER'
 const SAVE_POST = 'SAVE_POST'
 const WATCH_CONTENT = 'WATCH_CONTENT'
 const UPDATE_CONTENT = 'UPDATE_CONTENT'
+const DELETE_POST = 'DELETE_POST'
 
 
 export const browserResize = () => {
@@ -77,5 +78,12 @@ export const updateContent = (posts) => {
   return {
     type: UPDATE_CONTENT,
     content: posts
+  }
+}
+
+export const deletePost = (payload) => {
+  return {
+    type: DELETE_POST,
+    payload: payload
   }
 }

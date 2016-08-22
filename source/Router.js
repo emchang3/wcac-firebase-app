@@ -5,6 +5,8 @@ import { startsWith } from 'lodash'
 import NavbarMobile from './navbar/NavbarMobile'
 import Post from './contentEdit/Post'
 import Admin from './Admin'
+import PostList from './contentEdit/PostList'
+
 
 const routes = {
   '/': () => {
@@ -19,6 +21,14 @@ const routes = {
       <div style={{ width: '100%', height: '100%' }}>
         <NavbarMobile />
         <Admin />
+      </div>
+    )
+  },
+  '/posts' : () => {
+    return (
+      <div style={{ width: '100%', height: '100%' }}>
+        <NavbarMobile />
+        <PostList />
       </div>
     )
   },
@@ -39,7 +49,6 @@ const routes = {
 }
 
 const Router = ({ path }) => {
-  console.log(path);
   if (routes[path]) {
     return routes[path]()
   }
@@ -51,6 +60,7 @@ const Router = ({ path }) => {
     }
   }
 }
+
 
 const mapStateToProps = (state) => {
   return {

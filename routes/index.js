@@ -4,7 +4,7 @@ const router = express.Router()
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' })
+  res.render('index', { title: 'Home' })
 })
 
 // router.post('/testLoc', (req, res, next) => {
@@ -16,6 +16,10 @@ router.get('/', (req, res, next) => {
 
 router.get('/admin', (req, res, next) => {
   res.render('default', { title: 'Log In' })
+})
+
+router.get('/posts', (req, res, next) => {
+  res.render('default', { title: 'All Posts' })
 })
 
 router.get('/create_new', (req, res, next) => {

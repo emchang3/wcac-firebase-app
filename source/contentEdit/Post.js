@@ -12,6 +12,7 @@ import { SaveMode } from './SaveMode'
 import { Title } from './Title'
 import { DateSelect } from './DateSelect'
 import { SermonLink } from './SermonLink'
+import { Return } from './Return'
 
 
 const {
@@ -24,7 +25,7 @@ const {
   convertFromRaw
 } = Draft
 
-const {Map} = Immutable
+const { Map } = Immutable
 
 class RichEditorExample extends React.Component {
   constructor(props) {
@@ -60,7 +61,6 @@ class RichEditorExample extends React.Component {
   componentWillReceiveProps = (nextProps) => {
     // console.log('nextProps', nextProps);
     if (nextProps.content && nextProps.initialTimestamp !== null) {
-      console.log(nextProps.content[nextProps.initialTimestamp]);
 
       const rawContentState = nextProps.content[nextProps.initialTimestamp].content
 
@@ -121,7 +121,8 @@ class RichEditorExample extends React.Component {
         congregation: congregation,
         mode: saveMode,
         category: category,
-        initialTimestamp: initialTimestamp
+        initialTimestamp: initialTimestamp,
+        timestamp: new Date().getTime()
       }
 
       if (category === 'events'
@@ -235,30 +236,28 @@ class RichEditorExample extends React.Component {
 
     if (this.props.uid !== undefined && this.props.uid !== null) {
       return (
-        <div
-          style={{ display: 'flex', justifyContent: 'center' }}
-        >
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <div
             style={{
               width: this.props.browserWidth < 1145 ? '80%' : '60%',
               paddingTop: '80px'
             }}
           >
-            <div>
-              <p>
-                <a href='/admin' style={{ color: 'black' }}>
-                  <button className="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">
-                    <i className="material-icons">arrow_back</i>
-                  </button>
-                </a>
-                <span style={{ paddingLeft: '8px' }}>ADMIN</span>
-              </p>
-            </div>
+            <Return
+              url={ this.props.initialTimestamp ? '/posts' : '/admin' }
+              language={this.props.language}
+            />
 
             <h2>
               {
-                this.props.language === 'EN' ? 'Create New Content' : (
-                  this.props.language === '检体' ? '创建新内容' : '創建新內容'
+                this.props.initialTimestamp ? (
+                  this.props.language === 'EN' ? 'Edit Entry' : (
+                    this.props.language === '检体' ? '修改条目' : '修改條目'
+                  )
+                ) : (
+                  this.props.language === 'EN' ? 'Create New Entry' : (
+                    this.props.language === '检体' ? '创建新条目' : '創建新條目'
+                  )
                 )
               }
             </h2>
@@ -311,8 +310,7 @@ class RichEditorExample extends React.Component {
             <div
               style={{
                 display: 'flex',
-                justifyContent: 'space-between',
-                border: '1px solid black'
+                justifyContent: 'space-between'
               }}
             >
               <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -322,11 +320,7 @@ class RichEditorExample extends React.Component {
                   congregation={this.state.congregation}
                 />
               </div>
-              <SaveMode
-                onChange={this.saveModeToggle}
-                browserWidth={this.props.browserWidth}
-                saveMode={this.state.saveMode}
-              />
+              <SaveMode onChange={this.saveModeToggle} saveMode={this.state.saveMode} />
             </div>
           </div>
         </div>
@@ -381,9 +375,9 @@ class StyleButton extends React.Component {
 }
 
 const BLOCK_TYPES = [
-  // {label: 'H1', style: 'header-one'},
-  // {label: 'H2', style: 'header-two'},
-  // {label: 'H3', style: 'header-three'},
+  {label: 'H1', style: 'header-one'},
+  {label: 'H2', style: 'header-two'},
+  {label: 'H3', style: 'header-three'},
   {label: 'H4', style: 'header-four'},
   {label: 'H5', style: 'header-five'},
   {label: 'H6', style: 'header-six'},
@@ -429,7 +423,6 @@ const InlineStyleControls = (props) => {
     <div className="RichEditor-controls">
       {
         INLINE_STYLES.map((type) => {
-          console.log(type);
           let styledLabel
           switch (type.label) {
             case 'b':
@@ -444,7 +437,7 @@ const InlineStyleControls = (props) => {
             default:
               styledLabel = type.label
           }
-          console.log(type.label, styledLabel);
+
           return (
             <StyleButton
               key={type.label}
@@ -471,7 +464,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    savePost: (uid, title, content, mode) => dispatch(savePost(uid, title, content, mode))
+    savePost: (payload) => dispatch(savePost(payload))
   }
 }
 

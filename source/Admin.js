@@ -32,7 +32,7 @@ const Admin = ({ language, browserWidth, attemptLogin, uid }) => {
                 </a>
               </p>
               <p>
-                <a href='/create_new'>
+                <a href='/posts'>
                   <button className="mdl-button mdl-js-button mdl-js-ripple-effect">
                     View All
                   </button>
