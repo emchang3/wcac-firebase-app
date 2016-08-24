@@ -25,7 +25,8 @@ function* stateSave(getState) {
   if (haveStorage === true) {
     const persisted = {
       uid: getState().uid,
-      language: getState().language
+      language: getState().language,
+      content: getState().content
     }
     yield persistState(persisted)
   }
@@ -92,7 +93,7 @@ function* deleteContentSaga(action) {
 
 
 function* watchCriticalStateChange(getState) {
-  yield* takeLatest([ 'LANGUAGE_CHANGE', 'SET_USER' ], stateSave, getState)
+  yield* takeLatest([ 'LANGUAGE_CHANGE', 'SET_USER', 'UPDATE_CONTENT' ], stateSave, getState)
 }
 
 function* watchStateRetrievalRequest() {

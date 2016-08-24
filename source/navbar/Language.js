@@ -23,6 +23,7 @@ class Language extends React.Component {
         expanded: 'animating'
       })
       vExpand(this, 150, 'px', 2, 300, () => {
+        window.addEventListener('click', this.closeMenu)
         this.setState({
           expanded: 'expanded'
         })
@@ -37,6 +38,21 @@ class Language extends React.Component {
           expanded: 'contracted'
         })
       })
+    }
+  }
+  closeMenu = (event) => {
+    if (event.target !== document.getElementById('language-menu')) {
+      if (this.state.expanded === 'expanded') {
+        this.setState({
+          expanded: 'animating'
+        })
+        vExpand(this, -150, 'px', 0.5, 300, () => {
+          this.setState({
+            expanded: 'contracted'
+          })
+        })
+      }
+      window.removeEventListener('click', this.closeMenu)
     }
   }
 
@@ -57,6 +73,7 @@ class Language extends React.Component {
           <span style={{ padding: '1px', borderRadius: '3px' }}>&nbsp;{this.props.language} </span>{ this.state.expanded === 'contracted' ? <i className="material-icons">arrow_drop_down</i> : <i className="material-icons">arrow_drop_up</i> }
         </button>
         <div
+          id='language-menu'
           style={{
             height: this.state.style.height,
             width: '66px',

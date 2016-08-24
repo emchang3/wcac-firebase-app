@@ -26,14 +26,20 @@ const Admin = ({ language, browserWidth, attemptLogin, uid }) => {
             <div>
               <p>
                 <a href='/create_new'>
-                  <button className="mdl-button mdl-js-button mdl-js-ripple-effect">
+                  <button
+                    className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                    style={{ width: '200px' }}
+                  >
                     Create New
                   </button>
                 </a>
               </p>
               <p>
                 <a href='/posts'>
-                  <button className="mdl-button mdl-js-button mdl-js-ripple-effect">
+                  <button
+                    className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                    style={{ width: '200px' }}
+                  >
                     View All
                   </button>
                 </a>
