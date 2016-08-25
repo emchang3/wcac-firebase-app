@@ -30,7 +30,6 @@ const { Map } = Immutable
 class RichEditorExample extends React.Component {
   constructor(props) {
     super(props)
-    // console.log(props);
     this.state = {
       editorState: EditorState.createEmpty(),
       saveMode: 'draft',
@@ -59,10 +58,10 @@ class RichEditorExample extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    // console.log('nextProps', nextProps);
     if (nextProps.content && nextProps.initialTimestamp !== null) {
 
-      const rawContentState = nextProps.content[nextProps.initialTimestamp].content
+      const initialTimestamp = nextProps.initialTimestamp
+      const rawContentState = nextProps.content[initialTimestamp].content
 
       if (isEmpty(rawContentState.entityMap)) {
         rawContentState.entityMap = {};
@@ -71,33 +70,72 @@ class RichEditorExample extends React.Component {
       const blockArray = convertFromRaw(rawContentState)
       const myES = EditorState.createWithContent(blockArray)
 
-      const title = nextProps.content[nextProps.initialTimestamp].title
-      const congregation = nextProps.content[nextProps.initialTimestamp].congregation
-      const category = nextProps.content[nextProps.initialTimestamp].category
-      const initialTimestamp = nextProps.content[nextProps.initialTimestamp].initialTimestamp
-      const uid = nextProps.content[nextProps.initialTimestamp].uid
-      const saveMode = nextProps.content[nextProps.initialTimestamp].mode
+      const title = nextProps.content[initialTimestamp].title
+      const congregation = nextProps.content[initialTimestamp].congregation
+      const category = nextProps.content[initialTimestamp].category
+      const uid = nextProps.content[initialTimestamp].uid
+      const saveMode = nextProps.content[initialTimestamp].mode
 
-      const payload = {
-        uid: uid,
-        title: title,
-        editorState: myES,
-        congregation: congregation,
-        category: category,
-        initialTimestamp: initialTimestamp,
-        saveMode: saveMode
-      }
 
       if (title !== this.state.title) {
-        if (saveMode === 'publish') {
-           document.getElementById('saveSwitch').click()
+        const payload = {
+          uid: uid,
+          title: title,
+          editorState: myES,
+          congregation: congregation,
+          category: category,
+          initialTimestamp: initialTimestamp,
+          saveMode: saveMode
         }
-        if (congregation !== '') {
-          document.getElementById(congregation).click()
+
+        if (category === 'events') {
+          const startDateTime = new Date(nextProps.content[initialTimestamp].startDateTime)
+          const endDateTime = new Date(nextProps.content[initialTimestamp].endDateTime)
+
+          const startYear = `${startDateTime.getUTCFullYear()}`
+          const startMonth = startDateTime.getUTCMonth() < 10
+            ? `0${startDateTime.getUTCMonth() + 1}`
+            : `${startDateTime.getUTCMonth() + 1}`
+          const startDay = startDateTime.getUTCDate() < 10
+            ? `0${startDateTime.getUTCDate()}`
+            : `${startDateTime.getUTCDate()}`
+          const startDate = `${startYear}-${startMonth}-${startDay}`
+
+          const startHour = startDateTime.getUTCHours() < 10
+            ? `0${startDateTime.getUTCHours()}`
+            : `${startDateTime.getUTCHours()}`
+          const startMinute = startDateTime.getUTCMinutes() < 10
+            ? `0${startDateTime.getUTCMinutes()}`
+            : `${startDateTime.getUTCMinutes()}`
+          const startTime = `${startHour}:${startMinute}`
+
+          const endYear = `${endDateTime.getUTCFullYear()}`
+          const endMonth = endDateTime.getUTCMonth() < 10
+            ? `0${endDateTime.getUTCMonth() + 1}`
+            : `${endDateTime.getUTCMonth() + 1}`
+          const endDay = endDateTime.getUTCDate() < 10
+            ? `0${endDateTime.getUTCDate()}`
+            : `${endDateTime.getUTCDate()}`
+          const endDate = `${endYear}-${endMonth}-${endDay}`
+          const endHour = endDateTime.getUTCHours() < 10
+            ? `0${endDateTime.getUTCHours()}`
+            : `${endDateTime.getUTCHours()}`
+          const endMinute = endDateTime.getUTCMinutes() < 10
+            ? `0${endDateTime.getUTCMinutes()}`
+            : `${endDateTime.getUTCMinutes()}`
+          const endTime = `${endHour}:${endMinute}`
+
+          payload.startDate = startDate
+          payload.startTime = startTime
+          payload.endDate = endDate
+          payload.endTime = endTime
         }
-        if (category !== 'uncategorized') {
-          document.getElementById(category).click()
+
+        if (category === 'sermons') {
+          const sermonLink = nextProps.content[initialTimestamp].sermonLink
+          payload.sermonLink = sermonLink
         }
+
         this.setState(payload)
       }
     }
@@ -297,13 +335,17 @@ class RichEditorExample extends React.Component {
                   updateEndDate={this.updateEndDate}
                   updateStartTime={this.updateStartTime}
                   updateEndTime={this.updateEndTime}
+                  startDate={this.state.startDate}
+                  startTime={this.state.startTime}
+                  endDate={this.state.endDate}
+                  endTime={this.state.endTime}
                 />
               ) : ''
             }
 
             {
               this.state.category === 'sermons' ? (
-                <SermonLink setSermonLink={this.setSermonLink} />
+                <SermonLink setSermonLink={this.setSermonLink} sermonLink={this.state.sermonLink} />
               ) : ''
             }
 

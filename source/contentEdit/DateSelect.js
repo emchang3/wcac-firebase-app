@@ -1,7 +1,16 @@
 import React from 'react'
 
 
-export const DateSelect = ({ updateStartDate, updateStartTime, updateEndDate, updateEndTime }) => {
+export const DateSelect = ({
+  updateStartDate,
+  updateStartTime,
+  updateEndDate,
+  updateEndTime,
+  startDate,
+  startTime,
+  endDate,
+  endTime
+}) => {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '300px' }}>
@@ -14,6 +23,7 @@ export const DateSelect = ({ updateStartDate, updateStartTime, updateEndDate, up
             type="date"
             id="start-date"
             onChange={updateStartDate}
+            value={startDate}
           />
         </div>
       </div>
@@ -24,6 +34,7 @@ export const DateSelect = ({ updateStartDate, updateStartTime, updateEndDate, up
             type="time"
             id="start-time"
             onChange={updateStartTime}
+            value={startTime}
           />
         </div>
       </div>
@@ -38,6 +49,7 @@ export const DateSelect = ({ updateStartDate, updateStartTime, updateEndDate, up
             type="date"
             id="end-date"
             onChange={updateEndDate}
+            value={endDate}
           />
         </div>
       </div>
@@ -48,6 +60,7 @@ export const DateSelect = ({ updateStartDate, updateStartTime, updateEndDate, up
             type="time"
             id="end-time"
             onChange={updateEndTime}
+            value={endTime}
           />
         </div>
       </div>

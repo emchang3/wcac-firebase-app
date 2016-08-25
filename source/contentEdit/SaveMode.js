@@ -20,11 +20,22 @@ export const SaveMode = ({ onChange, saveMode, inList, itemId }) => {
           htmlFor={ inList && inList === true ? `saveSwitch${itemId}` : 'saveSwitch' }
           className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
         >
-          <input type="checkbox"
-            id={ inList && inList === true ? `saveSwitch${itemId}` : 'saveSwitch' }
-            className="mdl-switch__input"
-            onChange={onChange}
-          />
+          {
+            saveMode === 'draft' ? (
+              <input type="checkbox"
+                id={ inList && inList === true ? `saveSwitch${itemId}` : 'saveSwitch' }
+                className="mdl-switch__input"
+                onChange={onChange}
+              />
+            ) : (
+              <input type="checkbox"
+                id={ inList && inList === true ? `saveSwitch${itemId}` : 'saveSwitch' }
+                className="mdl-switch__input"
+                onChange={onChange}
+                checked
+              />
+            )
+          }
         </label>
       </div>
     </div>

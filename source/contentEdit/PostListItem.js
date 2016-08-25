@@ -11,14 +11,10 @@ import { savePost } from '../actions'
 class PostListItem extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props);
   }
 
   componentDidMount = () => {
     componentHandler.upgradeAllRegistered()
-    if (this.props.content.mode === 'publish') {
-      document.getElementById(`saveSwitch${this.props.content.initialTimestamp}`).click()
-    }
   }
 
   componentDidUpdate = () => {

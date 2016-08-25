@@ -1,6 +1,7 @@
 import React from 'react'
 
-export const SermonLink = ({ setSermonLink }) => {
+
+export const SermonLink = ({ setSermonLink, sermonLink }) => {
   return (
     <div className="mdl-textfield mdl-js-textfield">
       <input
@@ -8,6 +9,7 @@ export const SermonLink = ({ setSermonLink }) => {
         type="text"
         id="sermon-url"
         onChange={setSermonLink}
+        value={sermonLink}
       />
       <label className="mdl-textfield__label" htmlFor="sermon-url">Sermon URL...</label>
     </div>
