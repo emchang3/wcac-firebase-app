@@ -88,13 +88,18 @@ function* watchAndReturnContent(action) {
 function* deleteContentSaga(action) {
   const adminStatus = yield* isAdmin(action.payload.uid)
   adminStatus === true
-    ? yield* yield* deleteContent(action.payload.initialTimestamp)
+    ? yield* deleteContent(action.payload.initialTimestamp)
     : yield put(setUser(null))
 }
 
 
 function* watchCriticalStateChange(getState) {
-  yield* takeLatest([ 'LANGUAGE_CHANGE', 'SET_USER', 'UPDATE_CONTENT' ], stateSave, getState)
+  yield* takeLatest([
+    'LANGUAGE_CHANGE',
+    'SET_USER',
+    'UPDATE_CONTENT',
+    'UPDATE_ORDER'
+  ], stateSave, getState)
 }
 
 function* watchStateRetrievalRequest() {
