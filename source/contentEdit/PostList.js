@@ -1,19 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { sortBy, reverse } from 'lodash'
-
 import PostListItem from './PostListItem'
 import { Return } from './Return'
 
 
-const PostList = ({ uid, content, language, browserWidth }) => {
+const PostList = ({ uid, content, language, browserWidth, contentOrder }) => {
   if (uid !== undefined && uid !== null) {
-    const contentList = reverse(sortBy(content, (contentItem) => {
-      return contentItem.timestamp
-    })).map((contentItem) => {
-      return <PostListItem content={contentItem} key={contentItem.initialTimestamp} />
+    const generalOrder = contentOrder.general
+    const contentList = generalOrder.map((initialTimestamp) => {
+      return <PostListItem content={content[initialTimestamp]} key={initialTimestamp} />
     })
+
     return (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <div
@@ -24,15 +22,24 @@ const PostList = ({ uid, content, language, browserWidth }) => {
         >
           <Return url={'/admin'} language={language} />
 
-          <h2>
-            {
-              language === 'EN' ? 'Posts' : (
-                language === '检体' ? '条目' : '條目'
-              )
-            }
-          </h2>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+            <h2>
+              {
+                language === 'EN' ? 'Posts' : (
+                  language === '检体' ? '条目' : '條目'
+                )
+              }
+            </h2>
+            <a href='/create_new'>
+              <button
+                className="mdl-button mdl-js-button mdl-js-ripple-effect"
+              >
+                Create New
+              </button>
+            </a>
+          </div>
 
-          <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style={{ width: '100%' }}>
+          <table className="mdl-data-table mdl-js-data-table" style={{ width: '100%' }}>
             <thead>
               <tr>
                 <th className="mdl-data-table__cell--non-numeric">
@@ -91,7 +98,8 @@ const mapStateToProps = (state) => {
     uid: state.uid,
     browserWidth: state.browserWidth,
     language: state.language,
-    content: state.content
+    content: state.content,
+    contentOrder: state.contentOrder
   }
 }
 

@@ -26,7 +26,8 @@ function* stateSave(getState) {
     const persisted = {
       uid: getState().uid,
       language: getState().language,
-      content: getState().content
+      content: getState().content,
+      contentOrder: getState().contentOrder
     }
     yield persistState(persisted)
   }

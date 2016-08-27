@@ -1,14 +1,15 @@
-const BROWSER_RESIZE = 'BROWSER_RESIZE'
-const LANGUAGE_CHANGE = 'LANGUAGE_CHANGE'
-const STORE_LOCAL = 'STORE_LOCAL'
-const RETRIEVE_STATE = 'RETRIEVE_STATE'
-const RESTORE_LOCAL = 'RESTORE_LOCAL'
-const ATTEMPT_LOGIN = 'ATTEMPT_LOGIN'
-const SET_USER = 'SET_USER'
-const SAVE_POST = 'SAVE_POST'
-const WATCH_CONTENT = 'WATCH_CONTENT'
-const UPDATE_CONTENT = 'UPDATE_CONTENT'
-const DELETE_POST = 'DELETE_POST'
+export const BROWSER_RESIZE = 'BROWSER_RESIZE'
+export const LANGUAGE_CHANGE = 'LANGUAGE_CHANGE'
+export const STORE_LOCAL = 'STORE_LOCAL'
+export const RETRIEVE_STATE = 'RETRIEVE_STATE'
+export const RESTORE_LOCAL = 'RESTORE_LOCAL'
+export const ATTEMPT_LOGIN = 'ATTEMPT_LOGIN'
+export const SET_USER = 'SET_USER'
+export const SAVE_POST = 'SAVE_POST'
+export const WATCH_CONTENT = 'WATCH_CONTENT'
+export const UPDATE_CONTENT = 'UPDATE_CONTENT'
+export const DELETE_POST = 'DELETE_POST'
+export const UPDATE_ORDER = 'UPDATE_ORDER'
 
 
 export const browserResize = () => {
@@ -78,6 +79,13 @@ export const updateContent = (posts) => {
   return {
     type: UPDATE_CONTENT,
     content: posts
+  }
+}
+
+export const updateContentOrder = (order) => {
+  return {
+    type: UPDATE_ORDER,
+    contentOrder: order
   }
 }
 
