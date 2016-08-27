@@ -11,6 +11,9 @@ import { savePost } from '../actions'
 class PostListItem extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      saveMode: this.props.content.mode
+    }
   }
 
   componentDidMount = () => {
@@ -21,11 +24,20 @@ class PostListItem extends React.Component {
     componentHandler.upgradeAllRegistered()
   }
 
-  saveModeToggle = (event) => {
+  componentWillUpdate = (nextProps, nextState) => {
     const payload = this.props.content
+    payload.mode = nextState.saveMode || this.state.saveMode
+    this.props.savePost(payload)
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    this.setState({ saveMode: nextProps.content.mode })
+  }
+
+  saveModeToggle = (event) => {
     event.target.checked === true
-      ? this.props.savePost({ ...payload, mode: 'publish' })
-      : this.props.savePost({ ...payload, mode: 'draft' })
+      ? this.setState({ saveMode: 'publish' })
+      : this.setState({ saveMode: 'draft' })
   }
 
   render() {
@@ -48,7 +60,7 @@ class PostListItem extends React.Component {
         <td className="mdl-data-table__cell--non-numeric">
           <SaveMode
             onChange={this.saveModeToggle}
-            saveMode={this.props.content.mode}
+            saveMode={this.state.saveMode}
             inList={true}
             itemId={this.props.content.initialTimestamp}
           />
