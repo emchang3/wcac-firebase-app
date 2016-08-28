@@ -61,7 +61,7 @@ function* stateLoad() {
       yield put(rehydrateState(defaultState))
     }
   } catch (e) {
-    console.log(`stateLoad FAILURE: ${e}`)
+    console.log(`stateLoad FAILURE:`, e)
   }
 }
 
@@ -94,7 +94,7 @@ function* deleteContentSaga(action) {
 
 
 function* watchCriticalStateChange(getState) {
-  yield* takeLatest([
+  yield* takeEvery([
     'LANGUAGE_CHANGE',
     'SET_USER',
     'UPDATE_CONTENT',

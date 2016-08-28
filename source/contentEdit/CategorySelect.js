@@ -1,7 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 
-export class CategorySelect extends React.Component {
+class CategorySelect extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -28,11 +29,14 @@ export class CategorySelect extends React.Component {
         <button
           className="mdl-button mdl-js-button mdl-js-ripple-effect"
           onClick={this.openOptions}
-          style={{ paddingBottom: '8px' }}
         >
-          Category
+          {
+            this.props.language === 'EN' ? 'Category' : (
+              this.props.language === '检体' ? '类别' : '類別'
+            )
+          }
         </button>
-        <div style={{ display: this.state.display, paddingLeft: '8px' }}>
+        <div style={{ display: this.state.display, paddingLeft: '8px', paddingTop: '8px' }}>
           <label
             className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
             htmlFor="announcements"
@@ -60,7 +64,13 @@ export class CategorySelect extends React.Component {
                 />
               )
             }
-            <span className="mdl-radio__label">Announcement</span>
+            <span className="mdl-radio__label">
+              {
+                this.props.language === 'EN' ? 'Announcements' : (
+                  this.props.language === '检体' ? '公告' : '公告'
+                )
+              }
+            </span>
           </label>
           <label
             className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
@@ -89,7 +99,13 @@ export class CategorySelect extends React.Component {
                 />
               )
             }
-            <span className="mdl-radio__label">Event</span>
+            <span className="mdl-radio__label">
+              {
+                this.props.language === 'EN' ? 'Events' : (
+                  this.props.language === '检体' ? '活动' : '活動'
+                )
+              }
+            </span>
           </label>
           <label
             className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
@@ -118,7 +134,13 @@ export class CategorySelect extends React.Component {
                 />
               )
             }
-            <span className="mdl-radio__label">Ministry</span>
+            <span className="mdl-radio__label">
+              {
+                this.props.language === 'EN' ? 'Ministries' : (
+                  this.props.language === '检体' ? '事工' : '事工'
+                )
+              }
+            </span>
           </label>
           <label
             className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
@@ -147,7 +169,13 @@ export class CategorySelect extends React.Component {
                 />
               )
             }
-            <span className="mdl-radio__label">Sermons</span>
+            <span className="mdl-radio__label">
+              {
+                this.props.language === 'EN' ? 'Sermons' : (
+                  this.props.language === '检体' ? '讲道' : '講道'
+                )
+              }
+            </span>
           </label>
           <label
             className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
@@ -176,7 +204,13 @@ export class CategorySelect extends React.Component {
                 />
               )
             }
-            <span className="mdl-radio__label">Statement of Faith</span>
+            <span className="mdl-radio__label">
+              {
+                this.props.language === 'EN' ? 'Statement of Faith' : (
+                  this.props.language === '检体' ? '信仰' : '信仰'
+                )
+              }
+            </span>
           </label>
           <label
             className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
@@ -205,7 +239,13 @@ export class CategorySelect extends React.Component {
                 />
               )
             }
-            <span className="mdl-radio__label">Mission</span>
+            <span className="mdl-radio__label">
+              {
+                this.props.language === 'EN' ? 'Mission' : (
+                  this.props.language === '检体' ? '任务' : '任務'
+                )
+              }
+            </span>
           </label>
           <label
             className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
@@ -234,7 +274,13 @@ export class CategorySelect extends React.Component {
                 />
               )
             }
-            <span className="mdl-radio__label">Staff</span>
+            <span className="mdl-radio__label">
+              {
+                this.props.language === 'EN' ? 'Staff' : (
+                  this.props.language === '检体' ? '同工' : '同工'
+                )
+              }
+            </span>
           </label>
           <label
             className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
@@ -263,10 +309,25 @@ export class CategorySelect extends React.Component {
                 />
               )
             }
-            <span className="mdl-radio__label">Jobs</span>
+            <span className="mdl-radio__label">
+              {
+                this.props.language === 'EN' ? 'Jobs' : (
+                  this.props.language === '检体' ? '工作' : '工作'
+                )
+              }
+            </span>
           </label>
         </div>
       </div>
     )
   }
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    language: state.language
+  }
+}
+
+export default connect(mapStateToProps)(CategorySelect)

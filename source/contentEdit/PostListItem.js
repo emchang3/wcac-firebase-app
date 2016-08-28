@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { capitalize } from 'lodash'
 
 import DeletePost from './DeletePost'
-import { SaveMode } from './SaveMode'
+import SaveMode from './SaveMode'
 
 import { savePost } from '../actions'
 
@@ -25,13 +25,19 @@ class PostListItem extends React.Component {
   }
 
   componentWillUpdate = (nextProps, nextState) => {
-    const payload = this.props.content
-    payload.mode = nextState.saveMode || this.state.saveMode
-    this.props.savePost(payload)
+    const payload = nextProps.content
+    if (nextProps.content) {
+      payload.mode = nextState.saveMode || this.state.saveMode
+      this.props.savePost(payload)
+    }
   }
 
   componentWillReceiveProps = (nextProps) => {
-    this.setState({ saveMode: nextProps.content.mode })
+    try {
+      this.setState({ saveMode: nextProps.content.mode })
+    } catch (e) {
+
+    }
   }
 
   saveModeToggle = (event) => {
@@ -41,32 +47,43 @@ class PostListItem extends React.Component {
   }
 
   render() {
+    let its = ''
+    let title = ''
+    let category = ''
+    let congregation = ''
+    if (this.props.content) {
+      its = this.props.content.initialTimestamp
+      title = this.props.content.title
+      category = this.props.content.category
+      congregation = this.props.content.congregation
+    }
+
     return (
       <tr>
         <td className="mdl-data-table__cell--non-numeric">
           <a
-            href={`/edit/${this.props.content.initialTimestamp}`}
+            href={`/edit/${its}`}
             style={{ color: 'black' }}
           >
-            {capitalize(this.props.content.title)}
+            {capitalize(title)}
           </a>
         </td>
         <td className="mdl-data-table__cell--non-numeric">
-          {capitalize(this.props.content.category)}
+          {capitalize(category)}
         </td>
         <td className="mdl-data-table__cell--non-numeric">
-          {capitalize(this.props.content.congregation)}
+          {capitalize(congregation)}
         </td>
         <td className="mdl-data-table__cell--non-numeric">
           <SaveMode
             onChange={this.saveModeToggle}
             saveMode={this.state.saveMode}
             inList={true}
-            itemId={this.props.content.initialTimestamp}
+            itemId={its}
           />
         </td>
         <td className="mdl-data-table__cell--non-numeric">
-          <DeletePost itemId={this.props.content.initialTimestamp} />
+          <DeletePost itemId={its} />
         </td>
       </tr>
     )

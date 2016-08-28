@@ -68,7 +68,10 @@ class Navbar extends Component {
             />
           </a>
         </div>
-        <div id='site-title' style={{ width: this.state.style.width, opacity: this.state.style.opacity }}>
+        <div
+          id='site-title'
+          style={{ width: this.state.style.width, opacity: this.state.style.opacity }}
+        >
           <strong>
             {
               this.props.language === 'EN' ? (

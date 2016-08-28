@@ -1,7 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 
-export const DateSelect = ({
+const DateSelect = ({
   updateStartDate,
   updateStartTime,
   updateEndDate,
@@ -9,13 +10,18 @@ export const DateSelect = ({
   startDate,
   startTime,
   endDate,
-  endTime
+  endTime,
+  language
 }) => {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '300px' }}>
         <div style={{ paddingTop: '25px', paddingLeft: '16px', fontSize: '1.1em' }}>
-          Start:
+          {
+            language === 'EN' ? 'Start:' : (
+              language === '检体' ? '从' : '從'
+            )
+          }
         </div>
         <div className="mdl-textfield mdl-js-textfield" style={{ width: '200px' }}>
           <input
@@ -41,7 +47,11 @@ export const DateSelect = ({
       <br />
       <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '300px' }}>
         <div style={{ paddingTop: '25px', paddingLeft: '16px', fontSize: '1.1em' }}>
-          End:
+          {
+            language === 'EN' ? 'End:' : (
+              language === '检体' ? '到' : '到'
+            )
+          }
         </div>
         <div className="mdl-textfield mdl-js-textfield" style={{ width: '200px' }}>
           <input
@@ -67,3 +77,12 @@ export const DateSelect = ({
     </div>
   )
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    language: state.language
+  }
+}
+
+export default connect(mapStateToProps)(DateSelect)

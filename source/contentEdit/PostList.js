@@ -3,14 +3,18 @@ import { connect } from 'react-redux'
 
 import PostListItem from './PostListItem'
 import { Return } from './Return'
+import CreatePost from './CreatePost'
 
 
 const PostList = ({ uid, content, language, browserWidth, contentOrder }) => {
   if (uid !== undefined && uid !== null) {
-    const generalOrder = contentOrder.general
-    const contentList = generalOrder.map((initialTimestamp) => {
-      return <PostListItem content={content[initialTimestamp]} key={initialTimestamp} />
-    })
+    let contentList = []
+    if (content && contentOrder) {
+      const generalOrder = contentOrder.general
+      contentList = generalOrder.map((initialTimestamp) => {
+        return <PostListItem content={content[initialTimestamp]} key={initialTimestamp} />
+      })
+    }
 
     return (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -30,13 +34,7 @@ const PostList = ({ uid, content, language, browserWidth, contentOrder }) => {
                 )
               }
             </h2>
-            <a href='/create_new'>
-              <button
-                className="mdl-button mdl-js-button mdl-js-ripple-effect"
-              >
-                Create New
-              </button>
-            </a>
+            <CreatePost />
           </div>
 
           <table className="mdl-data-table mdl-js-data-table" style={{ width: '100%' }}>

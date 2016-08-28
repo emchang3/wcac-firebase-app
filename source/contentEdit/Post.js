@@ -6,13 +6,14 @@ import { isEmpty } from 'lodash'
 
 import { savePost } from '../actions'
 
-import { CongregationSelect } from './CongregationSelect'
-import { CategorySelect } from './CategorySelect'
-import { SaveMode } from './SaveMode'
+import CongregationSelect from './CongregationSelect'
+import CategorySelect from './CategorySelect'
+import SaveMode from './SaveMode'
 import { Title } from './Title'
-import { DateSelect } from './DateSelect'
+import DateSelect from './DateSelect'
 import { SermonLink } from './SermonLink'
 import { Return } from './Return'
+import Language from '../navbar/Language'
 
 
 const {
@@ -274,95 +275,100 @@ class RichEditorExample extends React.Component {
 
     if (this.props.uid !== undefined && this.props.uid !== null) {
       return (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <div
-            style={{
-              width: this.props.browserWidth < 1145 ? '80%' : '60%',
-              paddingTop: '80px'
-            }}
-          >
-            <Return
-              url={ this.props.initialTimestamp ? '/posts' : '/admin' }
-              language={this.props.language}
-            />
-
-            <h2>
-              {
-                this.props.initialTimestamp ? (
-                  this.props.language === 'EN' ? 'Edit Entry' : (
-                    this.props.language === '检体' ? '修改条目' : '修改條目'
-                  )
-                ) : (
-                  this.props.language === 'EN' ? 'Create New Entry' : (
-                    this.props.language === '检体' ? '创建新条目' : '創建新條目'
-                  )
-                )
-              }
-            </h2>
-
-            <Title
-              onChange={this.updateTitle}
-              language={this.props.language}
-              title={this.state.title}
-            />
-
-            <div className="RichEditor-root">
-              <BlockStyleControls
-                editorState={editorState}
-                onToggle={this.toggleBlockType}
-              />
-              <InlineStyleControls
-                editorState={editorState}
-                onToggle={this.toggleInlineStyle}
-              />
-              <div className={className}>
-                <Editor
-                  blockStyleFn={getBlockStyle}
-                  customStyleMap={styleMap}
-                  editorState={editorState}
-                  handleKeyCommand={this.handleKeyCommand}
-                  onChange={this.onChange}
-                  ref="editor"
-                  spellCheck={true}
-                />
-              </div>
-            </div>
-
-            {
-              this.state.category === 'events' ? (
-                <DateSelect
-                  updateStartDate={this.updateStartDate}
-                  updateEndDate={this.updateEndDate}
-                  updateStartTime={this.updateStartTime}
-                  updateEndTime={this.updateEndTime}
-                  startDate={this.state.startDate}
-                  startTime={this.state.startTime}
-                  endDate={this.state.endDate}
-                  endTime={this.state.endTime}
-                />
-              ) : ''
-            }
-
-            {
-              this.state.category === 'sermons' ? (
-                <SermonLink setSermonLink={this.setSermonLink} sermonLink={this.state.sermonLink} />
-              ) : ''
-            }
-
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
+            <Language />
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
             <div
               style={{
-                display: 'flex',
-                justifyContent: 'space-between'
+                width: this.props.browserWidth < 1145 ? '80%' : '60%',
+                paddingTop: '80px'
               }}
             >
-              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                <CategorySelect onClick={this.categoryChange} category={this.state.category} />
-                <CongregationSelect
-                  onClick={this.congregationChange}
-                  congregation={this.state.congregation}
+              <Return
+                url={'/posts'}
+                language={this.props.language}
+              />
+
+              <h2>
+                {
+                  this.props.initialTimestamp ? (
+                    this.props.language === 'EN' ? 'Edit Entry' : (
+                      this.props.language === '检体' ? '修改条目' : '修改條目'
+                    )
+                  ) : (
+                    this.props.language === 'EN' ? 'Create New Entry' : (
+                      this.props.language === '检体' ? '创建新条目' : '創建新條目'
+                    )
+                  )
+                }
+              </h2>
+
+              <Title
+                onChange={this.updateTitle}
+                language={this.props.language}
+                title={this.state.title}
+              />
+
+              <div className="RichEditor-root">
+                <BlockStyleControls
+                  editorState={editorState}
+                  onToggle={this.toggleBlockType}
                 />
+                <InlineStyleControls
+                  editorState={editorState}
+                  onToggle={this.toggleInlineStyle}
+                />
+                <div className={className}>
+                  <Editor
+                    blockStyleFn={getBlockStyle}
+                    customStyleMap={styleMap}
+                    editorState={editorState}
+                    handleKeyCommand={this.handleKeyCommand}
+                    onChange={this.onChange}
+                    ref="editor"
+                    spellCheck={true}
+                  />
+                </div>
               </div>
-              <SaveMode onChange={this.saveModeToggle} saveMode={this.state.saveMode} />
+
+              {
+                this.state.category === 'events' ? (
+                  <DateSelect
+                    updateStartDate={this.updateStartDate}
+                    updateEndDate={this.updateEndDate}
+                    updateStartTime={this.updateStartTime}
+                    updateEndTime={this.updateEndTime}
+                    startDate={this.state.startDate}
+                    startTime={this.state.startTime}
+                    endDate={this.state.endDate}
+                    endTime={this.state.endTime}
+                  />
+                ) : ''
+              }
+
+              {
+                this.state.category === 'sermons' ? (
+                  <SermonLink setSermonLink={this.setSermonLink} sermonLink={this.state.sermonLink} />
+                ) : ''
+              }
+
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between'
+                }}
+              >
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                  <CategorySelect onClick={this.categoryChange} category={this.state.category} />
+                  <CongregationSelect
+                    onClick={this.congregationChange}
+                    congregation={this.state.congregation}
+                  />
+                </div>
+                <SaveMode onChange={this.saveModeToggle} saveMode={this.state.saveMode} />
+              </div>
             </div>
           </div>
         </div>

@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import { attemptLogin } from './actions'
 
+import CreatePost from './contentEdit/CreatePost'
+
 
 const Admin = ({ language, browserWidth, attemptLogin, uid }) => {
   return (
@@ -15,24 +17,35 @@ const Admin = ({ language, browserWidth, attemptLogin, uid }) => {
       }}
     >
       <div>
-        <h1>Administrator Log-in</h1>
+        <h1>
+          {
+            uid && uid !== null ? (
+              language === 'EN' ? 'Website Administration' : (
+                language === '检体' ? '网站管理' : '網站管理'
+              )
+            ) : (
+              language === 'EN' ? 'Adminstrator Log-in' : (
+                language === '检体' ? '网站管理登录' : '網站管理登錄'
+              )
+            )
+          }
+        </h1>
         <p>
-          <button className="mdl-button mdl-js-button mdl-button--icon" onClick={attemptLogin}>
-            <i className="material-icons">account_circle</i>
-          </button>
+          {
+            uid && uid !== null ? (
+              <img src={'images/alliance.jpeg'} />
+            ) : (
+              <button className="mdl-button mdl-js-button mdl-button--icon" onClick={attemptLogin}>
+                <i className="material-icons">account_circle</i>
+              </button>
+            )
+          }
         </p>
         {
           uid !== null ? (
             <div>
               <p>
-                <a href='/create_new'>
-                  <button
-                    className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                    style={{ width: '200px' }}
-                  >
-                    Create New
-                  </button>
-                </a>
+                <CreatePost />
               </p>
               <p>
                 <a href='/posts'>
@@ -40,14 +53,22 @@ const Admin = ({ language, browserWidth, attemptLogin, uid }) => {
                     className="mdl-button mdl-js-button mdl-js-ripple-effect"
                     style={{ width: '200px' }}
                   >
-                    View All
+                    {
+                      language === 'EN' ? 'All Entries' : (
+                        language === '检体' ? '所有条目' : '所有條目'
+                      )
+                    }
                   </button>
                 </a>
               </p>
             </div>
           ) : (
             <p>
-              Log in with Google.
+              {
+                language === 'EN' ? 'Log in with Google.' : (
+                  language === '检体' ? '用谷歌登录' : '用谷歌登錄'
+                )
+              }
             </p>
           )
         }

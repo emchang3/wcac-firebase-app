@@ -1,7 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 
-export class CongregationSelect extends React.Component {
+class CongregationSelect extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -29,7 +30,11 @@ export class CongregationSelect extends React.Component {
           className="mdl-button mdl-js-button mdl-js-ripple-effect"
           onClick={this.openOptions}
         >
-          Congregation
+          {
+            this.props.language === 'EN' ? 'Congregation' : (
+              this.props.language === '检体' ? '会堂' : '會堂'
+            )
+          }
         </button>
         <div style={{ display: this.state.display, paddingLeft: '8px' }}>
           <label
@@ -59,7 +64,13 @@ export class CongregationSelect extends React.Component {
                 />
               )
             }
-            <span className="mdl-radio__label">English</span>
+            <span className="mdl-radio__label">
+              {
+                this.props.language === 'EN' ? 'English' : (
+                  this.props.language === '检体' ? '英语堂' : '英語堂'
+                )
+              }
+            </span>
           </label>
           <label
             className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
@@ -88,7 +99,13 @@ export class CongregationSelect extends React.Component {
                 />
               )
             }
-            <span className="mdl-radio__label">Cantonese</span>
+            <span className="mdl-radio__label">
+              {
+                this.props.language === 'EN' ? 'Cantonese' : (
+                  this.props.language === '检体' ? '粵语堂' : '粵語堂'
+                )
+              }
+            </span>
           </label>
           <label
             className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
@@ -117,7 +134,13 @@ export class CongregationSelect extends React.Component {
                 />
               )
             }
-            <span className="mdl-radio__label">Mandarin</span>
+            <span className="mdl-radio__label">
+              {
+                this.props.language === 'EN' ? 'Mandarin' : (
+                  this.props.language === '检体' ? '国语堂' : '國語堂'
+                )
+              }
+            </span>
           </label>
           <label
             className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
@@ -146,10 +169,25 @@ export class CongregationSelect extends React.Component {
                 />
               )
             }
-            <span className="mdl-radio__label">Youth Group</span>
+            <span className="mdl-radio__label">
+              {
+                this.props.language === 'EN' ? 'Youth' : (
+                  this.props.language === '检体' ? '青年团契' : '青年團契'
+                )
+              }
+            </span>
           </label>
         </div>
       </div>
     )
   }
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    language: state.language
+  }
+}
+
+export default connect(mapStateToProps)(CongregationSelect)

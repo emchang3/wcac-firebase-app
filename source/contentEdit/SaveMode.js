@@ -1,7 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 
-export const SaveMode = ({ onChange, saveMode, inList, itemId }) => {
+const SaveMode = ({ onChange, saveMode, inList, itemId, language }) => {
 
   return (
     <div
@@ -13,7 +14,17 @@ export const SaveMode = ({ onChange, saveMode, inList, itemId }) => {
       }}
     >
       <span style={{ paddingTop: '2px' }}>
-        { saveMode === 'draft' ? `${saveMode.toLowerCase()}` : `${saveMode.toUpperCase()}` }
+        {
+          saveMode === 'draft' ? (
+            language === 'EN' ? `${saveMode.toLowerCase()}` : (
+              language === '检体' ? '草稿' : '草稿'
+            )
+          ) : (
+            language === 'EN' ? `${saveMode.toUpperCase()}` : (
+              language === '检体' ? '发布' : '發布'
+            )
+          )
+        }
       </span>
       <div style={{ paddingLeft: '16px', paddingRight: '8px' }}>
         <label
@@ -41,3 +52,12 @@ export const SaveMode = ({ onChange, saveMode, inList, itemId }) => {
     </div>
   )
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    language: state.language
+  }
+}
+
+export default connect(mapStateToProps)(SaveMode)
