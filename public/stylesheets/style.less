@@ -220,17 +220,21 @@ blockquote:after {
 }
 
 .container {
+  // display: flex;
+  // justify-content: space-between;
   position: absolute;
   width: 100%;
-  height: 60%;
+  height: 50%;
 }
 
-#cont-box {
+.cont-box {
   left: 0%;
+  border: 1px dotted black;
   /*border: 1px solid black;*/
 }
 
-#mov-box {
+.mov-box {
+  height: 100%;
   /*border: 1px solid yellow;*/
 }
 
@@ -239,17 +243,18 @@ blockquote:after {
   height: 100%;
   top: 0%;
   width: 50%;
+  overflow-y: hidden;
 }
 
-#article0 {
+.article0 {
   left: -25%;
   border: 1px dotted red;
 }
-#article1 {
+.article1 {
   left: 25%;
   border: 1px dotted green;
 }
-#article2 {
+.article2 {
   left: 75%;
   border: 1px dotted blue;
 }
@@ -261,11 +266,11 @@ blockquote:after {
   width: 25%;
 }
 
-#coverLeft {
+.coverLeft {
   left: 0%;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.25));
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.1));
 }
-#coverRight {
+.coverRight {
   right: 0%;
-  background: linear-gradient(to left, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.25));
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.1));
 }

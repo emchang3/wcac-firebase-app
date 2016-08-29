@@ -15,7 +15,6 @@ import { SermonLink } from './SermonLink'
 import { Return } from './Return'
 import Language from '../navbar/Language'
 
-
 const {
   Editor,
   EditorState,
@@ -27,6 +26,7 @@ const {
 } = Draft
 
 const { Map } = Immutable
+
 
 class RichEditorExample extends React.Component {
   constructor(props) {
@@ -118,6 +118,7 @@ class RichEditorExample extends React.Component {
             ? `0${endDateTime.getUTCDate()}`
             : `${endDateTime.getUTCDate()}`
           const endDate = `${endYear}-${endMonth}-${endDay}`
+          
           const endHour = endDateTime.getUTCHours() < 10
             ? `0${endDateTime.getUTCHours()}`
             : `${endDateTime.getUTCHours()}`

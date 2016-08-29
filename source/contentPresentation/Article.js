@@ -1,7 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Immutable from 'immutable'
+import Draft from 'draft-js'
+import { endsWith, isEmpty } from 'lodash'
 
-import { endsWith } from 'lodash'
+const {
+  Editor,
+  EditorState,
+  ContentState,
+  RichUtils,
+  DefaultDraftBlockRenderMap,
+  convertToRaw,
+  convertFromRaw
+} = Draft
+
+const { Map } = Immutable
 
 
 class Article extends React.Component {
@@ -85,6 +98,7 @@ class Article extends React.Component {
             ? `0${endDateTime.getUTCDate()}`
             : `${endDateTime.getUTCDate()}`
           const endDate = `${endYear}-${endMonth}-${endDay}`
+
           const endHour = endDateTime.getUTCHours() < 10
             ? `0${endDateTime.getUTCHours()}`
             : `${endDateTime.getUTCHours()}`
@@ -123,16 +137,26 @@ class Article extends React.Component {
     }
 
     return (
-      <div className={className}>
-        <Editor
-          blockStyleFn={getBlockStyle}
-          customStyleMap={styleMap}
-          editorState={editorState}
-          onChange={this.onChange}
-          ref="editor"
-          spellCheck={true}
-          readOnly={true}
-        />
+      <div className={`article ${this.props.place}`} id={this.state.initialTimestamp}>
+        <div
+          style={{
+            paddingLeft: '48px',
+            paddingRight: '48px',
+            paddingTop: '24px',
+            paddingBottom: '24px'
+          }}
+        >
+          <h3>{this.state.title}</h3>
+          <Editor
+            blockStyleFn={getBlockStyle}
+            customStyleMap={styleMap}
+            editorState={editorState}
+            onChange={this.onChange}
+            ref="editor"
+            spellCheck={true}
+            readOnly={true}
+          />
+        </div>
       </div>
     )
   }

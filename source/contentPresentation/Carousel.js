@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Article } from './Article'
+import Article from './Article'
 
-import { hShift } from './Animations'
+import { hShift } from '../navbar/Animation'
 
 
 export class Carousel extends Component {
@@ -14,6 +14,7 @@ export class Carousel extends Component {
       articles: props.articles
     }
   }
+
   leftShift = () => {
     hShift(this, -50, '%', 2, 750, this.postLeft)
   }
@@ -36,34 +37,38 @@ export class Carousel extends Component {
       articles: [this.state.articles[this.state.articles.length - 1], ...this.state.articles.slice(0, this.state.articles.length - 1)]
     })
   }
+
+  componentDidMount = () => {
+    // document.getElementById('splash').style.opacity = '0'
+  }
   render() {
     let myArticles = this.state.articles.map((initialTimestamp) => {
       return (
         <Article
           key={initialTimestamp}
-          initialTimestamp={initialTimestamp} id={`article${this.state.articles.indexOf(initialTimestamp)}`}
+          initialTimestamp={initialTimestamp} place={`article${this.state.articles.indexOf(initialTimestamp)}`}
         />
       )
     })
     return (
-      <div className='container' id='cont-box' style={{ top: this.props.top || '20%' }}>
-        <div style={this.state.style} className='container' id='mov-box'>
+      <div className='container cont-box' style={{ top: this.props.top || '20%' }}>
+        <div style={this.state.style} className='container mov-box'>
           {myArticles}
         </div>
-        <div id='coverLeft' className='cover'>
+        <div className='cover coverLeft'>
           <button
             className="mdl-button mdl-js-button mdl-button--primary"
             onClick={this.rightShift}
-            style={{ position: 'absolute', right: '0%', bottom: '0%' }}
+            style={{ position: 'absolute', left: '0%', bottom: '0%' }}
           >
             <i className="material-icons">chevron_left</i>
           </button>
         </div>
-        <div id='coverRight' className='cover'>
+        <div className='cover coverRight'>
           <button
           className="mdl-button mdl-js-button mdl-button--primary"
           onClick={this.leftShift}
-          style={{ position: 'absolute', left: '0%', bottom: '0%' }}
+          style={{ position: 'absolute', right: '0%', bottom: '0%' }}
         >
             <i className="material-icons">chevron_right</i>
           </button>
