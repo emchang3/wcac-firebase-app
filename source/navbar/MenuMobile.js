@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import AboutMobile from './AboutMobile'
 
-import { hShift } from './Animation'
+import { hShift, fade } from './Animation'
 
 
 class MenuMobile extends React.Component {
@@ -11,7 +11,8 @@ class MenuMobile extends React.Component {
     super(props)
     this.state = {
       style: {
-        left: '-200px'
+        left: '-200px',
+        opacity: '0'
       },
       menuOut: 'hidden'
     }
@@ -43,21 +44,74 @@ class MenuMobile extends React.Component {
     }
   }
   handleNavBlur = (event) => {
-    if (event.target !== document.getElementById('mobile-menu')) {
+    const mobileMenu = document.getElementById('mobile-menu')
+    const about = document.getElementById('about-mobile')
+    if (event.target !== mobileMenu && event.target !== about) {
       this.menuIn()
       window.removeEventListener('click', this.handleNavBlur)
     }
+  }
+
+  menuButtonDown = () => {
+    this.setState({
+      style: {
+        ...this.state.style,
+        opacity: '0.7'
+      }
+    })
+  }
+  menuButtonUp = () => {
+    fade(this, -0.7, 0.5, 350)
+  }
+  menuButtonOver = () => {
+    this.setState({
+      style: {
+        ...this.state.style,
+        opacity: '0.2'
+      }
+    })
+  }
+  menuButtonOut = () => {
+    this.setState({
+      style: {
+        ...this.state.style,
+        opacity: '0'
+      }
+    })
   }
 
   render() {
     return (
       <div>
         <div id='menu-button'>
-          <button
-            className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" onClick={this.menuOut}
+          <div
+            onClick={this.menuOut}
+            onMouseDown={this.menuButtonDown}
+            onMouseUp={this.menuButtonUp}
+            onMouseOver={this.menuButtonOver}
+            onMouseOut={this.menuButtonOut}
+            style={{
+              position: 'relative',
+              paddingLeft: '4px',
+              paddingTop: '9px',
+              cursor: 'pointer'
+            }}
           >
-            <i className="material-icons">menu</i>
-          </button>
+            <div
+              style={{
+                position: 'absolute',
+                left: '-1px',
+                top: '8px',
+                width: '36px',
+                height: '36px',
+                backgroundColor: `rgba(117, 117, 117, ${this.state.style.opacity})`
+              }}
+            >
+              <i className="material-icons" style={{ position: 'relative', top: '1px' }}>
+                menu
+              </i>
+            </div>
+          </div>
         </div>
         <div id='mobile-menu' style={{ left: this.state.style.left, height: window.innerHeight }}>
           <button

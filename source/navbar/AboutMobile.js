@@ -15,7 +15,8 @@ class AboutMobile extends React.Component {
     }
   }
 
-  openMenu = () => {
+  openMenu = (event) => {
+    event.stopPropagation()
     if (this.state.expanded === 'contracted') {
       this.setState({
         expanded: 'animating'
@@ -45,6 +46,7 @@ class AboutMobile extends React.Component {
           className="mdl-button mdl-js-button mdl-js-ripple-effect"
           style={{ width: '100%', textAlign: 'left' }}
           onClick={this.openMenu}
+          id='about-mobile'
         >
           {
             this.props.language === 'EN' ? 'About' : (

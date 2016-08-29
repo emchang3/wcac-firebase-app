@@ -16,7 +16,6 @@ class Navbar extends Component {
     this.state = {
       style: {
         right: '171px',
-        width: window.innerWidth < 423 ? '100px' : '150px',
         opacity: 1
       }
     }
@@ -70,7 +69,7 @@ class Navbar extends Component {
         </div>
         <div
           id='site-title'
-          style={{ width: this.state.style.width, opacity: this.state.style.opacity }}
+          style={{ opacity: this.state.style.opacity, paddingLeft: '16px' }}
         >
           <strong>
             {
