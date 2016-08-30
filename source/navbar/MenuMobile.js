@@ -67,7 +67,7 @@ class MenuMobile extends React.Component {
     this.setState({
       style: {
         ...this.state.style,
-        opacity: '0.2'
+        opacity: '0.15'
       }
     })
   }
@@ -91,7 +91,7 @@ class MenuMobile extends React.Component {
             onMouseOver={this.menuButtonOver}
             onMouseOut={this.menuButtonOut}
             style={{
-              position: 'relative',
+              position: 'absolute',
               paddingLeft: '4px',
               paddingTop: '9px',
               cursor: 'pointer'
@@ -107,7 +107,7 @@ class MenuMobile extends React.Component {
                 backgroundColor: `rgba(117, 117, 117, ${this.state.style.opacity})`
               }}
             >
-              <i className="material-icons" style={{ position: 'relative', top: '1px' }}>
+              <i className="material-icons" style={{ position: 'relative' }}>
                 menu
               </i>
             </div>
@@ -116,9 +116,8 @@ class MenuMobile extends React.Component {
         <div id='mobile-menu' style={{ left: this.state.style.left, height: window.innerHeight }}>
           <button
             className="mdl-button mdl-js-button mdl-js-ripple-effect"
-            style={{ paddingLeft: '13px', paddingRight: '0px', textAlign: 'left', width: '100%' }} onClick={this.menuIn}
+            style={{ width: '100%' }} onClick={this.menuIn}
           >
-            <i className="material-icons" style={{ position: 'relative' }}>menu</i>
           </button>
           <button
             className="mdl-button mdl-js-button mdl-js-ripple-effect"

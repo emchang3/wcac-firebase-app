@@ -6,6 +6,7 @@ import Search from './Search'
 import About from './AboutMobile'
 import Language from './Language'
 import MenuMobile from './MenuMobile'
+import Title from './Title'
 
 import { hShiftR, hExpand, fade } from './Animation'
 
@@ -67,24 +68,11 @@ class Navbar extends Component {
             />
           </a>
         </div>
-        <div
-          id='site-title'
-          style={{ opacity: this.state.style.opacity, paddingLeft: '16px' }}
-        >
-          <strong>
-            {
-              this.props.language === 'EN' ? (
-                'WCAC'
-              ) : (
-                this.props.language === '检体' ? (
-                  '惠顿华人宣道会'
-                ) : (
-                  '惠頓華人宣道會'
-                )
-              )
-            }
-          </strong>
-        </div>
+        {
+          this.props.browserWidth > 345
+            ? <Title opacity={this.state.style.opacity} />
+            : <div></div>
+        }
         <Search left={this.left} back={this.back} />
         <Language />
       </div>
