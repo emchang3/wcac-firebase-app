@@ -24,27 +24,27 @@ class Navbar extends Component {
 
   left = () => {
     hShiftR(this, 150, 'px', 2, 300)
-    if (window.innerWidth < 480 && this.props.language === 'EN') {
-      window.innerWidth < 445 ? (
+    if (this.props.browserWidth < 480 && this.props.language === 'EN') {
+      this.props.browserWidth < 445 ? (
         fade(this, -1, 2, 300)
       ) : (
         hExpand(this, -75, 'px', 2, 300)
       )
     }
-    if (window.innerWidth < 445 && this.props.language !== 'EN') {
+    if (this.props.browserWidth < 445 && this.props.language !== 'EN') {
       fade(this, -1, 2, 300)
     }
   }
   back = () => {
     hShiftR(this, -150, 'px', 0.5, 300)
-    if (window.innerWidth < 480 && this.props.language === 'EN') {
-      window.innerWidth < 445 ? (
+    if (this.props.browserWidth < 480 && this.props.language === 'EN') {
+      this.props.browserWidth < 445 ? (
         fade(this, 1, 0.5, 300)
       ) : (
         hExpand(this, 75, 'px', 0.5, 300)
       )
     }
-    if (window.innerWidth < 445 && this.props.language !== 'EN') {
+    if (this.props.browserWidth < 445 && this.props.language !== 'EN') {
       fade(this, 1, 0.5, 300)
     }
   }
@@ -57,7 +57,7 @@ class Navbar extends Component {
     return (
       <div id='navbar'>
         <MenuMobile />
-        <div id='logo' style={{ opacity: window.innerWidth < 418 ? this.state.style.opacity : 1 }}>
+        <div id='logo' style={{ opacity: this.props.browserWidth < 418 ? this.state.style.opacity : 1 }}>
           <a href='/'>
             <img
               src={

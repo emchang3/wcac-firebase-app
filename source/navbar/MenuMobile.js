@@ -107,17 +107,31 @@ class MenuMobile extends React.Component {
                 backgroundColor: `rgba(117, 117, 117, ${this.state.style.opacity})`
               }}
             >
-              <i className="material-icons" style={{ position: 'relative' }}>
+              <i
+                className="material-icons"
+                style={{ position: 'relative', top: '1px', left: '3px' }}
+              >
                 menu
               </i>
             </div>
           </div>
         </div>
-        <div id='mobile-menu' style={{ left: this.state.style.left, height: window.innerHeight }}>
+        <div
+          id='mobile-menu'
+          style={{
+            left: this.state.style.left,
+            height: this.props.browserHeight,
+            backgroundColor: 'white'
+          }}
+        >
           <button
             className="mdl-button mdl-js-button mdl-js-ripple-effect"
-            style={{ width: '100%' }} onClick={this.menuIn}
+            style={{ width: '100%', textAlign: 'left' }}
+            onClick={this.menuIn}
           >
+            <i className="material-icons" style={{ color: 'red' }}>
+              menu
+            </i>
           </button>
           <button
             className="mdl-button mdl-js-button mdl-js-ripple-effect"
@@ -180,7 +194,8 @@ class MenuMobile extends React.Component {
 const mapStateToProps = (state) => {
   return {
     language: state.language,
-    browserWidth: state.browserWidth
+    browserWidth: state.browserWidth,
+    browserHeight: state.browserHeight
   }
 }
 

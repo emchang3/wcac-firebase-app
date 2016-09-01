@@ -136,8 +136,42 @@ class Article extends React.Component {
       }
     }
 
+    let individualStyle = {
+      width: this.props.browserWidth > 800 ? '50%' : '100%'
+    }
+
+    switch (this.props.place) {
+      case 'article0':
+        individualStyle = {
+          ...individualStyle,
+          left: this.props.browserWidth > 800 ? '-25%' : '-100%',
+          border: '1px dotted red'
+        }
+        break
+      case 'article1':
+        individualStyle = {
+          ...individualStyle,
+          left: this.props.browserWidth > 800 ? '25%' : '0%',
+          border: '1px dotted green'
+        }
+        break
+      case 'article2':
+        individualStyle = {
+          ...individualStyle,
+          left: this.props.browserWidth > 800 ? '75%' : '100%',
+          border: '1px dotted blue'
+        }
+        break;
+      default:
+        break
+    }
+
     return (
-      <div className={`article ${this.props.place}`} id={this.state.initialTimestamp}>
+      <div
+        className={`article`}
+        id={this.state.initialTimestamp}
+        style={individualStyle}
+      >
         <div
           style={{
             paddingLeft: '48px',
@@ -182,7 +216,8 @@ function getBlockStyle(block) {
 
 const mapStateToProps = (state) => {
   return {
-    content: state.content
+    content: state.content,
+    browserWidth: state.browserWidth
   }
 }
 

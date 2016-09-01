@@ -6,7 +6,7 @@ import NavbarMobile from './navbar/NavbarMobile'
 import Post from './contentEdit/Post'
 import Admin from './Admin'
 import PostList from './contentEdit/PostList'
-import { Carousel } from './contentPresentation/Carousel'
+import Carousel from './contentPresentation/Carousel'
 
 
 const routes = {

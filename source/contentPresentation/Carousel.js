@@ -1,22 +1,27 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+
 import Article from './Article'
 
 import { hShift } from '../navbar/Animation'
 
 
-export class Carousel extends Component {
+class Carousel extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       style: {
         left: '0%'
       },
-      articles: props.articles
+      articles: props.articles,
+      anchorDistance: null,
+      latestTouchX: null
     }
   }
 
   leftShift = () => {
-    hShift(this, -50, '%', 2, 750, this.postLeft)
+    const distance = this.props.browserWidth > 800 ? -50 : -100
+    hShift(this, distance, '%', 2, 750, this.postLeft)
   }
   postLeft = () => {
     this.setState({
@@ -27,7 +32,8 @@ export class Carousel extends Component {
     })
   }
   rightShift = () => {
-    hShift(this, 50, '%', 2, 750, this.postRight)
+    const distance = this.props.browserWidth > 800 ? 50 : 100
+    hShift(this, distance, '%', 2, 750, this.postRight)
   }
   postRight = () => {
     this.setState({
@@ -41,6 +47,36 @@ export class Carousel extends Component {
   componentDidMount = () => {
     // document.getElementById('splash').style.opacity = '0'
   }
+
+  recordTouchStart = (event) => {
+    if (event.touches.length === 1) {
+      this.setState({ anchorDistance: event.touches[0].pageX })
+    }
+  }
+  updateTouchDrag = (event) => {
+    if (event.touches.length === 1) {
+      const holdup = ((event.touches[0].pageX - this.state.anchorDistance) / this.props.browserWidth) * 100
+      this.setState({
+        style: {
+          left: `${holdup}%`
+        },
+        latestTouchX: event.touches[0].pageX
+      })
+    }
+  }
+  fireAnimation = () => {
+    const distanceTraveled = this.state.anchorDistance - this.state.latestTouchX
+    const browserWidth = this.props.browserWidth
+    if (distanceTraveled < 0) {
+      const remainingDistance = ((browserWidth + distanceTraveled) / browserWidth) * 100
+      hShift(this, remainingDistance, '%', 2, 750, this.postRight)
+    }
+    if (distanceTraveled > 0) {
+      const remainingDistance = ((browserWidth - distanceTraveled) / browserWidth) * -100
+      hShift(this, remainingDistance, '%', 2, 750, this.postLeft)
+    }
+  }
+  
   render() {
     let myArticles = this.state.articles.map((initialTimestamp) => {
       return (
@@ -51,7 +87,13 @@ export class Carousel extends Component {
       )
     })
     return (
-      <div className='container cont-box' style={{ top: this.props.top || '20%' }}>
+      <div
+        className='container cont-box'
+        onTouchStart={this.recordTouchStart}
+        onTouchMove={this.updateTouchDrag}
+        onTouchEnd={this.fireAnimation}
+        style={{ top: this.props.top || '20%' }}
+      >
         <div style={this.state.style} className='container mov-box'>
           {myArticles}
         </div>
@@ -77,3 +119,12 @@ export class Carousel extends Component {
     )
   }
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    browserWidth: state.browserWidth
+  }
+}
+
+export default connect(mapStateToProps)(Carousel)
