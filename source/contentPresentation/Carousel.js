@@ -67,16 +67,33 @@ class Carousel extends React.Component {
   fireAnimation = () => {
     const distanceTraveled = this.state.anchorDistance - this.state.latestTouchX
     const browserWidth = this.props.browserWidth
-    if (distanceTraveled < 0) {
+    if (distanceTraveled <= -100) {
       const remainingDistance = ((browserWidth + distanceTraveled) / browserWidth) * 100
-      hShift(this, remainingDistance, '%', 2, 750, this.postRight)
+      hShift(this, remainingDistance, '%', 2, 300, this.postRight)
     }
-    if (distanceTraveled > 0) {
+    if (distanceTraveled > -100 && distanceTraveled < 0) {
+      console.log('derp', distanceTraveled);
+      const returnDistance = (distanceTraveled / browserWidth) * 100
+      hShift(this, returnDistance, '%', 2, 300, this.postAnimation)
+    }
+    if (distanceTraveled >= 100) {
       const remainingDistance = ((browserWidth - distanceTraveled) / browserWidth) * -100
-      hShift(this, remainingDistance, '%', 2, 750, this.postLeft)
+      hShift(this, remainingDistance, '%', 2, 300, this.postLeft)
+    }
+    if (distanceTraveled < 100 && distanceTraveled > 0) {
+      console.log('bloop', distanceTraveled);
+      const returnDistance = (distanceTraveled / browserWidth) * 100
+      hShift(this, returnDistance, '%', 2, 300, this.postAnimation)
     }
   }
-  
+  postAnimation = () => {
+    this.setState({
+      style: {
+        left: '0%'
+      }
+    })
+  }
+
   render() {
     let myArticles = this.state.articles.map((initialTimestamp) => {
       return (
