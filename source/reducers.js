@@ -28,4 +28,5 @@ function general(state = {}, action) {
   }
 }
 
+
 export default general

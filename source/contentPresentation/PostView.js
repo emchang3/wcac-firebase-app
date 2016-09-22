@@ -16,10 +16,10 @@ const {
 
 const { Map } = Immutable
 
-
-class Article extends React.Component {
+class PostView extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
       editorState: EditorState.createEmpty(),
       saveMode: 'draft',
@@ -137,60 +137,10 @@ class Article extends React.Component {
     }
 
     let individualStyle = {
-      width: this.props.browserWidth > 800 ? '50%' : '100%'
+      width: this.props.browserWidth > 800 ? '60%' : '90%',
+      left: this.props.browserWidth > 800 ? '20%' : '5%',
+      top: '100px'
     }
-
-    switch (this.props.place) {
-      case 'article0':
-        individualStyle = {
-          ...individualStyle,
-          left: this.props.browserWidth > 800 ? '-25%' : '-100%',
-          border: '1px dotted red'
-        }
-        break
-      case 'article1':
-        individualStyle = {
-          ...individualStyle,
-          left: this.props.browserWidth > 800 ? '25%' : '0%',
-          border: '1px dotted green'
-        }
-        break
-      case 'article2':
-        individualStyle = {
-          ...individualStyle,
-          left: this.props.browserWidth > 800 ? '75%' : '100%',
-          border: '1px dotted blue'
-        }
-        break;
-      default:
-        break
-    }
-
-    let whenString = ''
-    if (this.state.category === 'events') {
-      whenString += 'When: '
-      whenString += `${this.state.startDate.slice(5, 7)}/${this.state.startDate.slice(8, 10)}/${this.state.startDate.slice(0,4)}, `
-      parseInt(this.state.startTime.slice(0, 2)) > 12 ? (
-          whenString += `${parseInt(this.state.startTime.slice(0, 2)) - 12}${this.state.startTime.slice(2, 5)} PM`
-        ) : (
-          parseInt(this.state.startTime.slice(0, 2)) === 0 ? (
-            whenString += `${parseInt(this.state.startTime.slice(0, 2)) + 12}${this.state.startTime.slice(2, 5)} AM`
-          ) : whenString += `${this.state.startTime} AM`
-        )
-      this.state.startDate === this.state.endDate
-        ? whenString += ' - '
-        : whenString += ` - ${this.state.endDate.slice(5, 7)}/${this.state.endDate.slice(8, 10)}/${this.state.endDate.slice(0, 4)}, `
-      parseInt(this.state.endTime.slice(0, 2)) > 12 ? (
-          whenString += `${parseInt(this.state.endTime.slice(0, 2)) - 12}${this.state.endTime.slice(2, 5)} PM`
-        ) : (
-          parseInt(this.state.endTime.slice(0, 2)) === 0 ? (
-            whenString += `${parseInt(this.state.endTime.slice(0, 2)) + 12}${this.state.endTime.slice(2, 5)} AM`
-          ) : whenString += `${this.state.endTime} AM`
-        )
-    }
-
-
-
 
     return (
       <div
@@ -207,15 +157,11 @@ class Article extends React.Component {
           }}
         >
           <h3>{this.state.title}</h3>
-          {
-            this.state.initialTimestamp ? (
-              <h6>Posted on: {new Date(parseInt(this.state.initialTimestamp)).toLocaleString()}</h6>
-            ) : null
-          }
+          <h6>Posted on: {new Date(parseInt(this.props.initialTimestamp)).toLocaleString()}</h6>
           {
             this.state.category === 'events' ? (
               <h5>
-                {whenString}
+                {`When: ${this.state.startDate}, ${this.state.startTime} - ${this.state.endDate}, ${this.state.endTime}`}
               </h5>
             ) : null
           }
@@ -234,7 +180,6 @@ class Article extends React.Component {
   }
 }
 
-
 const styleMap = {
   CODE: {
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
@@ -251,7 +196,6 @@ function getBlockStyle(block) {
   }
 }
 
-
 const mapStateToProps = (state) => {
   return {
     content: state.content,
@@ -259,4 +203,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Article)
+export default connect(mapStateToProps)(PostView)

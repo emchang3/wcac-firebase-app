@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
 // })
 
 router.get('/admin', (req, res, next) => {
-  res.render('default', { title: 'Log In' })
+  res.render('default', { title: 'Administrator' })
 })
 
 router.get('/posts', (req, res, next) => {
@@ -27,7 +27,13 @@ router.get('/create_new', (req, res, next) => {
 })
 
 router.get('/edit/:its', (req, res, next) => {
-  res.render('secondary', { title: 'Edit Content'})
+  const its = req.params.its
+  res.render('secondary', { title: `Edit Post: ${its}` })
+})
+
+router.get('/view/:its', (req, res, next) => {
+  const its = req.params.its
+  res.render('secondary', { title: `View Post: ${its}` })
 })
 
 module.exports = router

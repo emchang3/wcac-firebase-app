@@ -61,7 +61,7 @@ class Navbar extends Component {
           <a href='/'>
             <img
               src={
-                startsWith(this.props.path, '/edit')
+                startsWith(this.props.path, '/edit') || startsWith(this.props.path, '/view')
                   ? '../images/alliance.jpeg'
                   : 'images/alliance.jpeg'
               }

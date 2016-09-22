@@ -100,7 +100,7 @@ class MenuMobile extends React.Component {
             <div
               style={{
                 position: 'absolute',
-                left: '-1px',
+                left: '2px',
                 top: '8px',
                 width: '36px',
                 height: '36px',
@@ -109,7 +109,7 @@ class MenuMobile extends React.Component {
             >
               <i
                 className="material-icons"
-                style={{ position: 'relative', top: '1px', left: '3px' }}
+                style={{ position: 'relative', top: '1px' }}
               >
                 menu
               </i>
@@ -129,7 +129,7 @@ class MenuMobile extends React.Component {
             style={{ width: '100%', textAlign: 'left' }}
             onClick={this.menuIn}
           >
-            <i className="material-icons" style={{ color: 'red' }}>
+            <i className="material-icons" style={{ color: 'black' }}>
               menu
             </i>
           </button>

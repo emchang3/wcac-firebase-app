@@ -7,15 +7,27 @@ import Post from './contentEdit/Post'
 import Admin from './Admin'
 import PostList from './contentEdit/PostList'
 import Carousel from './contentPresentation/Carousel'
+import PostView from './contentPresentation/PostView'
+import { SectionTitle } from './contentPresentation/SectionTitle'
 
 
 const routes = {
-  '/': (test) => {
-    if (test) {
+  '/': (params) => {
+    if (params) {
+      const { browserHeight, announcements, events } = params
       return (
         <div style={{ width: '100%', height: '100%' }}>
           <NavbarMobile />
-          <Carousel articles={[ test[2], ...test.slice(0, 2) ]} top={'125%'} />
+          <SectionTitle sectionTitle='Announcements' top={`${browserHeight}px`} />
+          <Carousel
+            articles={[ announcements[2], ...announcements.slice(0, 2) ]}
+            top={`${browserHeight + 100}px`}
+          />
+          <SectionTitle sectionTitle='Events' top={`${(2 * browserHeight)}px`} />
+          <Carousel
+            articles={[ events[2], ...events.slice(0, 2) ]}
+            top={`${(2 * browserHeight) + 100}px`}
+          />
         </div>
       )
     }
@@ -29,7 +41,7 @@ const routes = {
       </div>
     )
   },
-  '/posts' : () => {
+  '/posts': () => {
     return (
       <div style={{ width: '100%', height: '100%' }}>
         <NavbarMobile />
@@ -40,23 +52,36 @@ const routes = {
   '/create_new': () => {
     return (
       <div style={{ width: '100%', height: '100%' }}>
-        <Post readOnly={false} initialTimestamp={null} />
+        <Post initialTimestamp={null} />
       </div>
     )
   },
   '/edit': (initialTimestamp) => {
     return (
       <div style={{ width: '100%', height: '100%' }}>
-        <Post readOnly={false} initialTimestamp={initialTimestamp} />
+        <Post initialTimestamp={initialTimestamp} />
+      </div>
+    )
+  },
+  '/view': (initialTimestamp) => {
+    return (
+      <div style={{ width: '100%', height: '100%' }}>
+        <NavbarMobile />
+        <PostView initialTimestamp={initialTimestamp} />
       </div>
     )
   }
 }
 
-const Router = ({ path, contentOrder }) => {
+const Router = ({ path, contentOrder, browserHeight }) => {
   if (routes[path]) {
     if (contentOrder) {
-      return routes[path](contentOrder.announcements)
+      const params = {
+        browserHeight: browserHeight,
+        announcements: contentOrder.announcements,
+        events: contentOrder.events
+      }
+      return routes[path](params)
     }
     return routes[path]()
   }
@@ -74,7 +99,8 @@ const mapStateToProps = (state) => {
   return {
     language: state.language,
     path: state.path,
-    contentOrder: state.contentOrder
+    contentOrder: state.contentOrder,
+    browserHeight: state.browserHeight
   }
 }
 
