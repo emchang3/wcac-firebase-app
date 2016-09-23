@@ -189,9 +189,6 @@ class Article extends React.Component {
         )
     }
 
-
-
-
     return (
       <div
         className={`article`}

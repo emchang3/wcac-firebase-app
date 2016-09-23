@@ -4,14 +4,24 @@ import { connect } from 'react-redux'
 import PostListItem from './PostListItem'
 import { Return } from './Return'
 import CreatePost from './CreatePost'
+import PageInput from './PageInput'
 
 
-const PostList = ({ uid, content, language, browserWidth, contentOrder }) => {
+const PostList = ({ uid, content, language, browserWidth, contentOrder, postsPage }) => {
   if (uid !== undefined && uid !== null) {
     let contentList = []
+    const generalOrder = contentOrder.general
+    const numPages = Math.ceil(generalOrder.length / 10)
     if (content && contentOrder) {
-      const generalOrder = contentOrder.general
-      contentList = generalOrder.map((initialTimestamp) => {
+
+      let currentItems = []
+      let c = (postsPage - 1) * 10
+      while (c / 10 < postsPage && c < generalOrder.length) {
+        currentItems.push(generalOrder[c])
+        c++
+      }
+
+      contentList = currentItems.map((initialTimestamp) => {
         return <PostListItem content={content[initialTimestamp]} key={initialTimestamp} />
       })
     }
@@ -79,6 +89,7 @@ const PostList = ({ uid, content, language, browserWidth, contentOrder }) => {
               {contentList}
             </tbody>
           </table>
+          <PageInput numPages={numPages} />
         </div>
       </div>
     )
@@ -97,7 +108,8 @@ const mapStateToProps = (state) => {
     browserWidth: state.browserWidth,
     language: state.language,
     content: state.content,
-    contentOrder: state.contentOrder
+    contentOrder: state.contentOrder,
+    postsPage: state.postsPage
   }
 }
 

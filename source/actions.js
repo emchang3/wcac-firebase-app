@@ -10,6 +10,7 @@ export const WATCH_CONTENT = 'WATCH_CONTENT'
 export const UPDATE_CONTENT = 'UPDATE_CONTENT'
 export const DELETE_POST = 'DELETE_POST'
 export const UPDATE_ORDER = 'UPDATE_ORDER'
+export const SET_POSTS_PAGE = 'SET_POSTS_PAGE'
 
 
 export const browserResize = () => {
@@ -92,6 +93,13 @@ export const updateContentOrder = (order) => {
 export const deletePost = (payload) => {
   return {
     type: DELETE_POST,
+    payload: payload
+  }
+}
+
+export const setPostsPage = (payload) => {
+  return {
+    type: SET_POSTS_PAGE,
     payload: payload
   }
 }

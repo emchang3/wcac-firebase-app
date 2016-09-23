@@ -24,7 +24,14 @@ const initialState = {
   browserWidth: window.innerWidth,
   browserHeight: window.innerHeight,
   uid: null,
-  path: window.location.pathname
+  path: window.location.pathname,
+  postsPage: 1,
+  announcementsPage: 1,
+  eventsPage: 1,
+  ministriesPage: 1,
+  sermonsPage: 1,
+  staffPage: 1,
+  jobsPage: 1
 }
 export const store = createStore(reductor, initialState, compose(
   applyMiddleware(sagaMiddleware),

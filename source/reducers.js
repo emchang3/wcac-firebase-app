@@ -4,7 +4,8 @@ import {
   RESTORE_LOCAL,
   SET_USER,
   UPDATE_CONTENT,
-  UPDATE_ORDER
+  UPDATE_ORDER,
+  SET_POSTS_PAGE
 } from './actions'
 
 
@@ -23,6 +24,8 @@ function general(state = {}, action) {
       return { ...state, content: action.content }
     case UPDATE_ORDER:
       return { ...state, contentOrder: action.contentOrder }
+    case SET_POSTS_PAGE:
+      return { ...state, postsPage: action.payload }
     default:
       return state
   }
