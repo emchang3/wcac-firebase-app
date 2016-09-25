@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const { capitalize } = require('lodash')
 
 
 /* GET home page. */
@@ -34,6 +35,11 @@ router.get('/edit/:its', (req, res, next) => {
 router.get('/view/:its', (req, res, next) => {
   const its = req.params.its
   res.render('secondary', { title: `View Post: ${its}` })
+})
+
+router.get('/category/:cat', (req, res, next) => {
+  const cat = req.params.cat
+  res.render('secondary', { title: `Category: ${capitalize(cat)}`})
 })
 
 module.exports = router

@@ -62,46 +62,62 @@ class AboutMobile extends React.Component {
             borderRight: '1px solid black'
           }}
         >
-          <button
-            className="mdl-button mdl-js-button mdl-js-ripple-effect"
-            style={{ width: '100%', textAlign: 'left' }}
-          >
-            {
-              this.props.language === 'EN' ? 'Statement of Faith' : (
-                this.props.language === '检体' ? '信仰' : '信仰'
-              )
-            }
-          </button>
-          <button
-            className="mdl-button mdl-js-button mdl-js-ripple-effect"
-            style={{ width: '100%', textAlign: 'left' }}
-          >
-            {
-              this.props.language === 'EN' ? 'Mission' : (
-                this.props.language === '检体' ? '任务' : '任務'
-              )
-            }
-          </button>
-          <button
-            className="mdl-button mdl-js-button mdl-js-ripple-effect"
-            style={{ width: '100%', textAlign: 'left' }}
-          >
-            {
-              this.props.language === 'EN' ? 'Staff' : (
-                this.props.language === '检体' ? '同工' : '同工'
-              )
-            }
-          </button>
-          <button
-            className="mdl-button mdl-js-button mdl-js-ripple-effect"
-            style={{ width: '100%', textAlign: 'left' }}
-          >
-            {
-              this.props.language === 'EN' ? 'Jobs' : (
-                this.props.language === '检体' ? '工作' : '工作'
-              )
-            }
-          </button>
+          {
+            this.props.contentOrder ? (
+              <a href={`/view/${this.props.contentOrder.statement[0]}`}>
+                <button
+                  className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                  style={{ width: '100%', textAlign: 'left' }}
+                >
+                  {
+                    this.props.language === 'EN' ? 'Statement of Faith' : (
+                      this.props.language === '检体' ? '信仰' : '信仰'
+                    )
+                  }
+                </button>
+              </a>
+            ) : null
+          }
+          {
+            this.props.contentOrder ? (
+              <a href={`/view/${this.props.contentOrder.mission[0]}`}>
+                <button
+                  className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                  style={{ width: '100%', textAlign: 'left' }}
+                >
+                  {
+                    this.props.language === 'EN' ? 'Mission' : (
+                      this.props.language === '检体' ? '任务' : '任務'
+                    )
+                  }
+                </button>
+              </a>
+            ) : null
+          }
+          <a href='/category/staff'>
+            <button
+              className="mdl-button mdl-js-button mdl-js-ripple-effect"
+              style={{ width: '100%', textAlign: 'left' }}
+            >
+              {
+                this.props.language === 'EN' ? 'Staff' : (
+                  this.props.language === '检体' ? '同工' : '同工'
+                )
+              }
+            </button>
+          </a>
+          <a href='/category/jobs'>
+            <button
+              className="mdl-button mdl-js-button mdl-js-ripple-effect"
+              style={{ width: '100%', textAlign: 'left' }}
+            >
+              {
+                this.props.language === 'EN' ? 'Jobs' : (
+                  this.props.language === '检体' ? '工作' : '工作'
+                )
+              }
+            </button>
+          </a>
         </div>
       </div>
     )
@@ -112,7 +128,8 @@ class AboutMobile extends React.Component {
 const mapStateToProps = (state) => {
   return {
     language: state.language,
-    browserWidth: state.browserWidth
+    browserWidth: state.browserWidth,
+    contentOrder: state.contentOrder
   }
 }
 

@@ -64,7 +64,11 @@ class Language extends React.Component {
     return (
       <div
         id='site-language'
-        style={{ width: '66px', right: this.props.browserWidth < 1145 ? '0px' : '50px' }}
+        style={{
+          width: '66px',
+          right: this.props.browserWidth < 1145 ? '0px' : '50px',
+          pointerEvents: 'auto'
+        }}
       >
         <button
           className="mdl-button mdl-js-button mdl-js-ripple-effect"
@@ -79,7 +83,8 @@ class Language extends React.Component {
             width: '66px',
             overflow: 'hidden',
             borderRight: '1px solid black',
-            borderBottom: '1px solid black'
+            borderBottom: '1px solid black',
+            backgroundColor: 'white'
           }}
         >
           <button

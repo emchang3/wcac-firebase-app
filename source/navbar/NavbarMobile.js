@@ -55,13 +55,19 @@ class Navbar extends Component {
 
   render() {
     return (
-      <div id='navbar'>
+      <div id='navbar' style={{ pointerEvents: 'none' }}>
         <MenuMobile />
-        <div id='logo' style={{ opacity: this.props.browserWidth < 418 ? this.state.style.opacity : 1 }}>
+        <div
+          id='logo'
+          style={{
+            opacity: this.props.browserWidth < 418 ? this.state.style.opacity : 1,
+            pointerEvents: 'auto'
+          }}
+        >
           <a href='/'>
             <img
               src={
-                startsWith(this.props.path, '/edit') || startsWith(this.props.path, '/view')
+                startsWith(this.props.path, '/edit') || startsWith(this.props.path, '/view') || startsWith(this.props.path, '/category')
                   ? '../images/alliance.jpeg'
                   : 'images/alliance.jpeg'
               }
@@ -71,7 +77,7 @@ class Navbar extends Component {
         {
           this.props.browserWidth > 345
             ? <Title opacity={this.state.style.opacity} />
-            : <div></div>
+            : null
         }
         <Search left={this.left} back={this.back} />
         <Language />

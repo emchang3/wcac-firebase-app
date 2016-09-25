@@ -9,8 +9,8 @@ import CreatePost from './contentEdit/CreatePost'
 const Admin = ({ language, browserWidth, attemptLogin, uid }) => {
   return (
     <div
+      className='myFlex'
       style={{
-        display: 'flex',
         paddingTop: '100px',
         justifyContent: 'center',
         textAlign: 'center'

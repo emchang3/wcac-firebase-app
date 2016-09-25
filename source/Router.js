@@ -9,6 +9,7 @@ import PostList from './contentEdit/PostList'
 import Carousel from './contentPresentation/Carousel'
 import PostView from './contentPresentation/PostView'
 import { SectionTitle } from './contentPresentation/SectionTitle'
+import ArticleList from './contentPresentation/ArticleList'
 
 
 const routes = {
@@ -52,6 +53,7 @@ const routes = {
   '/create_new': () => {
     return (
       <div style={{ width: '100%', height: '100%' }}>
+        <NavbarMobile />
         <Post initialTimestamp={null} />
       </div>
     )
@@ -59,6 +61,7 @@ const routes = {
   '/edit': (initialTimestamp) => {
     return (
       <div style={{ width: '100%', height: '100%' }}>
+        <NavbarMobile />
         <Post initialTimestamp={initialTimestamp} />
       </div>
     )
@@ -68,6 +71,14 @@ const routes = {
       <div style={{ width: '100%', height: '100%' }}>
         <NavbarMobile />
         <PostView initialTimestamp={initialTimestamp} />
+      </div>
+    )
+  },
+  '/category': (category) => {
+    return (
+      <div style={{ width: '100%', height: '100%' }}>
+        <NavbarMobile />
+        <ArticleList category={category} />
       </div>
     )
   }

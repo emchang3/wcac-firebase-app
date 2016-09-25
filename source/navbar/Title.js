@@ -8,19 +8,17 @@ const Title = ({ language, opacity }) => {
       id='site-title'
       style={{ opacity: opacity, paddingLeft: '16px' }}
     >
-      <strong>
-        {
-          language === 'EN' ? (
-            'WCAC'
+      {
+        language === 'EN' ? (
+          'WCAC'
+        ) : (
+          language === '检体' ? (
+            '惠顿华人宣道会'
           ) : (
-            language === '检体' ? (
-              '惠顿华人宣道会'
-            ) : (
-              '惠頓華人宣道會'
-            )
+            '惠頓華人宣道會'
           )
-        }
-      </strong>
+        )
+      }
     </div>
   )
 }

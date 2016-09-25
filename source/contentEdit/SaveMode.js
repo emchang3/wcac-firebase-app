@@ -6,8 +6,9 @@ const SaveMode = ({ onChange, saveMode, inList, itemId, language }) => {
 
   return (
     <div
+      className='myFlex'
       style={{
-        display: 'flex',
+        // display: 'flex',
         justifyContent: 'flex-end',
         paddingTop: inList && inList === true ? '0px' : '12px',
         paddingRight: '8px'

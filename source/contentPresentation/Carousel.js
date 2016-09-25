@@ -135,11 +135,10 @@ class Carousel extends React.Component {
           ) : null
         }
         <div
-          className='coverBottom'
+          className='coverBottom myFlex'
           style={{
             position: 'absolute',
-            display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'flex-end',
             alignItems: 'flex-end',
             left: this.props.browserWidth > 800 ? '25%' : '0%',
             width: this.props.browserWidth > 800 ? '50%' : '100%',

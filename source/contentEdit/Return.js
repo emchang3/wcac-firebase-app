@@ -20,7 +20,12 @@ export const Return = ({ url, language }) => {
   )
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+    <div
+      className='myFlex'
+      style={{
+        justifyContent: 'flex-start'
+      }}
+    >
       <a href={url} style={{ color: 'black' }}>
         <button className="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">
           <i className="material-icons">arrow_back</i>

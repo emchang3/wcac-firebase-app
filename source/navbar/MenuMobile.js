@@ -82,7 +82,7 @@ class MenuMobile extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ pointerEvents: 'auto' }}>
         <div id='menu-button'>
           <div
             onClick={this.menuOut}
@@ -133,46 +133,54 @@ class MenuMobile extends React.Component {
               menu
             </i>
           </button>
-          <button
-            className="mdl-button mdl-js-button mdl-js-ripple-effect"
-            style={{ width: '100%', textAlign: 'left' }}
-          >
-            {
-              this.props.language === 'EN' ? 'Announcements' : (
-                this.props.language === '检体' ? '公告' : '公告'
-              )
-            }
-          </button>
-          <button
-            className="mdl-button mdl-js-button mdl-js-ripple-effect"
-            style={{ width: '100%', textAlign: 'left' }}
-          >
-            {
-              this.props.language === 'EN' ? 'Events' : (
-                this.props.language === '检体' ? '活动' : '活動'
-              )
-            }
-          </button>
-          <button
-            className="mdl-button mdl-js-button mdl-js-ripple-effect"
-            style={{ width: '100%', textAlign: 'left' }}
-          >
-            {
-              this.props.language === 'EN' ? 'Ministries' : (
-                this.props.language === '检体' ? '事工' : '事工'
-              )
-            }
-          </button>
-          <button
-            className="mdl-button mdl-js-button mdl-js-ripple-effect"
-            style={{ width: '100%', textAlign: 'left' }}
-          >
-            {
-              this.props.language === 'EN' ? 'Sermons' : (
-                this.props.language === '检体' ? '讲道' : '講道'
-              )
-            }
-          </button>
+          <a href='/category/announcements'>
+            <button
+              className="mdl-button mdl-js-button mdl-js-ripple-effect"
+              style={{ width: '100%', textAlign: 'left' }}
+            >
+              {
+                this.props.language === 'EN' ? 'Announcements' : (
+                  this.props.language === '检体' ? '公告' : '公告'
+                )
+              }
+            </button>
+          </a>
+          <a href='/category/events'>
+            <button
+              className="mdl-button mdl-js-button mdl-js-ripple-effect"
+              style={{ width: '100%', textAlign: 'left' }}
+            >
+              {
+                this.props.language === 'EN' ? 'Events' : (
+                  this.props.language === '检体' ? '活动' : '活動'
+                )
+              }
+            </button>
+          </a>
+          <a href='/category/ministries'>
+            <button
+              className="mdl-button mdl-js-button mdl-js-ripple-effect"
+              style={{ width: '100%', textAlign: 'left' }}
+            >
+              {
+                this.props.language === 'EN' ? 'Ministries' : (
+                  this.props.language === '检体' ? '事工' : '事工'
+                )
+              }
+            </button>
+          </a>
+          <a href='/category/sermons'>
+            <button
+              className="mdl-button mdl-js-button mdl-js-ripple-effect"
+              style={{ width: '100%', textAlign: 'left' }}
+            >
+              {
+                this.props.language === 'EN' ? 'Sermons' : (
+                  this.props.language === '检体' ? '讲道' : '講道'
+                )
+              }
+            </button>
+          </a>
           <AboutMobile language={this.props.language} />
           <button
             className="mdl-button mdl-js-button mdl-js-ripple-effect"

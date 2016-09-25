@@ -52,7 +52,8 @@ class Search extends React.Component {
         id='search'
         style={{
           width: this.state.style.width,
-          right: this.props.browserWidth < 1145 ? '66px' : '116px'
+          right: this.props.browserWidth < 1145 ? '66px' : '116px',
+          pointerEvents: 'auto'
         }}
       >
         <button

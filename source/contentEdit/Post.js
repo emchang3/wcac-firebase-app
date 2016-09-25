@@ -118,7 +118,7 @@ class RichEditorExample extends React.Component {
             ? `0${endDateTime.getUTCDate()}`
             : `${endDateTime.getUTCDate()}`
           const endDate = `${endYear}-${endMonth}-${endDay}`
-          
+
           const endHour = endDateTime.getUTCHours() < 10
             ? `0${endDateTime.getUTCHours()}`
             : `${endDateTime.getUTCHours()}`
@@ -273,14 +273,25 @@ class RichEditorExample extends React.Component {
         className += ' RichEditor-hidePlaceholder'
       }
     }
-
+    // <div
+    //   className='myFlex'
+    //   style={{
+    //     justifyContent: 'flex-end',
+    //     width: '100%'
+    //   }}
+    // >
+    //   <Language />
+    // </div>
     if (this.props.uid !== undefined && this.props.uid !== null) {
       return (
         <div>
-          <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
-            <Language />
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <div
+            className='myFlex'
+            style={{
+              justifyContent: 'center',
+              width: '100%'
+            }}
+          >
             <div
               style={{
                 width: this.props.browserWidth < 1145 ? '80%' : '60%',
@@ -356,12 +367,17 @@ class RichEditorExample extends React.Component {
               }
 
               <div
+                className='myFlex'
                 style={{
-                  display: 'flex',
                   justifyContent: 'space-between'
                 }}
               >
-                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                <div
+                  className='myFlex'
+                  style={{
+                    flexWrap: 'wrap'
+                  }}
+                >
                   <CategorySelect onClick={this.categoryChange} category={this.state.category} />
                   <CongregationSelect
                     onClick={this.congregationChange}

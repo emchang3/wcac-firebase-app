@@ -15,7 +15,13 @@ const DateSelect = ({
 }) => {
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '300px' }}>
+      <div
+        className='myFlex'
+        style={{
+          justifyContent: 'space-between',
+          maxWidth: '300px'
+        }}
+      >
         <div style={{ paddingTop: '25px', paddingLeft: '16px', fontSize: '1.1em' }}>
           {
             language === 'EN' ? 'Start:' : (
@@ -33,7 +39,13 @@ const DateSelect = ({
           />
         </div>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'flex-end', maxWidth: '300px' }}>
+      <div
+        className='myFlex'
+        style={{
+          justifyContent: 'flex-end',
+          maxWidth: '300px'
+        }}
+      >
         <div className="mdl-textfield mdl-js-textfield" style={{ width: '200px' }}>
           <input
             className="mdl-textfield__input"
@@ -45,7 +57,13 @@ const DateSelect = ({
         </div>
       </div>
       <br />
-      <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '300px' }}>
+      <div
+        className='myFlex'
+        style={{
+          justifyContent: 'space-between',
+          maxWidth: '300px'
+        }}
+      >
         <div style={{ paddingTop: '25px', paddingLeft: '16px', fontSize: '1.1em' }}>
           {
             language === 'EN' ? 'End:' : (
@@ -63,7 +81,13 @@ const DateSelect = ({
           />
         </div>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'flex-end', maxWidth: '300px' }}>
+      <div
+        className='myFlex'
+        style={{
+          justifyContent: 'flex-end',
+          maxWidth: '300px'
+        }}
+      >
         <div className="mdl-textfield mdl-js-textfield" style={{ width: '200px' }}>
           <input
             className="mdl-textfield__input"

@@ -27,7 +27,12 @@ const PostList = ({ uid, content, language, browserWidth, contentOrder, postsPag
     }
 
     return (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div
+        className='myFlex'
+        style={{
+          justifyContent: 'center'
+        }}
+      >
         <div
           style={{
             width: browserWidth < 1145 ? '80%' : '60%',
@@ -36,7 +41,13 @@ const PostList = ({ uid, content, language, browserWidth, contentOrder, postsPag
         >
           <Return url={'/admin'} language={language} />
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+          <div
+            className='myFlex'
+            style={{
+              justifyContent: 'space-between',
+              alignItems: 'baseline'
+            }}
+          >
             <h2>
               {
                 language === 'EN' ? 'Posts' : (

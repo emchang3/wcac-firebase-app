@@ -6,7 +6,12 @@ import { deletePost } from '../actions'
 
 const DeletePost = ({ itemId, uid, deletePost }) => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+    <div
+      className='myFlex'
+      style={{
+        justifyContent: 'flex-end'
+      }}
+    >
       <i
         className="material-icons"
         onClick={ () => deletePost(itemId, uid) }

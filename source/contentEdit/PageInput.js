@@ -29,20 +29,18 @@ class PageInput extends React.Component {
   render() {
     const outerStyle = {
       width: '100%',
-      display: 'flex',
       justifyContent: 'center',
       alignItems: 'center'
     }
 
     const inputStyle = {
       width: '50px',
-      display: 'flex',
       justifyContent: 'center',
       alignItems: 'center'
     }
 
     return (
-      <div style={outerStyle}>
+      <div className='myFlex' style={outerStyle}>
         <button
           className="mdl-button mdl-js-button mdl-button--icon"
           onClick={() => {
@@ -54,7 +52,7 @@ class PageInput extends React.Component {
           <i className="material-icons">keyboard_arrow_left</i>
         </button>
         <div
-          className="mdl-textfield mdl-js-textfield"
+          className="mdl-textfield mdl-js-textfield myFlex"
           style={inputStyle}
         >
           <input
