@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const { capitalize } = require('lodash')
 
-
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Home' })
@@ -39,7 +38,7 @@ router.get('/view/:its', (req, res, next) => {
 
 router.get('/category/:cat', (req, res, next) => {
   const cat = req.params.cat
-  res.render('secondary', { title: `Category: ${capitalize(cat)}`})
+  res.render('secondary', { title: `Category: ${capitalize(cat)}` })
 })
 
 module.exports = router

@@ -1,22 +1,20 @@
-import "babel-polyfill"
+import 'babel-polyfill'
 
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware, compose } from 'redux'
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux'  // eslint-disable-line no-unused-vars
 import createSagaMiddleware from 'redux-saga'
 
 import { startApp } from './database'
 
-import App from './App'
+import App from './App' // eslint-disable-line no-unused-vars
 
-import { browserResize, storeLocal, retrieveState, watchContent } from './actions'
+import { browserResize, retrieveState, watchContent } from './actions'
 import reductor from './reducers'
 import rootSaga from './sagas'
 
-
 startApp()
-
 
 const sagaMiddleware = createSagaMiddleware()
 const initialState = {
@@ -39,7 +37,6 @@ export const store = createStore(reductor, initialState, compose(
 ))
 sagaMiddleware.run(rootSaga, store.getState)
 
-
 store.dispatch(retrieveState())
 
 const renderNav = () => {
@@ -49,8 +46,7 @@ window.addEventListener('resize', renderNav, false)
 
 store.dispatch(watchContent(store.dispatch))
 
-
-function render() {
+function render () {
   ReactDOM.render(
     <Provider store={store}>
       <App />

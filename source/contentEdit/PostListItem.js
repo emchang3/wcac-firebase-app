@@ -7,7 +7,6 @@ import SaveMode from './SaveMode'
 
 import { savePost } from '../actions'
 
-
 class PostListItem extends React.Component {
   constructor(props) {
     super(props)
@@ -89,7 +88,6 @@ class PostListItem extends React.Component {
     )
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

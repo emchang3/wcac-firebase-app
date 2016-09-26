@@ -12,7 +12,6 @@ export const DELETE_POST = 'DELETE_POST'
 export const UPDATE_ORDER = 'UPDATE_ORDER'
 export const SET_POSTS_PAGE = 'SET_POSTS_PAGE'
 
-
 export const browserResize = () => {
   const width = window.innerWidth
   const height = window.innerHeight

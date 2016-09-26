@@ -1,10 +1,9 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 
 import { attemptLogin } from './actions'
 
-import CreatePost from './contentEdit/CreatePost'
-
+import CreatePost from './contentEdit/CreatePost' // eslint-disable-line no-unused-vars
 
 const Admin = ({ language, browserWidth, attemptLogin, uid }) => {
   return (
@@ -77,7 +76,6 @@ const Admin = ({ language, browserWidth, attemptLogin, uid }) => {
   )
 }
 
-
 const mapStateToProps = (state) => {
   return {
     language: state.language,
@@ -94,4 +92,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect (mapStateToProps, mapDispatchToProps)(Admin)
+export default connect(mapStateToProps, mapDispatchToProps)(Admin)

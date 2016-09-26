@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { startsWith } from 'lodash'
 
@@ -10,8 +10,7 @@ import Title from './Title'
 
 import { hShiftR, hExpand, fade } from './Animation'
 
-
-class Navbar extends Component {
+class Navbar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -85,7 +84,6 @@ class Navbar extends Component {
     )
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

@@ -14,12 +14,11 @@ import {
   deleteContent
 } from './database'
 
+// function* helloSaga() {
+//   // console.log('--- saga init ---')
+// }
 
-function* helloSaga() {
-  // console.log('--- saga init ---')
-}
-
-function* stateSave(getState) {
+function* stateSave (getState) {
   // console.log('--- persisting state ---')
   const haveStorage = yield storageAvailable('localStorage')
   if (haveStorage === true) {
@@ -40,7 +39,7 @@ const defaultState = {
   uid: null
 }
 
-function* stateLoad() {
+function* stateLoad () {
   // console.log('--- retrieving state ---')
   try {
     const haveStorage = yield storageAvailable('localStorage')
@@ -52,12 +51,10 @@ function* stateLoad() {
         adminStatus === true
           ? yield put(setUser(storedState.uid))
           : yield put(setUser(null))
-      }
-      else {
+      } else {
         yield put(rehydrateState(defaultState))
       }
-    }
-    else {
+    } else {
       yield put(rehydrateState(defaultState))
     }
   } catch (e) {
@@ -65,7 +62,7 @@ function* stateLoad() {
   }
 }
 
-function* loginSaga() {
+function* loginSaga () {
   // console.log('--- logging in ---')
   const newUid = yield* addUser()
   const adminStatus = yield* isAdmin(newUid)
@@ -74,26 +71,25 @@ function* loginSaga() {
     : yield put(setUser(null))
 }
 
-function* persistContent(action) {
+function* persistContent (action) {
   const adminStatus = yield* isAdmin(action.payload.uid)
   adminStatus === true
     ? yield* postContent(action.payload)
     : yield put(setUser(null))
 }
 
-function* watchAndReturnContent(action) {
+function* watchAndReturnContent (action) {
   initiateContentWatch(action.dispatch)
 }
 
-function* deleteContentSaga(action) {
+function* deleteContentSaga (action) {
   const adminStatus = yield* isAdmin(action.payload.uid)
   adminStatus === true
     ? yield* deleteContent(action.payload.initialTimestamp)
     : yield put(setUser(null))
 }
 
-
-function* watchCriticalStateChange(getState) {
+function* watchCriticalStateChange (getState) {
   yield* takeEvery([
     'LANGUAGE_CHANGE',
     'SET_USER',
@@ -102,28 +98,27 @@ function* watchCriticalStateChange(getState) {
   ], stateSave, getState)
 }
 
-function* watchStateRetrievalRequest() {
+function* watchStateRetrievalRequest () {
   yield* takeLatest('RETRIEVE_STATE', stateLoad)
 }
 
-function* watchLoginAttempt() {
+function* watchLoginAttempt () {
   yield* takeLatest('ATTEMPT_LOGIN', loginSaga)
 }
 
-function* watchContentSave() {
+function* watchContentSave () {
   yield* takeEvery('SAVE_POST', persistContent)
 }
 
-function* watchContentWatch() {
+function* watchContentWatch () {
   yield* takeLatest('WATCH_CONTENT', watchAndReturnContent)
 }
 
-function* watchContentDelete() {
+function* watchContentDelete () {
   yield* takeEvery('DELETE_POST', deleteContentSaga)
 }
 
-
-export default function* rootSaga(getState) {
+export default function* rootSaga (getState) {
   yield [
     // helloSaga(),
     watchCriticalStateChange(getState),

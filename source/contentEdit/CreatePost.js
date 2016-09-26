@@ -1,6 +1,5 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
-
 
 const CreatePost = ({ language }) => {
   return (
@@ -18,7 +17,6 @@ const CreatePost = ({ language }) => {
     </a>
   )
 }
-
 
 const mapStateToProps = (state) => {
   return {

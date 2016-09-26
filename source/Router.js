@@ -1,16 +1,15 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 import { startsWith } from 'lodash'
 
-import NavbarMobile from './navbar/NavbarMobile'
-import Post from './contentEdit/Post'
-import Admin from './Admin'
-import PostList from './contentEdit/PostList'
-import Carousel from './contentPresentation/Carousel'
-import PostView from './contentPresentation/PostView'
-import { SectionTitle } from './contentPresentation/SectionTitle'
-import ArticleList from './contentPresentation/ArticleList'
-
+import NavbarMobile from './navbar/NavbarMobile'  // eslint-disable-line no-unused-vars
+import Post from './contentEdit/Post' // eslint-disable-line no-unused-vars
+import Admin from './Admin' // eslint-disable-line no-unused-vars
+import PostList from './contentEdit/PostList' // eslint-disable-line no-unused-vars
+import Carousel from './contentPresentation/Carousel' // eslint-disable-line no-unused-vars
+import PostView from './contentPresentation/PostView' // eslint-disable-line no-unused-vars
+import { SectionTitle } from './contentPresentation/SectionTitle' // eslint-disable-line no-unused-vars
+import ArticleList from './contentPresentation/ArticleList' // eslint-disable-line no-unused-vars
 
 const routes = {
   '/': (params) => {
@@ -104,7 +103,6 @@ const Router = ({ path, contentOrder, browserHeight }) => {
     }
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

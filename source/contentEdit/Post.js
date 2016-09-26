@@ -27,7 +27,6 @@ const {
 
 const { Map } = Immutable
 
-
 class RichEditorExample extends React.Component {
   constructor(props) {
     super(props)

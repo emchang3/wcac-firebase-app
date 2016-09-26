@@ -1,11 +1,10 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 
-import PostListItem from './PostListItem'
-import { Return } from './Return'
-import CreatePost from './CreatePost'
-import PageInput from './PageInput'
-
+import PostListItem from './PostListItem' // eslint-disable-line no-unused-vars
+import { Return } from './Return' // eslint-disable-line no-unused-vars
+import CreatePost from './CreatePost' // eslint-disable-line no-unused-vars
+import PageInput from './PageInput' // eslint-disable-line no-unused-vars
 
 const PostList = ({ uid, content, language, browserWidth, contentOrder, postsPage }) => {
   if (uid !== undefined && uid !== null) {
@@ -13,7 +12,6 @@ const PostList = ({ uid, content, language, browserWidth, contentOrder, postsPag
     const generalOrder = contentOrder.general
     const numPages = Math.ceil(generalOrder.length / 10)
     if (content && contentOrder) {
-
       let currentItems = []
       let c = (postsPage - 1) * 10
       while (c / 10 < postsPage && c < generalOrder.length) {
@@ -111,7 +109,6 @@ const PostList = ({ uid, content, language, browserWidth, contentOrder, postsPag
     </div>
   )
 }
-
 
 const mapStateToProps = (state) => {
   return {

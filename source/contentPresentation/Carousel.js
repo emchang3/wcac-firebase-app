@@ -1,10 +1,9 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 
-import Article from './Article'
+import Article from './Article' // eslint-disable-line no-unused-vars
 
 import { hShift } from '../navbar/Animation'
-
 
 class Carousel extends React.Component {
   constructor(props) {
@@ -135,11 +134,9 @@ class Carousel extends React.Component {
           ) : null
         }
         <div
-          className='coverBottom myFlex'
+          className='coverBottom'
           style={{
             position: 'absolute',
-            justifyContent: 'flex-end',
-            alignItems: 'flex-end',
             left: this.props.browserWidth > 800 ? '25%' : '0%',
             width: this.props.browserWidth > 800 ? '50%' : '100%',
             top: '50%',
@@ -148,7 +145,7 @@ class Carousel extends React.Component {
         >
           <a
             href={`/view/${this.state.articles[1]}`}
-            style={{ position: 'absolute', bottom: '0%', color: 'black', textDecoration: 'none' }}
+            style={{ position: 'absolute', bottom: '0%', right: '0%', color: 'black', textDecoration: 'none' }}
           >
             <button
               className="mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect"
@@ -174,7 +171,6 @@ class Carousel extends React.Component {
     )
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

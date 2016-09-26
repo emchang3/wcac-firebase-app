@@ -5,7 +5,6 @@ import { changeLanguage } from '../actions'
 
 import { vExpand, hExpand } from './Animation'
 
-
 class Language extends React.Component {
   constructor(props) {
     super(props)

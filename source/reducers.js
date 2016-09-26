@@ -8,8 +8,7 @@ import {
   SET_POSTS_PAGE
 } from './actions'
 
-
-function general(state = {}, action) {
+function general (state = {}, action) {
   // console.log('general action', action)
   switch (action.type) {
     case BROWSER_RESIZE:
@@ -30,6 +29,5 @@ function general(state = {}, action) {
       return state
   }
 }
-
 
 export default general

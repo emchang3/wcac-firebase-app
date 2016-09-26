@@ -5,7 +5,6 @@ import AboutMobile from './AboutMobile'
 
 import { hShift, fade } from './Animation'
 
-
 class MenuMobile extends React.Component {
   constructor(props) {
     super(props)
@@ -197,7 +196,6 @@ class MenuMobile extends React.Component {
     )
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

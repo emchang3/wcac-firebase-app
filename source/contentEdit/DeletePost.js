@@ -1,8 +1,7 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 
 import { deletePost } from '../actions'
-
 
 const DeletePost = ({ itemId, uid, deletePost }) => {
   return (

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 import { vExpand } from './Animation'
 
-
 class AboutMobile extends React.Component {
   constructor(props) {
     super(props)
@@ -123,7 +122,6 @@ class AboutMobile extends React.Component {
     )
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

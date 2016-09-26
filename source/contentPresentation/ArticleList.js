@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 
-import SimpleArticle from './SimpleArticle'
+import SimpleArticle from './SimpleArticle' // eslint-disable-line no-unused-vars
 
 const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => {
   let contentList = []
 
   if (category && contentOrder) {
     const generalOrder = contentOrder[`${category}`]
-    const numPages = Math.ceil(generalOrder.length / 10)
+    // const numPages = Math.ceil(generalOrder.length / 10)
 
     let currentItems = []
     let c = (categoryPage - 1) * 10
@@ -47,7 +47,7 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
               width: '100%',
               top: '50%',
               height: '50%',
-              pointerEvents: 'auto',
+              pointerEvents: 'auto'
               // border: '1px solid green'
             }}
           >
@@ -85,7 +85,6 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
     </div>
   )
 }
-
 
 const mapStateToProps = (state, ownProps) => {
   return {

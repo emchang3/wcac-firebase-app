@@ -1,6 +1,5 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
-
 
 const Title = ({ language, opacity }) => {
   return (
@@ -22,7 +21,6 @@ const Title = ({ language, opacity }) => {
     </div>
   )
 }
-
 
 const mapStateToProps = (state) => {
   return {

@@ -1,6 +1,5 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
-
 
 class CategorySelect extends React.Component {
   constructor(props) {
@@ -322,7 +321,6 @@ class CategorySelect extends React.Component {
     )
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

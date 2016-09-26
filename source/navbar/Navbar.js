@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import Search from './Search'
@@ -7,8 +7,7 @@ import Language from './Language'
 
 import { hShiftR, hExpand } from './Animation'
 
-
-class Navbar extends Component {
+class Navbar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -113,9 +112,7 @@ class Navbar extends Component {
   }
 }
 
-
 const mapStateToProps = (state) => {
-  // console.log('App mapStateToProps state', state);
   return {
     language: state.language,
     browserWidth: state.browserWidth

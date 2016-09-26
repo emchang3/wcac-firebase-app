@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-
 class CongregationSelect extends React.Component {
   constructor(props) {
     super(props)
@@ -182,7 +181,6 @@ class CongregationSelect extends React.Component {
     )
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

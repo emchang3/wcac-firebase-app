@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 
-
 const SaveMode = ({ onChange, saveMode, inList, itemId, language }) => {
-
   return (
     <div
       className='myFlex'
@@ -53,7 +51,6 @@ const SaveMode = ({ onChange, saveMode, inList, itemId, language }) => {
     </div>
   )
 }
-
 
 const mapStateToProps = (state) => {
   return {

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 import { hExpand } from './Animation'
 
-
 class Search extends React.Component {
   constructor(props) {
     super(props)
@@ -97,7 +96,6 @@ class Search extends React.Component {
     )
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

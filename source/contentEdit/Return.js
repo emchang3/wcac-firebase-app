@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React from 'react' // eslint-disable-line no-unused-vars
 
 export const Return = ({ url, language }) => {
   let buttonLabel
