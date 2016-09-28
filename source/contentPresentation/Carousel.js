@@ -145,7 +145,13 @@ class Carousel extends React.Component {
         >
           <a
             href={`/view/${this.state.articles[1]}`}
-            style={{ position: 'absolute', bottom: '0%', right: '0%', color: 'black', textDecoration: 'none' }}
+            style={{
+              position: 'absolute',
+              bottom: '0%',
+              right: '0%',
+              color: 'black',
+              textDecoration: 'none'
+            }}
           >
             <button
               className="mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect"

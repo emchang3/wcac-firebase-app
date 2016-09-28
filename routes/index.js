@@ -41,4 +41,8 @@ router.get('/category/:cat', (req, res, next) => {
   res.render('secondary', { title: `Category: ${capitalize(cat)}` })
 })
 
+router.get('/search', (req, res, next) => {
+  res.render('default', { title: 'Site Search' })
+})
+
 module.exports = router

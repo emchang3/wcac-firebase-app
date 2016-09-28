@@ -38,11 +38,9 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
             spot={currentItems.indexOf(initialTimestamp)}
           />
           <div
-            className='coverBottom myFlex'
+            className='coverBottom'
             style={{
               position: 'absolute',
-              justifyContent: 'flex-end',
-              alignItems: 'flex-end',
               left: '0%',
               width: '100%',
               top: '50%',
@@ -53,7 +51,13 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
           >
             <a
               href={`/view/${initialTimestamp}`}
-              style={{ color: 'black', textDecoration: 'none' }}
+              style={{
+                position: 'absolute',
+                bottom: '0%',
+                right: '0%',
+                color: 'black',
+                textDecoration: 'none'
+              }}
             >
               <button
                 className="mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect"
