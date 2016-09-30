@@ -11,6 +11,7 @@ import PostView from './contentPresentation/PostView' // eslint-disable-line no-
 import { SectionTitle } from './contentPresentation/SectionTitle' // eslint-disable-line no-unused-vars
 import ArticleList from './contentPresentation/ArticleList' // eslint-disable-line no-unused-vars
 import Input from './search/Input'  // eslint-disable-line no-unused-vars
+import Results from './search/Results'
 
 const routes = {
   '/': (params) => {
@@ -87,6 +88,7 @@ const routes = {
       <div style={{ width: '100%', height: '100%' }}>
         <NavbarMobile />
         <Input />
+        <Results />
       </div>
     )
   }

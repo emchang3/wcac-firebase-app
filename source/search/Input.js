@@ -31,7 +31,7 @@ class Input extends React.Component {
   }
 
   closeInput = () => {
-    if (this.state.expanded === 'expanded') {
+    if (this.state.expanded === 'expanded' && this.props.search.length === 0) {
       this.setState({
         expanded: 'animating'
       })
@@ -87,7 +87,7 @@ class Input extends React.Component {
       alignItems: 'center',
       // alignContent: 'center',
       width: '100%',
-      height: '100%',
+      // height: '100%',
       paddingTop: '100px'
     }
 
@@ -124,7 +124,13 @@ class Input extends React.Component {
 
     return (
       <div className='myFlex' style={searchBox}>
-        <h2>Site Search</h2>
+        <h2>
+          {
+            this.props.language === 'EN' ? 'Site Search' : (
+              this.props.language === '检体' ? '网站搜索' : '網站搜索'
+            )
+          }
+        </h2>
         <div className='myFlex' style={innerBox}>
           <div
             className='myFlex'
@@ -161,7 +167,8 @@ class Input extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    search: state.search
+    search: state.search,
+    language: state.language
   }
 }
 

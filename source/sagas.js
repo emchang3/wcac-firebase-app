@@ -26,7 +26,8 @@ function* stateSave (getState) {
       uid: getState().uid,
       language: getState().language,
       content: getState().content,
-      contentOrder: getState().contentOrder
+      contentOrder: getState().contentOrder,
+      search: getState().search
     }
     yield persistState(persisted)
   }
@@ -94,7 +95,8 @@ function* watchCriticalStateChange (getState) {
     'LANGUAGE_CHANGE',
     'SET_USER',
     'UPDATE_CONTENT',
-    'UPDATE_ORDER'
+    'UPDATE_ORDER',
+    'SET_SEARCH'
   ], stateSave, getState)
 }
 
