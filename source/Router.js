@@ -10,6 +10,7 @@ import Carousel from './contentPresentation/Carousel' // eslint-disable-line no-
 import PostView from './contentPresentation/PostView' // eslint-disable-line no-unused-vars
 import { SectionTitle } from './contentPresentation/SectionTitle' // eslint-disable-line no-unused-vars
 import ArticleList from './contentPresentation/ArticleList' // eslint-disable-line no-unused-vars
+import Input from './search/Input'  // eslint-disable-line no-unused-vars
 
 const routes = {
   '/': (params) => {
@@ -78,6 +79,14 @@ const routes = {
       <div style={{ width: '100%', height: '100%' }}>
         <NavbarMobile />
         <ArticleList category={category} />
+      </div>
+    )
+  },
+  '/search': () => {
+    return (
+      <div style={{ width: '100%', height: '100%' }}>
+        <NavbarMobile />
+        <Input />
       </div>
     )
   }

@@ -29,7 +29,8 @@ const initialState = {
   ministriesPage: 1,
   sermonsPage: 1,
   staffPage: 1,
-  jobsPage: 1
+  jobsPage: 1,
+  search: ''
 }
 export const store = createStore(reductor, initialState, compose(
   applyMiddleware(sagaMiddleware),

@@ -11,6 +11,7 @@ export const UPDATE_CONTENT = 'UPDATE_CONTENT'
 export const DELETE_POST = 'DELETE_POST'
 export const UPDATE_ORDER = 'UPDATE_ORDER'
 export const SET_POSTS_PAGE = 'SET_POSTS_PAGE'
+export const SET_SEARCH = 'SET_SEARCH'
 
 export const browserResize = () => {
   const width = window.innerWidth
@@ -99,6 +100,13 @@ export const deletePost = (payload) => {
 export const setPostsPage = (payload) => {
   return {
     type: SET_POSTS_PAGE,
+    payload: payload
+  }
+}
+
+export const setSearch = (payload) => {
+  return {
+    type: SET_SEARCH,
     payload: payload
   }
 }
