@@ -6,7 +6,8 @@ import {
   UPDATE_CONTENT,
   UPDATE_ORDER,
   SET_POSTS_PAGE,
-  SET_SEARCH
+  SET_SEARCH,
+  SET_SEARCH_PAGE
 } from './actions'
 
 function general (state = {}, action) {
@@ -28,6 +29,8 @@ function general (state = {}, action) {
       return { ...state, postsPage: action.payload }
     case SET_SEARCH:
       return { ...state, search: action.payload }
+    case SET_SEARCH_PAGE:
+      return { ...state, searchPage: action.payload }
     default:
       return state
   }

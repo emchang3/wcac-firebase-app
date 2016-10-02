@@ -22,11 +22,9 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
       width: browserWidth > 800 ? '50%' : '90%',
       left: browserWidth > 800 ? '25%' : '5%',
       maxHeight: '300px',
-      // maxHeight: '300px',
       justifyContent: 'center',
       alignItems: 'center',
       alignContent: 'space-between',
-      // border: '1px dotted red',
       overflowY: 'hidden'
     }
 
@@ -46,7 +44,6 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
               top: '50%',
               height: '50%',
               pointerEvents: 'auto'
-              // border: '1px solid green'
             }}
           >
             <a
@@ -74,12 +71,7 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
   const pageStyle = {
     position: 'absolute',
     width: '100%',
-    // height: '100%',
     top: '50px',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // alignContent: 'center',
-    // border: '1px solid blue',
     pointerEvents: 'none'
   }
 

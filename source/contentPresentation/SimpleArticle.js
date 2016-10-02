@@ -16,10 +16,10 @@ const {
 
 const { Map } = Immutable
 
-
 class SimpleArticle extends React.Component {
   constructor(props) {
     super(props)
+    console.log('sa props', props);
     this.state = {
       editorState: EditorState.createEmpty(),
       saveMode: 'draft',
@@ -39,11 +39,20 @@ class SimpleArticle extends React.Component {
     }
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    if (nextProps.content && nextProps.initialTimestamp !== null) {
+  componentWillMount = () => {
+    this.loadContent(this.props)
+  }
 
-      const initialTimestamp = nextProps.initialTimestamp
-      const rawContentState = nextProps.content[initialTimestamp].content
+  componentWillReceiveProps = (nextProps) => {
+    this.loadContent(nextProps)
+  }
+
+  loadContent = (props) => {
+    console.log('sa props', props);
+    if (props.content && props.initialTimestamp !== null) {
+
+      const initialTimestamp = props.initialTimestamp
+      const rawContentState = props.content[initialTimestamp].content
 
       if (isEmpty(rawContentState.entityMap)) {
         rawContentState.entityMap = {};
@@ -52,11 +61,11 @@ class SimpleArticle extends React.Component {
       const blockArray = convertFromRaw(rawContentState)
       const myES = EditorState.createWithContent(blockArray)
 
-      const title = nextProps.content[initialTimestamp].title
-      const congregation = nextProps.content[initialTimestamp].congregation
-      const category = nextProps.content[initialTimestamp].category
-      const uid = nextProps.content[initialTimestamp].uid
-      const saveMode = nextProps.content[initialTimestamp].mode
+      const title = props.content[initialTimestamp].title
+      const congregation = props.content[initialTimestamp].congregation
+      const category = props.content[initialTimestamp].category
+      const uid = props.content[initialTimestamp].uid
+      const saveMode = props.content[initialTimestamp].mode
 
       if (title !== this.state.title) {
         const payload = {
@@ -70,8 +79,8 @@ class SimpleArticle extends React.Component {
         }
 
         if (category === 'events') {
-          const startDateTime = new Date(nextProps.content[initialTimestamp].startDateTime)
-          const endDateTime = new Date(nextProps.content[initialTimestamp].endDateTime)
+          const startDateTime = new Date(props.content[initialTimestamp].startDateTime)
+          const endDateTime = new Date(props.content[initialTimestamp].endDateTime)
 
           const startYear = `${startDateTime.getUTCFullYear()}`
           const startMonth = startDateTime.getUTCMonth() < 10
@@ -114,7 +123,7 @@ class SimpleArticle extends React.Component {
         }
 
         if (category === 'sermons') {
-          const sermonLink = nextProps.content[initialTimestamp].sermonLink
+          const sermonLink = props.content[initialTimestamp].sermonLink
           payload.sermonLink = sermonLink
         }
 
@@ -171,8 +180,8 @@ class SimpleArticle extends React.Component {
       >
         <div
           style={{
-            paddingLeft: '48px',
-            paddingRight: '48px',
+            // paddingLeft: '48px',
+            // paddingRight: '48px',
             paddingTop: '24px',
             paddingBottom: '24px'
           }}
