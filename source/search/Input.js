@@ -57,6 +57,7 @@ class Input extends React.Component {
   }
 
   menuButtonOver = () => {
+    this.openInput()
     this.setState({
       style: {
         ...this.state.style,
@@ -85,9 +86,7 @@ class Input extends React.Component {
       flexDirection: 'column',
       justifyContent: 'flex-start',
       alignItems: 'center',
-      // alignContent: 'center',
       width: '100%',
-      // height: '100%',
       paddingTop: '100px'
     }
 
@@ -95,18 +94,15 @@ class Input extends React.Component {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      // border: '1px solid blue'
     }
 
     const searchButton = {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      // alignContent: 'center',
       width: '56px',
       height: '56px',
       borderRadius: '50%',
-      // border: '1px dotted red',
       backgroundColor: `rgba(117, 117, 117, ${this.state.style.opacity})`,
       marginRight: '8px',
       cursor: 'pointer'

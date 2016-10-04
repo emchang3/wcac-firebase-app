@@ -31,7 +31,9 @@ const initialState = {
   staffPage: 1,
   jobsPage: 1,
   search: '',
-  searchPage: 1
+  searchPage: 1,
+  searchCategory: '',
+  searchCongregation: ''
 }
 export const store = createStore(reductor, initialState, compose(
   applyMiddleware(sagaMiddleware),

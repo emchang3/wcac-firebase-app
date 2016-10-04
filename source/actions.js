@@ -11,8 +11,11 @@ export const UPDATE_CONTENT = 'UPDATE_CONTENT'
 export const DELETE_POST = 'DELETE_POST'
 export const UPDATE_ORDER = 'UPDATE_ORDER'
 export const SET_POSTS_PAGE = 'SET_POSTS_PAGE'
+
 export const SET_SEARCH = 'SET_SEARCH'
 export const SET_SEARCH_PAGE = 'SET_SEARCH_PAGE'
+export const SET_SEARCH_CATEGORY = 'SET_SEARCH_CATEGORY'
+export const SET_SEARCH_CONGREGATION = 'SET_SEARCH_CONGREGATION'
 
 export const browserResize = () => {
   const width = window.innerWidth
@@ -115,6 +118,20 @@ export const setSearch = (payload) => {
 export const setSearchPage = (payload) => {
   return {
     type: SET_SEARCH_PAGE,
+    payload: payload
+  }
+}
+
+export const setSearchCategory = (payload) => {
+  return {
+    type: SET_SEARCH_CATEGORY,
+    payload: payload
+  }
+}
+
+export const setSearchCongregation = (payload) => {
+  return {
+    type: SET_SEARCH_CONGREGATION,
     payload: payload
   }
 }

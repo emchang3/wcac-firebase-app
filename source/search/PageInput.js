@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { setPostsPage } from '../actions'
+import { setSearchPage } from '../actions'
 
 class PageInput extends React.Component {
   constructor(props) {
@@ -10,8 +10,8 @@ class PageInput extends React.Component {
 
   componentDidUpdate = () => {
     componentHandler.upgradeAllRegistered()
-    if (parseInt(this.props.postsPage) !== parseInt(document.getElementById('page-input').value)) {
-      document.getElementById('page-input').value = this.props.postsPage
+    if (parseInt(this.props.searchPage) !== parseInt(document.getElementById('page-input').value)) {
+      document.getElementById('page-input').value = this.props.searchPage
     }
   }
 
@@ -22,19 +22,19 @@ class PageInput extends React.Component {
       && inputVal > 0
       && inputVal <= this.props.numPages
     ) {
-      this.props.setPostsPage(event.target.value)
+      this.props.setSearchPage(event.target.value)
     }
   }
 
   nextPage = () => {
-    if (this.props.postsPage + 1 <= this.props.numPages) {
-      this.props.setPostsPage(this.props.postsPage + 1)
+    if (this.props.searchPage + 1 <= this.props.numPages) {
+      this.props.setSearchPage(this.props.searchPage + 1)
     }
   }
 
   lastPage = () => {
-    if (this.props.postsPage - 1 >= 0) {
-      this.props.setPostsPage(this.props.postsPage - 1)
+    if (this.props.searchPage - 1 >= 0) {
+      this.props.setSearchPage(this.props.searchPage - 1)
     }
   }
 
@@ -71,7 +71,7 @@ class PageInput extends React.Component {
             onKeyDown={this.try}
           />
           <label className="mdl-textfield__label" htmlFor="page-input">
-            {this.props.postsPage}
+            {this.props.searchPage}
           </label>
           <span className="mdl-textfield__error">Input is not a number!</span>
         </div>
@@ -91,13 +91,13 @@ class PageInput extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    postsPage: state.postsPage
+    searchPage: state.searchPage
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setPostsPage: (page) => dispatch(setPostsPage(page))
+    setSearchPage: (page) => dispatch(setSearchPage(page))
   }
 }
 

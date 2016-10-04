@@ -7,7 +7,9 @@ import {
   UPDATE_ORDER,
   SET_POSTS_PAGE,
   SET_SEARCH,
-  SET_SEARCH_PAGE
+  SET_SEARCH_PAGE,
+  SET_SEARCH_CATEGORY,
+  SET_SEARCH_CONGREGATION
 } from './actions'
 
 function general (state = {}, action) {
@@ -31,6 +33,10 @@ function general (state = {}, action) {
       return { ...state, search: action.payload }
     case SET_SEARCH_PAGE:
       return { ...state, searchPage: action.payload }
+    case SET_SEARCH_CATEGORY:
+      return { ...state, searchCategory: action.payload }
+    case SET_SEARCH_CONGREGATION:
+      return { ...state, searchCongregation: action.payload }
     default:
       return state
   }

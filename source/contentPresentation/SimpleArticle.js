@@ -48,7 +48,6 @@ class SimpleArticle extends React.Component {
   }
 
   loadContent = (props) => {
-    console.log('sa props', props);
     if (props.content && props.initialTimestamp !== null) {
 
       const initialTimestamp = props.initialTimestamp

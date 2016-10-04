@@ -2,9 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import SimpleArticle from '../contentPresentation/SimpleArticle'
+import PageInput from './PageInput'
 
 const Results = ({ browserWidth, content, contentOrder, language, search, searchPage }) => {
   const query = new RegExp(search, 'i')
+  let numPages = 1
   let resultList = []
   if (content && contentOrder) {
     for (var i = 0; i < contentOrder.general.length; i++) {
@@ -23,7 +25,7 @@ const Results = ({ browserWidth, content, contentOrder, language, search, search
       }
     }
   }
-  console.log(resultList);
+  numPages = Math.ceil(resultList.length / 10)
 
   let currentItems = []
   let c = (searchPage - 1) * 10
@@ -99,7 +101,7 @@ const Results = ({ browserWidth, content, contentOrder, language, search, search
   const subHeader = contentList.length > 0 ? (
     <span>
       {
-        language === 'EN' ? `Search Results for '${search}':` : (
+        language === 'EN' ? `Search results for '${search}':` : (
           language === '检体'
             ? `为 '${search}' 搜索的结果:`
             : `為 '${search}' 搜索的結果:`
@@ -109,7 +111,7 @@ const Results = ({ browserWidth, content, contentOrder, language, search, search
   ) : (
     <span>
       {
-        language === 'EN' ? `No Search Results for '${search}.'` : (
+        language === 'EN' ? `No search results for '${search}.'` : (
           language === '检体'
             ? `为 '${search}' 搜索沒有结果。`
             : `為 '${search}' 搜索沒有結果。`
@@ -131,6 +133,7 @@ const Results = ({ browserWidth, content, contentOrder, language, search, search
         search && search.length > 0 ? (
           <div style={pageStyle}>
             {contentList}
+            <PageInput numPages={numPages} />
           </div>
         ) : null
       }

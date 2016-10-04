@@ -2,13 +2,15 @@ import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 
 import SimpleArticle from './SimpleArticle' // eslint-disable-line no-unused-vars
+import PageInput from './PageInput'
 
 const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => {
   let contentList = []
+  let numPages = 1
 
   if (category && contentOrder) {
     const generalOrder = contentOrder[`${category}`]
-    // const numPages = Math.ceil(generalOrder.length / 10)
+    numPages = Math.ceil(generalOrder.length / 10)
 
     let currentItems = []
     let c = (categoryPage - 1) * 10
@@ -78,6 +80,7 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
   return (
     <div style={pageStyle}>
       {contentList}
+      <PageInput category={category} categoryPage={categoryPage} numPages={numPages} />
     </div>
   )
 }
