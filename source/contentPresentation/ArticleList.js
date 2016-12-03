@@ -80,7 +80,11 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
   return (
     <div style={pageStyle}>
       {contentList}
-      <PageInput category={category} categoryPage={categoryPage} numPages={numPages} />
+      {
+        numPages > 1 ? (
+          <PageInput category={category} categoryPage={categoryPage} numPages={numPages} />
+        ) : null
+      }
     </div>
   )
 }

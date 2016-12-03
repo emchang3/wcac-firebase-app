@@ -133,7 +133,9 @@ const Results = ({ browserWidth, content, contentOrder, language, search, search
         search && search.length > 0 ? (
           <div style={pageStyle}>
             {contentList}
-            <PageInput numPages={numPages} />
+            {
+              numPages > 1 ? <PageInput numPages={numPages} /> : null
+            }
           </div>
         ) : null
       }

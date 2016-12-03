@@ -65,7 +65,7 @@ export const vExpand = (context, change, unit, easing, time, callback) => {
   const startTime = new Date().getTime()
   const startSize = parseFloat(context.state.style.height)
 
-  const horizontalTimer = setInterval(() => {
+  const verticalTimer = setInterval(() => {
     let step = Math.min(1, (new Date().getTime() - startTime) / time)
     let increment = Math.pow(step, easing) * parseFloat(change)
     let style = context.state.style
@@ -74,7 +74,7 @@ export const vExpand = (context, change, unit, easing, time, callback) => {
       style: style
     })
     if (step === 1) {
-      clearInterval(horizontalTimer)
+      clearInterval(verticalTimer)
       if (callback) {
         callback()
       }

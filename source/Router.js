@@ -13,13 +13,17 @@ import ArticleList from './contentPresentation/ArticleList' // eslint-disable-li
 import Input from './search/Input'  // eslint-disable-line no-unused-vars
 import Results from './search/Results'
 
+// <Carousel
+//   articles={[ general[2], ...general.slice(0, 2) ]}
+//   top={`100px`}
+// />
+
 const routes = {
   '/': (params) => {
     if (params) {
-      const { browserHeight, announcements, events } = params
+      const { browserHeight, announcements, events, general } = params
       return (
         <div style={{ width: '100%', height: '100%' }}>
-          <NavbarMobile />
           <SectionTitle sectionTitle='Announcements' top={`${browserHeight}px`} />
           <Carousel
             articles={[ announcements[2], ...announcements.slice(0, 2) ]}
@@ -30,6 +34,7 @@ const routes = {
             articles={[ events[2], ...events.slice(0, 2) ]}
             top={`${(2 * browserHeight) + 100}px`}
           />
+          <NavbarMobile />
         </div>
       )
     }
@@ -100,7 +105,8 @@ const Router = ({ path, contentOrder, browserHeight }) => {
       const params = {
         browserHeight: browserHeight,
         announcements: contentOrder.announcements,
-        events: contentOrder.events
+        events: contentOrder.events,
+        general: contentOrder.general
       }
       return routes[path](params)
     }

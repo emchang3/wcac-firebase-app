@@ -48,9 +48,9 @@ class Carousel extends React.Component {
     })
   }
 
-  // componentDidMount = () => {
-  //   document.getElementById('splash').style.opacity = '0'
-  // }
+  componentDidMount = () => {
+    document.getElementById('splash').style.opacity = '0'
+  }
 
   recordTouchStart = (event) => {
     if (event.touches.length === 1) {

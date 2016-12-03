@@ -98,7 +98,7 @@ const PostList = ({ uid, content, language, browserWidth, contentOrder, postsPag
               {contentList}
             </tbody>
           </table>
-          <PageInput numPages={numPages} />
+          { numPages > 1 ? <PageInput numPages={numPages} /> : null }
         </div>
       </div>
     )
