@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { capitalize } from 'lodash'
+import { capitalize, truncate } from 'lodash'
 
 import DeletePost from './DeletePost'
 import SaveMode from './SaveMode'
@@ -64,7 +64,7 @@ class PostListItem extends React.Component {
             href={`/edit/${its}`}
             style={{ color: 'black' }}
           >
-            {capitalize(title)}
+            {truncate(title, { length: 20 })}
           </a>
         </td>
         <td className="mdl-data-table__cell--non-numeric">

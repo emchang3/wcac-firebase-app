@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Immutable from 'immutable'
 import Draft from 'draft-js'
-import { isEmpty } from 'lodash'
+import { isEmpty, escape } from 'lodash'
 
 import { savePost } from '../actions'
 
@@ -80,7 +80,7 @@ class RichEditorExample extends React.Component {
       if (title !== this.state.title) {
         const payload = {
           uid: uid,
-          title: title,
+          title: escape(title),
           editorState: myES,
           congregation: congregation,
           category: category,
@@ -155,7 +155,7 @@ class RichEditorExample extends React.Component {
 
       const payload = {
         uid: uid,
-        title: title,
+        title: escape(title),
         content: rawContentState,
         congregation: congregation,
         mode: saveMode,
@@ -224,11 +224,11 @@ class RichEditorExample extends React.Component {
   updateTitle = (event) => {
     event.target.value.length > 0 && this.state.initialTimestamp.length === 0 ? (
       this.setState({
-        title: event.target.value,
+        title: escape(event.target.value),
         initialTimestamp: new Date().getTime()
       })
     ) : (
-      this.setState({ title: event.target.value })
+      this.setState({ title: escape(event.target.value) })
     )
   }
 
