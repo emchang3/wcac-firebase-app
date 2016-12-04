@@ -15,7 +15,8 @@ class Carousel extends React.Component {
       articles: props.articles,
       anchorDistance: null,
       latestTouchX: null,
-      animating: false
+      animating: false,
+      enoughChange: false
     }
   }
 
@@ -59,33 +60,48 @@ class Carousel extends React.Component {
   }
   updateTouchDrag = (event) => {
     if (event.touches.length === 1) {
-      const holdup = ((event.touches[0].pageX - this.state.anchorDistance) / this.props.browserWidth) * 100
-      this.setState({
-        style: {
-          left: `${holdup}%`
-        },
-        latestTouchX: event.touches[0].pageX
-      })
+      const xPosOrig = (this.state.anchorDistance / this.props.browserWidth) * 100
+      const xPosInPerc = (event.touches[0].pageX / this.props.browserWidth) * 100
+      const xPosChange = xPosOrig - xPosInPerc
+      const xPosChangeAbs = Math.abs(xPosChange)
+      if (xPosChangeAbs >= 15) {
+        const xPos = xPosChange > 0 ? (xPosChange - 15) * -1 : (xPosChange + 15) * -1
+        this.setState({
+          style: {
+            left: `${ xPos }%`
+          },
+          latestTouchX: event.touches[0].pageX,
+          enoughChange: true
+        })
+      }
+      else {
+        this.setState({
+          latestTouchX: event.touches[0].pageX,
+          enoughChange: false
+        })
+      }
     }
   }
   fireAnimation = () => {
-    const distanceTraveled = this.state.anchorDistance - this.state.latestTouchX
+    if (this.state.enoughChange === true) {
     const browserWidth = this.props.browserWidth
-    if (distanceTraveled <= -100) {
-      const remainingDistance = ((browserWidth + distanceTraveled) / browserWidth) * 100
-      hShift(this, remainingDistance, '%', 2, 300, this.postRight)
-    }
-    if (distanceTraveled > -100 && distanceTraveled < 0) {
-      const returnDistance = (distanceTraveled / browserWidth) * 100
-      hShift(this, returnDistance, '%', 2, 300, this.postAnimation)
-    }
-    if (distanceTraveled >= 100) {
-      const remainingDistance = ((browserWidth - distanceTraveled) / browserWidth) * -100
-      hShift(this, remainingDistance, '%', 2, 300, this.postLeft)
-    }
-    if (distanceTraveled < 100 && distanceTraveled > 0) {
-      const returnDistance = (distanceTraveled / browserWidth) * 100
-      hShift(this, returnDistance, '%', 2, 300, this.postAnimation)
+      const distanceTraveled = ((this.state.anchorDistance - this.state.latestTouchX) / browserWidth) * 100
+      if (distanceTraveled <= -30) {
+        const remainingDistance = distanceTraveled + 100 + 15
+        hShift(this, remainingDistance, '%', 2, 300, this.postRight)
+      }
+      if (distanceTraveled > -30 && distanceTraveled < 0) {
+        const remainingDistance = distanceTraveled + 15
+        hShift(this, remainingDistance, '%', 2, 300, this.postAnimation)
+      }
+      if (distanceTraveled >= 30) {
+        const remainingDistance = 100 - distanceTraveled + 15
+        hShift(this, remainingDistance * -1, '%', 2, 300, this.postLeft)
+      }
+      if (distanceTraveled < 30 && distanceTraveled > 0) {
+        const remainingDistance = distanceTraveled - 15
+        hShift(this, remainingDistance, '%', 2, 300, this.postAnimation)
+      }
     }
   }
   postAnimation = () => {
