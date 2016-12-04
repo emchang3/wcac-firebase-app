@@ -75,16 +75,16 @@ const routes = {
   '/view': (initialTimestamp) => {
     return (
       <div style={{ width: '100%', height: '100%' }}>
-        <NavbarMobile />
         <PostView initialTimestamp={initialTimestamp} />
+        <NavbarMobile />
       </div>
     )
   },
   '/category': (category) => {
     return (
       <div style={{ width: '100%', height: '100%' }}>
-        <NavbarMobile />
         <ArticleList category={category} />
+        <NavbarMobile />
       </div>
     )
   },

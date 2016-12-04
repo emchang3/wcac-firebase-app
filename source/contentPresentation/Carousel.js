@@ -84,7 +84,7 @@ class Carousel extends React.Component {
   }
   fireAnimation = () => {
     if (this.state.enoughChange === true) {
-    const browserWidth = this.props.browserWidth
+      const browserWidth = this.props.browserWidth
       const distanceTraveled = ((this.state.anchorDistance - this.state.latestTouchX) / browserWidth) * 100
       if (distanceTraveled <= -30) {
         const remainingDistance = distanceTraveled + 100 + 15
