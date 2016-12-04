@@ -8,7 +8,7 @@ then
   git rebase heroku
 fi
 
-if [ $1 == "heroku"]
+if [ $1 == "heroku" ]
 then
   echo "--- Checking out: heroku ---"
   sed -i -- "s/source\/database.js/# source\/database.js/g" .gitignore
