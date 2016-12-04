@@ -5,6 +5,7 @@ then
   echo "--- Checking out: master ---"
   sed -i -- "s/# source\/database.js/source\/database.js/g" .gitignore
   git checkout master
+  git rebase heroku
 fi
 
 if [ $1 == "heroku"]
