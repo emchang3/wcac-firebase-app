@@ -13,4 +13,5 @@ then
   echo "--- Checking out: heroku ---"
   sed -i -- "s/source\/database.js/# source\/database.js/g" .gitignore
   git checkout heroku
+  git rebase master
 fi
