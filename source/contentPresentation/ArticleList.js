@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import SimpleArticle from './SimpleArticle' // eslint-disable-line no-unused-vars
 import PageInput from './PageInput'
+import SocialMedia from './SocialMedia'
+import MonthNav from './MonthNav'
 
 const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => {
   let contentList = []
@@ -21,50 +23,22 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
 
     const articleContainerStyle = {
       position: 'relative',
-      width: browserWidth > 800 ? '50%' : '90%',
-      left: browserWidth > 800 ? '25%' : '5%',
-      maxHeight: '300px',
+      // maxHeight: '300px',
       justifyContent: 'center',
-      alignItems: 'center',
-      alignContent: 'space-between',
-      overflowY: 'hidden'
+      // alignItems: 'center',
+      // alignContent: 'space-between',
+      overflowY: 'hidden',
+      border: '1px dotted blue'
     }
 
     contentList = currentItems.map((initialTimestamp) => {
       return (
         <div className='myFlex' style={articleContainerStyle} key={initialTimestamp}>
+          <SocialMedia />
           <SimpleArticle
             initialTimestamp={initialTimestamp}
             spot={currentItems.indexOf(initialTimestamp)}
           />
-          <div
-            className='coverBottom'
-            style={{
-              position: 'absolute',
-              left: '0%',
-              width: '100%',
-              top: '50%',
-              height: '50%',
-              pointerEvents: 'auto'
-            }}
-          >
-            <a
-              href={`/view/${initialTimestamp}`}
-              style={{
-                position: 'absolute',
-                bottom: '0%',
-                right: '0%',
-                color: 'black',
-                textDecoration: 'none'
-              }}
-            >
-              <button
-                className="mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect"
-              >
-                Read more...
-              </button>
-            </a>
-          </div>
         </div>
       )
     })
@@ -74,12 +48,19 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
     position: 'absolute',
     width: '100%',
     top: '50px',
-    pointerEvents: 'none'
+    pointerEvents: 'none',
+    justifyContent: 'center'
   }
 
   return (
-    <div style={pageStyle}>
-      {contentList}
+    <div className='myFlex' style={pageStyle}>
+      <div style={{
+        width: browserWidth > 800 ? '40%' : '90%',
+        left: browserWidth > 800 ? '25%' : '5%'
+      }}>
+        {contentList}
+      </div>
+      <MonthNav />
       {
         numPages > 1 ? (
           <PageInput category={category} categoryPage={categoryPage} numPages={numPages} />

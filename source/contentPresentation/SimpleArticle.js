@@ -19,7 +19,7 @@ const { Map } = Immutable
 class SimpleArticle extends React.Component {
   constructor(props) {
     super(props)
-    console.log('sa props', props);
+    // console.log('sa props', props);
     this.state = {
       editorState: EditorState.createEmpty(),
       saveMode: 'draft',
@@ -145,8 +145,10 @@ class SimpleArticle extends React.Component {
     }
 
     let individualStyle = {
-      width: '100%',
-      maxHeight: '300px'
+      // position: 'relative',
+      width: this.props.browserWidth > 400 ? '75%' : '100%',
+      border: '1px dotted red'
+      // maxHeight: '300px'
     }
 
     let whenString = ''

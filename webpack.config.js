@@ -9,13 +9,13 @@ module.exports = {
       path: __dirname + "/public/javascripts",
       filename: "main.js"
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    })
-  ],
+  // plugins: [
+  //   new webpack.DefinePlugin({
+  //     'process.env': {
+  //       'NODE_ENV': JSON.stringify('production')
+  //     }
+  //   })
+  // ],
   module: {
     loaders: [{
      test: /\.js$/,
