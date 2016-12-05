@@ -13,6 +13,7 @@ import App from './App' // eslint-disable-line no-unused-vars
 import { browserResize, retrieveState, watchContent } from './actions'
 import reductor from './reducers'
 import rootSaga from './sagas'
+import { pullFB } from './pullFB'
 
 startApp()
 
@@ -33,13 +34,16 @@ const initialState = {
   search: '',
   searchPage: 1,
   searchCategory: '',
-  searchCongregation: ''
+  searchCongregation: '',
+  fbSDK: null
 }
 export const store = createStore(reductor, initialState, compose(
   applyMiddleware(sagaMiddleware),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 ))
 sagaMiddleware.run(rootSaga, store.getState)
+
+pullFB(store.dispatch)
 
 store.dispatch(retrieveState())
 
@@ -50,7 +54,7 @@ window.addEventListener('resize', renderNav, false)
 
 store.dispatch(watchContent(store.dispatch))
 
-function render () {
+const render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <App />

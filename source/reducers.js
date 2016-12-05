@@ -9,7 +9,8 @@ import {
   SET_SEARCH,
   SET_SEARCH_PAGE,
   SET_SEARCH_CATEGORY,
-  SET_SEARCH_CONGREGATION
+  SET_SEARCH_CONGREGATION,
+  SET_FB_SDK
 } from './actions'
 
 function general (state = {}, action) {
@@ -37,6 +38,8 @@ function general (state = {}, action) {
       return { ...state, searchCategory: action.payload }
     case SET_SEARCH_CONGREGATION:
       return { ...state, searchCongregation: action.payload }
+    case SET_FB_SDK:
+      return { ...state, fbSDK: action.payload }
     default:
       return state
   }

@@ -5,6 +5,8 @@ export const RETRIEVE_STATE = 'RETRIEVE_STATE'
 export const RESTORE_LOCAL = 'RESTORE_LOCAL'
 export const ATTEMPT_LOGIN = 'ATTEMPT_LOGIN'
 export const SET_USER = 'SET_USER'
+export const SET_FB_SDK = 'SET_FB_SDK'
+
 export const SAVE_POST = 'SAVE_POST'
 export const WATCH_CONTENT = 'WATCH_CONTENT'
 export const UPDATE_CONTENT = 'UPDATE_CONTENT'
@@ -132,6 +134,13 @@ export const setSearchCategory = (payload) => {
 export const setSearchCongregation = (payload) => {
   return {
     type: SET_SEARCH_CONGREGATION,
+    payload: payload
+  }
+}
+
+export const setFbSDK = (payload) => {
+  return {
+    type: SET_FB_SDK,
     payload: payload
   }
 }

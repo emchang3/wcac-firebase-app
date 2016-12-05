@@ -90,6 +90,19 @@ function* deleteContentSaga (action) {
     : yield put(setUser(null))
 }
 
+function* initFbSaga(getState) {
+  if (getState().fbSDK !== null) {
+    console.log(getState().fbSDK.init);
+    yield getState().fbSDK.init({
+      appId      : '193476354446811',
+      xfbml      : false,
+      version    : 'v2.8'
+    })
+    // console.log(wat);
+    getState().fbSDK.AppEvents.logPageView();
+  }
+}
+
 function* watchCriticalStateChange (getState) {
   yield* takeEvery([
     'LANGUAGE_CHANGE',
@@ -120,6 +133,10 @@ function* watchContentDelete () {
   yield* takeEvery('DELETE_POST', deleteContentSaga)
 }
 
+function* watchFbInstantiate(getState) {
+  yield* takeEvery('SET_FB_SDK', initFbSaga, getState)
+}
+
 export default function* rootSaga (getState) {
   yield [
     // helloSaga(),
@@ -128,6 +145,7 @@ export default function* rootSaga (getState) {
     watchLoginAttempt(),
     watchContentSave(),
     watchContentWatch(),
-    watchContentDelete()
+    watchContentDelete(),
+    watchFbInstantiate(getState)
   ]
 }
