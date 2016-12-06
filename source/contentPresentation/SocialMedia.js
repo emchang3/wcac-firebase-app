@@ -34,8 +34,11 @@ class SocialMedia extends React.Component {
 
   render() {
     const smStyle = {
-      width: this.props.browserWidth > 400 ? '25%' : '0%',
-      border: '1px dotted green'
+      // width: this.props.browserWidth > 600 ? '25%' : '0%',
+      width: '25%',
+      border: '1px dotted green',
+      textAlign: 'right',
+      paddingRight: '48px'
     }
 
     return (

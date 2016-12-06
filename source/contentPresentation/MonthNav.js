@@ -7,9 +7,10 @@ class MonthNav extends React.Component {
   }
 
   render() {
-    console.log('MonthNav render');
     const mnStyle = {
-      width: this.props.browserWidth > 400 ? '10%' : '0%',
+      // width: this.props.browserWidth > 600 ? '20%' : '0%',
+      width: '20%',
+      paddingLeft: '16px',
       border: '1px dotted green'
     }
 

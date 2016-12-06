@@ -200,15 +200,19 @@ class SimpleArticle extends React.Component {
               </h5>
             ) : null
           }
-          <Editor
-            blockStyleFn={getBlockStyle}
-            customStyleMap={styleMap}
-            editorState={editorState}
-            onChange={this.onChange}
-            ref="editor"
-            spellCheck={true}
-            readOnly={true}
-          />
+          {
+            this.props.browserWidth > 400 ? (
+              <Editor
+                blockStyleFn={getBlockStyle}
+                customStyleMap={styleMap}
+                editorState={editorState}
+                onChange={this.onChange}
+                ref="editor"
+                spellCheck={true}
+                readOnly={true}
+              />
+            ) : null
+          }
         </div>
       </div>
     )
@@ -220,8 +224,8 @@ const styleMap = {
   CODE: {
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
     fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-    fontSize: 16,
-    padding: 2,
+    fontSize: '16px',
+    padding: '2px',
   },
 }
 

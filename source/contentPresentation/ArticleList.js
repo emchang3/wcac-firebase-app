@@ -30,11 +30,14 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
       overflowY: 'hidden',
       border: '1px dotted blue'
     }
+    if (browserWidth > 600) {
+      articleContainerStyle.minHeight = '300px'
+    }
 
     contentList = currentItems.map((initialTimestamp) => {
       return (
         <div className='myFlex' style={articleContainerStyle} key={initialTimestamp}>
-          <SocialMedia />
+          { browserWidth > 400 ? <SocialMedia /> : null }
           <SimpleArticle
             initialTimestamp={initialTimestamp}
             spot={currentItems.indexOf(initialTimestamp)}
@@ -47,7 +50,7 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
   const pageStyle = {
     position: 'absolute',
     width: '100%',
-    top: '50px',
+    top: '100px',
     pointerEvents: 'none',
     justifyContent: 'center'
   }
@@ -55,12 +58,10 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
   return (
     <div className='myFlex' style={pageStyle}>
       <div style={{
-        width: browserWidth > 800 ? '40%' : '90%',
-        left: browserWidth > 800 ? '25%' : '5%'
+        width: browserWidth > 600 ? '50%' : '90%'
       }}>
         {contentList}
       </div>
-      <MonthNav />
       {
         numPages > 1 ? (
           <PageInput category={category} categoryPage={categoryPage} numPages={numPages} />
@@ -69,6 +70,7 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
     </div>
   )
 }
+// { browserWidth > 600 ? <MonthNav /> : null }
 
 const mapStateToProps = (state, ownProps) => {
   return {

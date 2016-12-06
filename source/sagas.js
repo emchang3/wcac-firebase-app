@@ -92,13 +92,11 @@ function* deleteContentSaga (action) {
 
 function* initFbSaga(getState) {
   if (getState().fbSDK !== null) {
-    console.log(getState().fbSDK.init);
-    yield getState().fbSDK.init({
+    getState().fbSDK.init({
       appId      : '193476354446811',
       xfbml      : false,
       version    : 'v2.8'
     })
-    // console.log(wat);
     getState().fbSDK.AppEvents.logPageView();
   }
 }
