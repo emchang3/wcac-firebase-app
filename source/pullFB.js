@@ -2,12 +2,6 @@ import { setFbSDK } from './actions'
 
 export const pullFB = (dispatch) => {
   window.fbAsyncInit = function() {
-    // FB.init({
-    //   appId      : '193476354446811',
-    //   xfbml      : false,
-    //   version    : 'v2.8'
-    // });
-    // FB.AppEvents.logPageView();
     dispatch(setFbSDK(FB))
   };
 

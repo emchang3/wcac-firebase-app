@@ -41,10 +41,9 @@ class Navbar extends React.Component {
         <div id='logo'>
           <a href='/'>
             <i
-              className="material-icons"
+              className="mdi mdi-church"
               style={{ position: 'relative', top: '7px' }}
             >
-              local_hospital
             </i>
           </a>
         </div>

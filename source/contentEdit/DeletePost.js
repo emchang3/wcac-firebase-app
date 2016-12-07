@@ -12,11 +12,10 @@ const DeletePost = ({ itemId, uid, deletePost }) => {
       }}
     >
       <i
-        className="material-icons"
+        className="mdi mdi-delete"
         onClick={ () => deletePost(itemId, uid) }
         style={{ cursor: 'pointer' }}
       >
-        delete
       </i>
     </div>
   )

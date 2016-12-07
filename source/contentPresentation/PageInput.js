@@ -59,7 +59,7 @@ class PageInput extends React.Component {
           className="mdl-button mdl-js-button mdl-button--icon"
           onClick={this.lastPage}
         >
-          <i className="material-icons">keyboard_arrow_left</i>
+          <i className="mdi mdi-chevron-left"></i>
         </button>
         <div
           className="mdl-textfield mdl-js-textfield myFlex"
@@ -84,7 +84,7 @@ class PageInput extends React.Component {
           className="mdl-button mdl-js-button mdl-button--icon"
           onClick={this.nextPage}
         >
-          <i className="material-icons">keyboard_arrow_right</i>
+          <i className="mdi mdi-chevron-right"></i>
         </button>
       </div>
     )

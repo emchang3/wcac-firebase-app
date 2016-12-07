@@ -59,7 +59,7 @@ class Search extends React.Component {
           className="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"
           style={{ position: 'absolute', marginTop: '10px', marginLeft: '10px' }} onClick={this.expandInput}
         >
-          <i className="material-icons">search</i>
+          <i className="mdi mdi-magnify"></i>
         </button>
         <div
           className="mdl-textfield mdl-js-textfield"

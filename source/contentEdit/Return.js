@@ -27,7 +27,7 @@ export const Return = ({ url, language }) => {
     >
       <a href={url} style={{ color: 'black' }}>
         <button className="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">
-          <i className="material-icons">arrow_back</i>
+          <i className="mdi mdi-keyboard-backspace"></i>
         </button>
       </a>
       <div style={{ display: 'inline', paddingLeft: '8px', paddingTop: '6px' }}>

@@ -57,9 +57,7 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
 
   return (
     <div className='myFlex' style={pageStyle}>
-      <div style={{
-        width: browserWidth > 600 ? '50%' : '90%'
-      }}>
+      <div style={{ width: browserWidth > 600 ? '50%' : '90%' }}>
         {contentList}
       </div>
       {

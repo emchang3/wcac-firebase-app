@@ -144,7 +144,7 @@ class Carousel extends React.Component {
                 onClick={this.rightShift}
                 style={{ position: 'absolute', left: '0%', bottom: '0%' }}
               >
-                <i className="material-icons">chevron_left</i>
+                <i className="mdi mdi-chevron-left"></i>
               </button>
             </div>
           ) : null
@@ -184,7 +184,7 @@ class Carousel extends React.Component {
                 onClick={this.leftShift}
                 style={{ position: 'absolute', right: '0%', bottom: '0%' }}
               >
-                <i className="material-icons">chevron_right</i>
+                <i className="mdi mdi-chevron-right"></i>
               </button>
             </div>
           ) : null

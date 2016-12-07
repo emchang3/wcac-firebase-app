@@ -66,20 +66,27 @@ class Language extends React.Component {
         style={{
           width: '66px',
           right: this.props.browserWidth < 1145 ? '0px' : '50px',
-          pointerEvents: 'auto'
+          pointerEvents: 'auto',
+          top: '8px'
         }}
       >
         <button
           className="mdl-button mdl-js-button mdl-js-ripple-effect"
-          style={{ paddingLeft: '1px', paddingRight: '0px', textAlign: 'center' }} onClick={this.openMenu}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignContent: 'center'
+          }}
+          onClick={this.openMenu}
         >
-          <span style={{ padding: '1px', borderRadius: '3px' }}>&nbsp;{this.props.language} </span>{ this.state.expanded === 'contracted' ? <i className="material-icons">arrow_drop_down</i> : <i className="material-icons">arrow_drop_up</i> }
+          {this.props.language}
         </button>
         <div
           id='language-menu'
           style={{
             height: this.state.style.height,
-            width: '66px',
+            width: '63px',
             overflow: 'hidden',
             borderRight: '1px solid black',
             borderBottom: '1px solid black',

@@ -18,7 +18,7 @@ const Search = ({ browserWidth }) => {
           className="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"
           style={{ position: 'absolute', marginTop: '10px', marginLeft: '10px' }}
         >
-          <i className="material-icons">search</i>
+          <i className="mdi mdi-magnify"></i>
         </button>
       </a>
     </div>

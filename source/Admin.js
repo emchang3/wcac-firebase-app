@@ -35,7 +35,7 @@ const Admin = ({ language, browserWidth, attemptLogin, uid }) => {
               <img src={'images/alliance.jpeg'} />
             ) : (
               <button className="mdl-button mdl-js-button mdl-button--icon" onClick={attemptLogin}>
-                <i className="material-icons">account_circle</i>
+                <i className="mdi mdi-account-circle"></i>
               </button>
             )
           }

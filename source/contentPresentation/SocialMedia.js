@@ -8,7 +8,8 @@ class SocialMedia extends React.Component {
       fb: false,
       twitter: false,
       gplus: false,
-      email: false
+      email: false,
+      share: false
     }
   }
   fbToggle = (event) => {
@@ -31,19 +32,42 @@ class SocialMedia extends React.Component {
       email: this.state.email === false ? true : false
     })
   }
+  shareToggle = (event) => {
+    this.setState({
+      share: this.state.share === false ? true : false
+    })
+  }
 
-  render() {
+  render = () => {
     const smStyle = {
       // width: this.props.browserWidth > 600 ? '25%' : '0%',
       width: '25%',
       border: '1px dotted green',
       textAlign: 'right',
-      paddingRight: '48px'
+      paddingRight: '48px',
+      pointerEvents: 'auto'
     }
+
+    const shareStyle = {
+      // border: `1px solid ${ this.state.share === false ? 'black' : 'white' }`,
+      backgroundColor: this.state.share === false ? 'transparent' : 'orange',
+      color: this.state.share === false ? 'black' : 'white',
+      padding: '8px',
+      borderRadius: '50%',
+      cursor: 'pointer'
+    }
+
+    // this.shareToggle()
 
     return (
       <div style={smStyle}>
-        wat.
+        <i
+          className="mdi mdi-share-variant"
+          style={shareStyle}
+          onMouseOver={this.shareToggle}
+          onMouseOut={this.shareToggle}
+        >
+        </i>
       </div>
     )
   }

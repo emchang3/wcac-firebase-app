@@ -92,7 +92,7 @@ class MenuMobile extends React.Component {
             style={{
               position: 'absolute',
               paddingLeft: '4px',
-              paddingTop: '9px',
+              // paddingTop: '9px',
               cursor: 'pointer'
             }}
           >
@@ -103,15 +103,14 @@ class MenuMobile extends React.Component {
                 top: '8px',
                 width: '36px',
                 height: '36px',
-                backgroundColor: `rgba(117, 117, 117, ${this.state.style.opacity})`
+                backgroundColor: `rgba(117, 117, 117, ${this.state.style.opacity})`,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                alignContent: 'center'
               }}
             >
-              <i
-                className="material-icons"
-                style={{ position: 'relative', top: '1px' }}
-              >
-                menu
-              </i>
+              <i className="mdi mdi-menu"></i>
             </div>
           </div>
         </div>
@@ -120,7 +119,7 @@ class MenuMobile extends React.Component {
           style={{
             left: this.state.style.left,
             height: this.props.browserHeight,
-            backgroundColor: 'white'
+            // backgroundColor: 'white'
           }}
         >
           <button
@@ -128,9 +127,7 @@ class MenuMobile extends React.Component {
             style={{ width: '100%', textAlign: 'left' }}
             onClick={this.menuIn}
           >
-            <i className="material-icons" style={{ color: 'black' }}>
-              menu
-            </i>
+            <i className="mdi mdi-menu" style={{ position: 'relative', color: 'black' }}></i>
           </button>
           <a href='/category/announcements'>
             <button

@@ -137,7 +137,7 @@ class Input extends React.Component {
             onMouseOut={this.menuButtonOut}
             onClick={this.openInput}
           >
-            <i className="material-icons" style={{ fontSize: '40px' }}>search</i>
+            <i className="mdi mdi-magnify" style={{ fontSize: '40px' }}></i>
           </div>
           <div
             className="mdl-textfield mdl-js-textfield" style={searchInput}

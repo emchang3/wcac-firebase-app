@@ -17,13 +17,12 @@ const Scroller = ({ browserHeight, destination, top }) => {
         alignItems: 'center'
       }}
     >
-      <i className="material-icons"
+      <i className="mdi mdi-chevron-down"
         style={{ cursor: 'pointer' }}
         onClick={() => {
           console.log('wat');
         }}
       >
-        keyboard_arrow_down
       </i>
     </div>
   )

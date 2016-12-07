@@ -97,7 +97,7 @@ function* initFbSaga(getState) {
       xfbml      : false,
       version    : 'v2.8'
     })
-    getState().fbSDK.AppEvents.logPageView();
+    getState().fbSDK.AppEvents.logPageView()
   }
 }
 
