@@ -23,10 +23,7 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
 
     const articleContainerStyle = {
       position: 'relative',
-      // maxHeight: '300px',
       justifyContent: 'center',
-      // alignItems: 'center',
-      // alignContent: 'space-between',
       overflowY: 'hidden',
       border: '1px dotted blue'
     }
@@ -37,7 +34,7 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
     contentList = currentItems.map((initialTimestamp) => {
       return (
         <div className='myFlex' style={articleContainerStyle} key={initialTimestamp}>
-          { browserWidth > 400 ? <SocialMedia /> : null }
+          { browserWidth > 400 ? <SocialMedia initialTimestamp={initialTimestamp} /> : null }
           <SimpleArticle
             initialTimestamp={initialTimestamp}
             spot={currentItems.indexOf(initialTimestamp)}
@@ -57,7 +54,7 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
 
   return (
     <div className='myFlex' style={pageStyle}>
-      <div style={{ width: browserWidth > 600 ? '50%' : '90%' }}>
+      <div style={{ width: browserWidth > 600 ? '60%' : '90%' }}>
         {contentList}
       </div>
       {

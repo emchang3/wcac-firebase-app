@@ -145,10 +145,8 @@ class SimpleArticle extends React.Component {
     }
 
     let individualStyle = {
-      // position: 'relative',
       width: this.props.browserWidth > 400 ? '75%' : '100%',
       border: '1px dotted red'
-      // maxHeight: '300px'
     }
 
     let whenString = ''
