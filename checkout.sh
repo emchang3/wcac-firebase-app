@@ -21,6 +21,6 @@ then
   echo "--- Checking out: firebase ---"
   sed -i -- "s/source\/database.js/# source\/database.js/g" .gitignore
   sed -i -- "s/database.rules.json/# database.rules.json/g" .gitignore
-  git checkout heroku
+  git checkout firebase
   git rebase master
 fi
