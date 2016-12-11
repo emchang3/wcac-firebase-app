@@ -1,5 +1,9 @@
 import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
+import { upperCase } from 'lodash'
+
+import Tweet from './Tweet'
+import { shortenUrl } from '../database'
 
 class SocialMedia extends React.Component {
   constructor(props) {
@@ -44,17 +48,30 @@ class SocialMedia extends React.Component {
       this.props.fbSDK.ui({
         method: 'share',
         mobile_iframe: true,
-        href: `https://wcac-d11de.firebaseapp.com/view/${this.props.initialTimestamp}`,
+        href: this.state.longUrl,
       }, function(response){});
     }
   }
 
-  render = () => {
+  componentWillMount = () => {
+    const longUrl = `https://wcac-d11de.firebaseapp.com/view/${this.props.initialTimestamp}`
+    this.setState({
+      longUrl: longUrl
+    })
+  }
+
+  componentDidMount = () => {
+    shortenUrl({
+      longUrl: this.state.longUrl
+    }, this)
+  }
+
+  render() {
     const smStyle = {
       width: '25%',
       border: '1px dotted green',
       paddingRight: '32px',
-      paddingTop: '28px',
+      paddingTop: '24px',
       pointerEvents: 'auto',
       display: 'flex',
       flexDirection: 'row-reverse',
@@ -65,14 +82,15 @@ class SocialMedia extends React.Component {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'flex-start',
-      border: '1px dotted purple'
+      border: '1px dotted purple',
+      width: '100px'
     }
 
     const iconSharedStyle = {
-      paddingTop: '4px',
-      paddingBottom: '2px',
-      paddingRight: '6px',
-      paddingLeft: '6px',
+      paddingTop: '5px',
+      paddingBottom: '3px',
+      paddingRight: '5px',
+      paddingLeft: '5px',
       borderRadius: '50%',
       cursor: 'pointer',
       marginBottom: '8px'
@@ -82,7 +100,9 @@ class SocialMedia extends React.Component {
       ...iconSharedStyle,
       backgroundColor: this.state.share === false ? 'white' : 'orange',
       color: this.state.share === false ? 'grey' : 'white',
-      border: this.state.share === false ? '1px solid grey' : '1px solid transparent'
+      border: this.state.share === false ? '1px solid grey' : '1px solid transparent',
+      paddingRight: '6px',
+      paddingLeft: '4px',
     }
     const fbStyle = {
       ...iconSharedStyle,
@@ -112,13 +132,17 @@ class SocialMedia extends React.Component {
     return (
       <div style={smStyle}>
         <div style={innerColumn}>
+          <div style={{ fontSize: '10px', paddingBottom: '8px' }}>
+            {upperCase(this.props.content[this.props.initialTimestamp].congregation)}
+            <br />
+            {upperCase(this.props.content[this.props.initialTimestamp].category)}
+          </div>
           <div style={shareStyle}>
             <div>
               <i
                 className="mdi mdi-share-variant"
                 onMouseOver={this.shareToggle}
                 onMouseOut={this.shareToggle}
-                style={{ fontSize: '16px' }}
               >
               </i>
             </div>
@@ -129,25 +153,28 @@ class SocialMedia extends React.Component {
               onMouseOver={this.fbToggle}
               onMouseOut={this.fbToggle}
               onClick={this.fbShare}
-              style={{ fontSize: '16px' }}
             >
             </i>
           </div>
           <div style={ttStyle}>
-            <i
-              className="mdi mdi-twitter"
-              onMouseOver={this.ttToggle}
-              onMouseOut={this.ttToggle}
-              style={{ fontSize: '16px' }}
+            <a
+              style={{ color: this.state.twitter === false ? 'grey' : 'white' }}
+              href={`https://twitter.com/intent/tweet?url=${this.state.shortUrl ? this.state.shortUrl : this.state.longUrl}`}
+              target="_blank"
             >
-            </i>
+              <i
+                className="mdi mdi-twitter"
+                onMouseOver={this.ttToggle}
+                onMouseOut={this.ttToggle}
+              >
+              </i>
+            </a>
           </div>
           <div style={gpStyle}>
             <i
               className="mdi mdi-google-plus"
               onMouseOver={this.gpToggle}
               onMouseOut={this.gpToggle}
-              style={{ fontSize: '16px' }}
             >
             </i>
           </div>
@@ -156,7 +183,6 @@ class SocialMedia extends React.Component {
               className="mdi mdi-email"
               onMouseOver={this.emToggle}
               onMouseOut={this.emToggle}
-              style={{ fontSize: '16px' }}
             >
             </i>
           </div>
@@ -169,7 +195,8 @@ class SocialMedia extends React.Component {
 const mapStateToProps = (state) => {
   return {
     browserWidth: state.browserWidth,
-    fbSDK: state.fbSDK
+    fbSDK: state.fbSDK,
+    content: state.content
   }
 }
 

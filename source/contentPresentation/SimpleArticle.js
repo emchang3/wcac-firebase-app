@@ -185,7 +185,7 @@ class SimpleArticle extends React.Component {
             paddingBottom: '24px'
           }}
         >
-          <h3>{this.state.title}</h3>
+          <h4>{this.state.title}</h4>
           {
             this.state.initialTimestamp ? (
               <h6>Posted on: {new Date(parseInt(this.state.initialTimestamp)).toLocaleString()}</h6>

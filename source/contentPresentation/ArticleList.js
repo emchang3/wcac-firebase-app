@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import SimpleArticle from './SimpleArticle' // eslint-disable-line no-unused-vars
 import PageInput from './PageInput'
-import SocialMedia from './SocialMedia'
+import SocialMedia from '../socialMedia/SocialMedia'
 import MonthNav from './MonthNav'
 
 const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => {

@@ -41,7 +41,8 @@ const Results = ({ browserWidth, content, contentOrder, language, search, search
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'space-between',
-    overflowY: 'hidden'
+    overflowY: 'hidden',
+    pointerEvents: 'auto'
   }
 
   let contentList = []
@@ -49,38 +50,30 @@ const Results = ({ browserWidth, content, contentOrder, language, search, search
   contentList = currentItems.map((initialTimestamp) => {
     return (
       <div className='myFlex' style={articleContainerStyle} key={initialTimestamp}>
-        <SimpleArticle
-          initialTimestamp={initialTimestamp}
-          spot={currentItems.indexOf(initialTimestamp)}
-        />
-        <div
-          className='coverBottom'
+        <a
+          href={`/view/${initialTimestamp}`}
           style={{
-            position: 'absolute',
-            left: '0%',
-            width: '100%',
-            top: '50%',
-            height: '50%',
-            pointerEvents: 'auto'
+            color: 'black',
+            textDecoration: 'none',
+            width: '100%'
           }}
         >
-          <a
-            href={`/view/${initialTimestamp}`}
+          <SimpleArticle
+            initialTimestamp={initialTimestamp}
+            spot={currentItems.indexOf(initialTimestamp)}
+          />
+          <div
+            className='coverBottom'
             style={{
               position: 'absolute',
-              bottom: '0%',
-              right: '0%',
-              color: 'black',
-              textDecoration: 'none'
+              left: '0%',
+              width: '100%',
+              top: '50%',
+              height: '50%'
             }}
           >
-            <button
-              className="mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect"
-            >
-              Read more...
-            </button>
-          </a>
-        </div>
+          </div>
+        </a>
       </div>
     )
   })

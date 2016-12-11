@@ -93,7 +93,7 @@ function* deleteContentSaga (action) {
 function* initFbSaga(getState) {
   if (getState().fbSDK !== null) {
     getState().fbSDK.init({
-      appId      : '193476354446811',
+      appId      : '1299129143443358',
       xfbml      : false,
       version    : 'v2.8'
     })
