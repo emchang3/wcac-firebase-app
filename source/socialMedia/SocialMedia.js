@@ -132,10 +132,14 @@ class SocialMedia extends React.Component {
     return (
       <div style={smStyle}>
         <div style={innerColumn}>
-          <div style={{ fontSize: '10px', paddingBottom: '8px' }}>
-            {upperCase(this.props.content[this.props.initialTimestamp].congregation)}
+          <div style={{ paddingBottom: '8px' }}>
+            <span style={{ fontSize: '12px', color: '#FF5252' }}>
+              {upperCase(this.props.content[this.props.initialTimestamp].congregation)}
+            </span>
             <br />
-            {upperCase(this.props.content[this.props.initialTimestamp].category)}
+            <span style={{ fontSize: '12px' }}>
+              {upperCase(this.props.content[this.props.initialTimestamp].category)}
+            </span>
           </div>
           <div style={shareStyle}>
             <div>

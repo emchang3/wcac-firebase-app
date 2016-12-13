@@ -28,7 +28,7 @@ const ArticleList = ({ browserWidth, category, contentOrder, categoryPage }) => 
       border: '1px dotted blue'
     }
     if (browserWidth > 600) {
-      articleContainerStyle.minHeight = '300px'
+      articleContainerStyle.minHeight = '350px'
     }
 
     contentList = currentItems.map((initialTimestamp) => {

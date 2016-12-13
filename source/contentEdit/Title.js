@@ -8,7 +8,7 @@ export const Title = ({ onChange, language, title }) => {
         type="text"
         id="post-title"
         onChange={onChange}
-        value={ title.length > 0 ? title : null }
+        value={ title.length > 0 ? title : '' }
       />
       <label className="mdl-textfield__label" htmlFor="post-title">
         {

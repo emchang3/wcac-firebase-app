@@ -78,6 +78,7 @@ class SimpleArticle extends React.Component {
         }
 
         if (category === 'events') {
+          const location = props.content[initialTimestamp].location
           const startDateTime = new Date(props.content[initialTimestamp].startDateTime)
           const endDateTime = new Date(props.content[initialTimestamp].endDateTime)
 
@@ -119,6 +120,7 @@ class SimpleArticle extends React.Component {
           payload.startTime = startTime
           payload.endDate = endDate
           payload.endTime = endTime
+          payload.location = location
         }
 
         if (category === 'sermons') {
@@ -193,9 +195,14 @@ class SimpleArticle extends React.Component {
           }
           {
             this.state.category === 'events' ? (
-              <h5>
-                {whenString}
-              </h5>
+              <div>
+                <p>
+                  {whenString}
+                </p>
+                <p>
+                  {this.state.location}
+                </p>
+              </div>
             ) : null
           }
           {

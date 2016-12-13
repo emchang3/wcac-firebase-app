@@ -14,6 +14,7 @@ import DateSelect from './DateSelect'
 import { SermonLink } from './SermonLink'
 import { Return } from './Return'
 import Language from '../navbar/Language'
+import { EventLocation } from './Location'
 
 const {
   Editor,
@@ -41,7 +42,8 @@ class RichEditorExample extends React.Component {
       endDate: '',
       endTime: '',
       sermonLink: '',
-      initialTimestamp: ''
+      initialTimestamp: '',
+      location: ''
     }
 
     // this.focus = () => {
@@ -89,6 +91,7 @@ class RichEditorExample extends React.Component {
         }
 
         if (category === 'events') {
+          const location = nextProps.content[initialTimestamp].location
           const startDateTime = new Date(nextProps.content[initialTimestamp].startDateTime)
           const endDateTime = new Date(nextProps.content[initialTimestamp].endDateTime)
 
@@ -130,6 +133,7 @@ class RichEditorExample extends React.Component {
           payload.startTime = startTime
           payload.endDate = endDate
           payload.endTime = endTime
+          payload.location = location
         }
 
         if (category === 'sermons') {
@@ -169,11 +173,14 @@ class RichEditorExample extends React.Component {
         && nextState.startTime.length > 0
         && nextState.endDate.length > 0
         && nextState.endTime.length > 0
+        && nextState.location.length > 0
       ) {
+        const location = nextState.location
         const startDateTime = new Date(`${nextState.startDate}T${nextState.startTime}`).getTime()
         const endDateTime = new Date(`${nextState.endDate}T${nextState.endTime}`).getTime()
         payload.startDateTime = startDateTime
         payload.endDateTime = endDateTime
+        payload.location = location
       }
 
       if (category === 'sermons') {
@@ -258,6 +265,10 @@ class RichEditorExample extends React.Component {
 
   setSermonLink = (event) => {
     this.setState({ sermonLink: event.target.value })
+  }
+
+  updateLocation = (event) => {
+    this.setState({ location: event.target.value })
   }
 
   render() {
@@ -356,13 +367,23 @@ class RichEditorExample extends React.Component {
                     endDate={this.state.endDate}
                     endTime={this.state.endTime}
                   />
-                ) : ''
+                ) : null
+              }
+
+              {
+                this.state.category === 'events' ? (
+                  <EventLocation
+                    onChange={this.updateLocation}
+                    language={this.props.language}
+                    location={this.state.location}
+                  />
+                ) : null
               }
 
               {
                 this.state.category === 'sermons' ? (
                   <SermonLink setSermonLink={this.setSermonLink} sermonLink={this.state.sermonLink} />
-                ) : ''
+                ) : null
               }
 
               <div

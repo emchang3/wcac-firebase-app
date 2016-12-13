@@ -41,28 +41,15 @@ class CongregationSelect extends React.Component {
             htmlFor="english"
             style={{ display: 'block', paddingBottom: '2px' }}
           >
-            {
-              this.props.congregation === 'english' ? (
-                <input
-                  className="mdl-radio__button"
-                  id="english"
-                  name="congregation"
-                  type="radio"
-                  value="english"
-                  onClick={this.props.onClick}
-                  checked
-                />
-              ) : (
-                <input
-                  className="mdl-radio__button"
-                  id="english"
-                  name="congregation"
-                  type="radio"
-                  value="english"
-                  onClick={this.props.onClick}
-                />
-              )
-            }
+            <input
+              className="mdl-radio__button"
+              id="english"
+              name="congregation"
+              type="radio"
+              value="english"
+              onClick={this.props.onClick}
+              checked={ this.props.congregation === 'english' ? true : false }
+            />
             <span className="mdl-radio__label">
               {
                 this.props.language === 'EN' ? 'English' : (
@@ -76,28 +63,15 @@ class CongregationSelect extends React.Component {
             htmlFor="cantonese"
             style={{ display: 'block', paddingBottom: '2px' }}
           >
-            {
-              this.props.congregation === 'cantonese' ? (
-                <input
-                  className="mdl-radio__button"
-                  id="cantonese"
-                  name="congregation"
-                  type="radio"
-                  value="cantonese"
-                  onClick={this.props.onClick}
-                  checked
-                />
-              ) : (
-                <input
-                  className="mdl-radio__button"
-                  id="cantonese"
-                  name="congregation"
-                  type="radio"
-                  value="cantonese"
-                  onClick={this.props.onClick}
-                />
-              )
-            }
+            <input
+              className="mdl-radio__button"
+              id="cantonese"
+              name="congregation"
+              type="radio"
+              value="cantonese"
+              onClick={this.props.onClick}
+              checked={ this.props.congregation === 'cantonese' ? true : false }
+            />
             <span className="mdl-radio__label">
               {
                 this.props.language === 'EN' ? 'Cantonese' : (
@@ -111,28 +85,15 @@ class CongregationSelect extends React.Component {
             htmlFor="mandarin"
             style={{ display: 'block', paddingBottom: '2px' }}
           >
-            {
-              this.props.congregation === 'mandarin' ? (
-                <input
-                  className="mdl-radio__button"
-                  id="mandarin"
-                  name="congregation"
-                  type="radio"
-                  value="mandarin"
-                  onClick={this.props.onClick}
-                  checked
-                />
-              ) : (
-                <input
-                  className="mdl-radio__button"
-                  id="mandarin"
-                  name="congregation"
-                  type="radio"
-                  value="mandarin"
-                  onClick={this.props.onClick}
-                />
-              )
-            }
+            <input
+              className="mdl-radio__button"
+              id="mandarin"
+              name="congregation"
+              type="radio"
+              value="mandarin"
+              onClick={this.props.onClick}
+              checked={ this.props.congregation === 'mandarin' ? true : false }
+            />
             <span className="mdl-radio__label">
               {
                 this.props.language === 'EN' ? 'Mandarin' : (
@@ -146,28 +107,15 @@ class CongregationSelect extends React.Component {
             htmlFor="youth"
             style={{ display: 'block', paddingBottom: '2px' }}
           >
-            {
-              this.props.congregation === 'youth' ? (
-                <input
-                  className="mdl-radio__button"
-                  id="youth"
-                  name="congregation"
-                  type="radio"
-                  value="youth"
-                  onClick={this.props.onClick}
-                  checked
-                />
-              ) : (
-                <input
-                  className="mdl-radio__button"
-                  id="youth"
-                  name="congregation"
-                  type="radio"
-                  value="youth"
-                  onClick={this.props.onClick}
-                />
-              )
-            }
+            <input
+              className="mdl-radio__button"
+              id="youth"
+              name="congregation"
+              type="radio"
+              value="youth"
+              onClick={this.props.onClick}
+              checked={ this.props.congregation === 'youth' ? true : false }
+            />
             <span className="mdl-radio__label">
               {
                 this.props.language === 'EN' ? 'Youth' : (

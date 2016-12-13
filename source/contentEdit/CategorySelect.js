@@ -41,28 +41,15 @@ class CategorySelect extends React.Component {
             htmlFor="announcements"
             style={{ display: 'block', paddingBottom: '2px' }}
           >
-            {
-              this.props.category === 'announcements' ? (
-                <input
-                  className="mdl-radio__button"
-                  id="announcements"
-                  name="category"
-                  type="radio"
-                  value="announcements"
-                  onClick={this.props.onClick}
-                  checked
-                />
-              ) : (
-                <input
-                  className="mdl-radio__button"
-                  id="announcements"
-                  name="category"
-                  type="radio"
-                  value="announcements"
-                  onClick={this.props.onClick}
-                />
-              )
-            }
+            <input
+              className="mdl-radio__button"
+              id="announcements"
+              name="category"
+              type="radio"
+              value="announcements"
+              onClick={this.props.onClick}
+              checked={ this.props.category === 'announcements' ? true : false }
+            />
             <span className="mdl-radio__label">
               {
                 this.props.language === 'EN' ? 'Announcements' : (
@@ -76,28 +63,15 @@ class CategorySelect extends React.Component {
             htmlFor="events"
             style={{ display: 'block', paddingBottom: '2px' }}
           >
-            {
-              this.props.category === 'events' ? (
-                <input
-                  className="mdl-radio__button"
-                  id="events"
-                  name="category"
-                  type="radio"
-                  value="events"
-                  onClick={this.props.onClick}
-                  checked
-                />
-              ) : (
-                <input
-                  className="mdl-radio__button"
-                  id="events"
-                  name="category"
-                  type="radio"
-                  value="events"
-                  onClick={this.props.onClick}
-                />
-              )
-            }
+            <input
+              className="mdl-radio__button"
+              id="events"
+              name="category"
+              type="radio"
+              value="events"
+              onClick={this.props.onClick}
+              checked={ this.props.category === 'events' ? true : false }
+            />
             <span className="mdl-radio__label">
               {
                 this.props.language === 'EN' ? 'Events' : (
@@ -111,28 +85,15 @@ class CategorySelect extends React.Component {
             htmlFor="ministries"
             style={{ display: 'block', paddingBottom: '2px' }}
           >
-            {
-              this.props.category === 'ministries' ? (
-                <input
-                  className="mdl-radio__button"
-                  id="ministries"
-                  name="category"
-                  type="radio"
-                  value="ministries"
-                  onClick={this.props.onClick}
-                  checked
-                />
-              ) : (
-                <input
-                  className="mdl-radio__button"
-                  id="ministries"
-                  name="category"
-                  type="radio"
-                  value="ministries"
-                  onClick={this.props.onClick}
-                />
-              )
-            }
+            <input
+              className="mdl-radio__button"
+              id="ministries"
+              name="category"
+              type="radio"
+              value="ministries"
+              onClick={this.props.onClick}
+              checked={ this.props.category === 'ministries' ? true : false }
+            />
             <span className="mdl-radio__label">
               {
                 this.props.language === 'EN' ? 'Ministries' : (
@@ -146,28 +107,15 @@ class CategorySelect extends React.Component {
             htmlFor="sermons"
             style={{ display: 'block', paddingBottom: '2px' }}
           >
-            {
-              this.props.category === 'sermons' ? (
-                <input
-                  className="mdl-radio__button"
-                  id="sermons"
-                  name="category"
-                  type="radio"
-                  value="sermons"
-                  onClick={this.props.onClick}
-                  checked
-                />
-              ) : (
-                <input
-                  className="mdl-radio__button"
-                  id="sermons"
-                  name="category"
-                  type="radio"
-                  value="sermons"
-                  onClick={this.props.onClick}
-                />
-              )
-            }
+            <input
+              className="mdl-radio__button"
+              id="sermons"
+              name="category"
+              type="radio"
+              value="sermons"
+              onClick={this.props.onClick}
+              checked={ this.props.category === 'sermons' ? true : false }
+            />
             <span className="mdl-radio__label">
               {
                 this.props.language === 'EN' ? 'Sermons' : (
@@ -181,28 +129,15 @@ class CategorySelect extends React.Component {
             htmlFor="statement"
             style={{ display: 'block', paddingBottom: '2px' }}
           >
-            {
-              this.props.category === 'statement' ? (
-                <input
-                  className="mdl-radio__button"
-                  id="statement"
-                  name="category"
-                  type="radio"
-                  value="statement"
-                  onClick={this.props.onClick}
-                  checked
-                />
-              ) : (
-                <input
-                  className="mdl-radio__button"
-                  id="statement"
-                  name="category"
-                  type="radio"
-                  value="statement"
-                  onClick={this.props.onClick}
-                />
-              )
-            }
+            <input
+              className="mdl-radio__button"
+              id="statement"
+              name="category"
+              type="radio"
+              value="statement"
+              onClick={this.props.onClick}
+              checked={ this.props.category === 'statement' ? true : false }
+            />
             <span className="mdl-radio__label">
               {
                 this.props.language === 'EN' ? 'Statement of Faith' : (
@@ -216,28 +151,15 @@ class CategorySelect extends React.Component {
             htmlFor="mission"
             style={{ display: 'block', paddingBottom: '2px' }}
           >
-            {
-              this.props.category === 'mission' ? (
-                <input
-                  className="mdl-radio__button"
-                  id="mission"
-                  name="category"
-                  type="radio"
-                  value="mission"
-                  onClick={this.props.onClick}
-                  checked
-                />
-              ) : (
-                <input
-                  className="mdl-radio__button"
-                  id="mission"
-                  name="category"
-                  type="radio"
-                  value="mission"
-                  onClick={this.props.onClick}
-                />
-              )
-            }
+            <input
+              className="mdl-radio__button"
+              id="mission"
+              name="category"
+              type="radio"
+              value="mission"
+              onClick={this.props.onClick}
+              checked={ this.props.category === 'mission' ? true : false }
+            />
             <span className="mdl-radio__label">
               {
                 this.props.language === 'EN' ? 'Mission' : (
@@ -251,28 +173,15 @@ class CategorySelect extends React.Component {
             htmlFor="staff"
             style={{ display: 'block', paddingBottom: '2px' }}
           >
-            {
-              this.props.category === 'staff' ? (
-                <input
-                  className="mdl-radio__button"
-                  id="staff"
-                  name="category"
-                  type="radio"
-                  value="staff"
-                  onClick={this.props.onClick}
-                  checked
-                />
-              ) : (
-                <input
-                  className="mdl-radio__button"
-                  id="staff"
-                  name="category"
-                  type="radio"
-                  value="staff"
-                  onClick={this.props.onClick}
-                />
-              )
-            }
+            <input
+              className="mdl-radio__button"
+              id="staff"
+              name="category"
+              type="radio"
+              value="staff"
+              onClick={this.props.onClick}
+              checked={ this.props.category === 'staff' ? true : false }
+            />
             <span className="mdl-radio__label">
               {
                 this.props.language === 'EN' ? 'Staff' : (
@@ -286,28 +195,15 @@ class CategorySelect extends React.Component {
             htmlFor="jobs"
             style={{ display: 'block', paddingBottom: '2px' }}
           >
-            {
-              this.props.category === 'jobs' ? (
-                <input
-                  className="mdl-radio__button"
-                  id="jobs"
-                  name="category"
-                  type="radio"
-                  value="jobs"
-                  onClick={this.props.onClick}
-                  checked
-                />
-              ) : (
-                <input
-                  className="mdl-radio__button"
-                  id="jobs"
-                  name="category"
-                  type="radio"
-                  value="jobs"
-                  onClick={this.props.onClick}
-                />
-              )
-            }
+            <input
+              className="mdl-radio__button"
+              id="jobs"
+              name="category"
+              type="radio"
+              value="jobs"
+              onClick={this.props.onClick}
+              checked={ this.props.category === 'jobs' ? true : false }
+            />
             <span className="mdl-radio__label">
               {
                 this.props.language === 'EN' ? 'Jobs' : (
