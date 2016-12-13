@@ -44,7 +44,6 @@ class SocialMedia extends React.Component {
 
   fbShare = () => {
     if (this.props.fbSDK !== null) {
-      console.log(this.props.fbSDK);
       this.props.fbSDK.ui({
         method: 'share',
         mobile_iframe: true,
